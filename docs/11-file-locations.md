@@ -23,7 +23,7 @@
 - `/etc/ac-poller.conf` — MirAIe cloud credentials for AC control.
 - `/etc/mesh-vendor-cache` — Persistent MAC→vendor lookup cache.
 - `/etc/mesh-youtube.state` — Whole-home YouTube blocking toggle state.
-- `/mnt/sda1` (symlink `/mnt/usb`) — 28GB ext4 USB 3.0 flash drive mount.
+- `/mnt/sda1` (symlink `/mnt/usb`) — 28GB ext4 USB 2.0 flash drive mount.
 - `/mnt/sda1/downloads` — Download destination for torrents and DLNA indexed media.
 - `/mnt/sda1/transmission` — Transmission daemon state, settings, and RPC assets.
 - `/etc/init.d/transmission` — Procd service definition for Transmission BitTorrent daemon (`http://192.168.0.50:9091/`).

@@ -34,7 +34,7 @@ The network operates on a single flat L3 subnet (`192.168.0.0/24`) with zero int
 │ • Wi-Fi 6 (802.11ax 4x4 MU-MIMO 160M) │         │ • Daisy-chain uplink │
 │ • OpenWrt SNAPSHOT (Quad-core ARM64)  │         │ • Real Busybox shell │
 │ • Primary DNS Sinkhole (adblock-fast) │         └──────────┬───────────┘
-│ • USB 3.0 Media Host Attached         │                    │ Cat6 LAN
+│ • USB 2.0 Media Host Attached         │                    │ Cat6 LAN
 │   (/mnt/sda1 ext4 28GB)               │                    ▼
 │   - transmission-daemon (:9091)       │         ┌────────────────────┐
 │   - MiniDLNA 1.3.3 (:8200)            │         │ TP-Link Archer A6  │
@@ -95,7 +95,7 @@ The network operates on a single flat L3 subnet (`192.168.0.0/24`) with zero int
 | Node | Model | IP | Role |
 |---|---|---|---|
 | **Nokia G-2425G-A** | MTK7528 GPON ONT | `192.168.0.1` | Fiber WAN Gateway, Master DHCP Server, 5G Ch 44 / 2.4G Ch 11 |
-| **JioRouter AX6000 (JIDU6101)** | MT7986 ARM64 4x4 Wi-Fi 6 | `192.168.0.50` | Primary Automation Hub, AP #1 replacement, Native USB 3.0 Media Host (:9091 Transmission, :8200 MiniDLNA), Primary DNS (`adblock-fast`), 5G Ch 36 HE160 |
+| **JioRouter AX6000 (JIDU6101)** | MT7986 ARM64 4x4 Wi-Fi 6 | `192.168.0.50` | Primary Automation Hub, AP #1 replacement, Native USB 2.0 Media Host (:9091 Transmission, :8200 MiniDLNA), Primary DNS (`adblock-fast`), 5G Ch 36 HE160 |
 | **Huawei HG8145V5 (AP #2)** | Dual-band AC1200 GPON | `192.168.0.98` | Secondary L2 Access Point, daisy-chains TP-Link, 5G Ch 52 DFS / 2.4G Ch 11 |
 | **TP-Link Archer A6 v3** | MediaTek MT7621AT | `192.168.0.12` | Secondary Access Point, Secondary DNS (`adblock-fast`), 5G Ch 36 / 2.4G Ch 6 |
 | **Huawei HG8145V5 (AP #1)** | Dual-band AC1200 GPON | `192.168.0.110` | **[DEPRECATED / DECOMMISSIONED]** Replaced by JioRouter AX6000 |
