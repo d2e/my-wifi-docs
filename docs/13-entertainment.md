@@ -373,12 +373,12 @@ down the whole entertainment stack at once — `entertainment-poller` loses its 
 concludes the TV is idle, and the app-aware DSP switcher helpfully "resets" the sound profile
 to Standard (visible in `/tmp/dsp-auto.log` as `Mi TV idle/standby → Profile reset to Standard`).
 
-**Always drive the TV through the router's adb** (`ssh root@192.168.0.12 'adb -s 192.168.0.10:5555 …'`),
+**Always drive the TV through the router's adb** (`ssh root@192.168.0.50 'adb -s 192.168.0.10:5555 …'`),
 which is what every script in this project already does. If a file needs pulling to the
 workstation, pull it to the router first and copy it from there.
 
 **Recovery, in order of escalation:**
-1. `ssh root@192.168.0.12 'adb kill-server; sleep 2; adb start-server; adb connect 192.168.0.10:5555'`
+1. `ssh root@192.168.0.50 'adb kill-server; sleep 2; adb start-server; adb connect 192.168.0.10:5555'`
    — worked the first time. `adb disconnect`+reconnect alone is NOT enough; it reuses the
    stuck session. Only a server restart forces a fresh handshake, and the router's key is
    normally still in the TV's `adb_keys`.

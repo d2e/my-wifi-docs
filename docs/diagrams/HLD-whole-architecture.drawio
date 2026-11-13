@@ -4,7 +4,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="t1" value="&lt;b style=&quot;font-size:22px&quot;&gt;Whole-Home Network &amp;amp; Automation &amp;#8212; High-Level Design&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:13px;color:#555&quot;&gt;One flat network. One small router does all the automation and publishes one dashboard.&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="t1" value="&lt;b style=&quot;font-size:22px&quot;&gt;Whole-Home Network &amp;amp; Automation &amp;#8212; High-Level Design&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:13px;color:#555&quot;&gt;One flat network. JioRouter AX6000 (192.168.0.50) is the central automation hub &amp;amp; hosts the dashboard.&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="60" y="24" width="1340" height="60" as="geometry" />
         </mxCell>
         <mxCell id="net" value="&lt;b&gt;① 🌐 Fiber Internet&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1">
@@ -13,16 +13,16 @@
         <mxCell id="gw" value="&lt;b&gt;② Nokia Gateway · 192.168.0.1&lt;/b&gt;&lt;br&gt;gives every device its address + Wi-Fi" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;verticalAlign=top;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="540" y="204" width="400" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="acc" value="③  Wi-Fi access points — plain Wi-Fi only, no routing" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#6c8ebf;fillColor=#f6f9ff;dashed=0;" vertex="1" parent="1">
+        <mxCell id="acc" value="③  Secondary Access Points — plain Wi-Fi only, no routing" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#6c8ebf;fillColor=#f6f9ff;dashed=0;" vertex="1" parent="1">
           <mxGeometry x="280" y="320" width="700" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="ap1" value="&lt;b&gt;JioRouter AX6000 · .50 (Replaces AP #1) + USB&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+        <mxCell id="ap2" value="&lt;b&gt;Huawei AP #2 · .98&lt;/b&gt;&lt;br&gt;Secondary L2 AP (5G ch52 / 2.4G ch11)" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=13;arcSize=8;spacing=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="302" y="365" width="300" height="56" as="geometry" />
         </mxCell>
-        <mxCell id="ap2" value="&lt;b&gt;Huawei AP #2 · .98&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="tplink" value="&lt;b&gt;TP-Link Archer A6 · .12&lt;/b&gt;&lt;br&gt;Secondary AP (chained off AP #2)" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=13;arcSize=8;spacing=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="658" y="365" width="300" height="56" as="geometry" />
         </mxCell>
-        <mxCell id="hub" value="④  Automation Core — JioRouter AX6000 (.50) &amp;amp; TP-Link Archer A6 (.12)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#82b366;fillColor=#f6fff4;dashed=0;" vertex="1" parent="1">
+        <mxCell id="hub" value="④  Primary Automation Hub &amp;amp; Wi-Fi 6 AP — JioRouter AX6000 · 192.168.0.50 (OpenWrt)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#82b366;fillColor=#f6fff4;dashed=0;" vertex="1" parent="1">
           <mxGeometry x="260" y="480" width="760" height="170" as="geometry" />
         </mxCell>
         <mxCell id="poll" value="&lt;b&gt;Pollers&lt;/b&gt;&lt;br&gt;read everything,&lt;br&gt;every few seconds" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;spacing=8;" vertex="1" parent="1">
@@ -31,7 +31,7 @@
         <mxCell id="api" value="&lt;b&gt;APIs&lt;/b&gt;&lt;br&gt;turn clicks into&lt;br&gt;real device commands" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#ffe6cc;strokeColor=#d79b00;verticalAlign=top;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="530" y="528" width="230" height="96" as="geometry" />
         </mxCell>
-        <mxCell id="dash" value="&lt;b&gt;Dashboard&lt;/b&gt;&lt;br&gt;one screen for&lt;br&gt;the whole house" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;spacing=8;" vertex="1" parent="1">
+        <mxCell id="dash" value="&lt;b&gt;Dashboard&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#6b21a8&quot;&gt;mesh.html on Jio .50&lt;/b&gt;&lt;br&gt;single pane for whole house" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;spacing=8;" vertex="1" parent="1">
           <mxGeometry x="776" y="528" width="230" height="96" as="geometry" />
         </mxCell>
         <mxCell id="user" value="&lt;b&gt;👤 You&lt;/b&gt;&lt;br&gt;any browser&lt;br&gt;on the home&lt;br&gt;Wi-Fi" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#e1d5e7;strokeColor=#9673a6;verticalAlign=top;spacing=8;" vertex="1" parent="1">
@@ -52,97 +52,100 @@
         <mxCell id="m3" value="&lt;b&gt;❄ Smart AC&lt;/b&gt;&lt;br&gt;control, running cost,&lt;br&gt;comfort prediction" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;spacing=8;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="750" y="748" width="300" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="m4" value="&lt;b&gt;💾 Media drive&lt;/b&gt;&lt;br&gt;USB disk on AP #2:&lt;br&gt;downloads, DLNA to the TVs" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;spacing=8;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="m4" value="&lt;b&gt;💾 Media drive&lt;/b&gt;&lt;br&gt;Local USB on JioRouter .50:&lt;br&gt;Transmission &amp;amp; MiniDLNA" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#f5f5f5;strokeColor=#666666;verticalAlign=top;spacing=8;fontSize=13;" vertex="1" parent="1">
           <mxGeometry x="1064" y="748" width="300" height="82" as="geometry" />
         </mxCell>
-        <mxCell id="t2" value="&lt;span style=&quot;font-size:12px;color:#555&quot;&gt;&lt;b&gt;How to read it:&lt;/b&gt; top to bottom is the physical path into the house &amp;#8212; everything below the gateway is one flat network. Box &amp;#9316; is the only part that automates anything; everything in &amp;#9317; is reached from there. Detail lives on page 2 and in the LLD set.&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="t2" value="&lt;span style=&quot;font-size:12px;color:#555&quot;&gt;&lt;b&gt;How to read it:&lt;/b&gt; top to bottom is the physical path into the house &amp;#8212; everything below the gateway is one flat network. Box &amp;#9316; (JioRouter AX6000 .50) connects directly to Nokia and automates everything; everything in &amp;#9317; is reached from there. Detail lives on page 2 and in the LLD set.&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="100" y="880" width="1300" height="60" as="geometry" />
         </mxCell>
         <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;" edge="1" parent="1" source="net" target="gw">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e4" value="cable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" edge="1" parent="1" source="gw" target="ap1">
+        <mxCell id="e4" value="Cat6 (direct uplink)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.45;entryY=0;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" edge="1" parent="1" source="gw" target="hub">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e5" value="cable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" edge="1" parent="1" source="gw" target="ap2">
+        <mxCell id="e5" value="Cat6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" edge="1" parent="1" source="gw" target="ap2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e6" value="cable — the hub’s only way out" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.7;entryY=0;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" edge="1" parent="1" source="ap2" target="hub">
+        <mxCell id="e6" value="Cat6 (chained SPOF)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" edge="1" parent="1" source="ap2" target="tplink">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e7" value="opens" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="user" target="dash">
+        <mxCell id="e7" value="opens http://192.168.0.50/mesh.html" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="user" target="dash">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e8" value="internet" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.8;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;dashed=1;strokeColor=#bf9000;fontColor=#bf9000;" edge="1" parent="1" source="api" target="cloud">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e9" value="Wi-Fi + router logins" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="hub" target="m1">
+        <mxCell id="e9" value="Wi-Fi + router logins" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="hub" target="m1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e10" value="remote control over Wi-Fi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="hub" target="m2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e11" value="via the AC cloud" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="hub" target="m3">
+        <mxCell id="e11" value="via the AC cloud" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="hub" target="m3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e12" value="over AP #2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="hub" target="m4">
+        <mxCell id="e12" value="USB 3.0 storage" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.95;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" edge="1" parent="1" source="hub" target="m4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="hld-detail---context-&amp;-flows" name="HLD detail - context &amp; flows">
-    <mxGraphModel dx="938" dy="555" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1980" pageHeight="1300" math="0" shadow="0">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1980" pageHeight="1300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="t1" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;" value="&lt;b style=&quot;font-size:20px&quot;&gt;HLD — Whole-Home Gigabit Mesh &amp;amp; Automation Architecture&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(85, 85, 85);&quot;&gt;Single flat L3 subnet 192.168.0.0/24 · zero routers below the gateway · TP-Link Archer A6 is the automation hub ·&amp;nbsp;&lt;/span&gt;" vertex="1">
-          <mxGeometry height="60" width="1200" x="40" y="16" as="geometry" />
+        <mxCell id="t1" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=12;" value="&lt;b style=&quot;font-size:20px&quot;&gt;HLD — Whole-Home Gigabit Mesh &amp;amp; Automation Architecture&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(85, 85, 85);&quot;&gt;Single flat L3 subnet 192.168.0.0/24 · zero routers below the gateway · JioRouter AX6000 (192.168.0.50) is the primary automation hub · TP-Link Archer A6 (.12) is secondary AP&lt;/span&gt;" vertex="1">
+          <mxGeometry height="60" width="1400" x="40" y="16" as="geometry" />
         </mxCell>
         <mxCell id="wan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#fff2cc;strokeColor=#d6b656;align=center;verticalAlign=middle;fontStyle=1;" value="&lt;b&gt;Fiber WAN — ISP GPON&lt;/b&gt;" vertex="1">
           <mxGeometry height="44" width="300" x="760" y="96" as="geometry" />
         </mxCell>
-        <mxCell id="nokia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Nokia G-2425G-A  ·  192.168.0.1&lt;/b&gt;&lt;br&gt;GPON ONT + master gateway (MTK7528)&lt;br&gt;Master DHCP server · advertises DNS .12 → 1.1.1.1&lt;br&gt;Wi-Fi: 5G ch44 VHT80 · 2.4G ch11 HT20&lt;br&gt;Mgmt: web + SSH/telnet (restricted vendor CLI, no root)" vertex="1">
+        <mxCell id="nokia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Nokia G-2425G-A  ·  192.168.0.1&lt;/b&gt;&lt;br&gt;GPON ONT + master gateway (MTK7528)&lt;br&gt;Master DHCP server · advertises DNS .50 → .12 → 1.1.1.1&lt;br&gt;Wi-Fi: 5G ch44 VHT80 · 2.4G ch11 HT20&lt;br&gt;Mgmt: web + SSH/telnet (restricted vendor CLI, no root)" vertex="1">
           <mxGeometry height="118" width="420" x="700" y="176" as="geometry" />
         </mxCell>
-        <mxCell id="ap1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;JioRouter AX6000 — .50 (Replaces AP #1)&lt;/b&gt;&lt;br&gt;MT7986 Quad-Core ARM64 · OpenWrt SNAPSHOT&lt;br&gt;Wi-Fi 6: 5G ch36 HE160 · 2.4G ch1 HE20 (4x4 MU-MIMO)&lt;br&gt;Hosts USB 3.0 Media Stack &amp;amp; Primary Automation Hub" vertex="1">
-          <mxGeometry height="118" width="360" x="170" y="390" as="geometry" />
+        <mxCell id="ap1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;" value="&lt;b&gt;Huawei HG8145V5 — AP #1  ·  .110&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;color:#b85450;font-weight:bold;&quot;&gt;[DEPRECATED / DECOMMISSIONED]&lt;/span&gt;&lt;br&gt;Replaced by JioRouter AX6000 (.50)&lt;br&gt;Permanently removed from active RF mesh &amp;amp; poller loops" vertex="1">
+          <mxGeometry height="118" width="360" x="80" y="390" as="geometry" />
         </mxCell>
         <mxCell id="ap2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Huawei HG8145V5 — AP #2  ·  .98&lt;/b&gt;&lt;br&gt;Pure L2 AP + TP-Link’s uplink  ⚠ single point of failure&lt;br&gt;5G ch52 (DFS) · 2.4G ch11 · both pinned&lt;br&gt;Mgmt: telnet vendor CLI (USB migrated to JioRouter)" vertex="1">
-          <mxGeometry height="118" width="420" x="700" y="390" as="geometry" />
+          <mxGeometry height="118" width="420" x="560" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="usb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;JioRouter USB 3.0 Media Services (28 GB ext4)&lt;/b&gt;&lt;br&gt;Mounted at /mnt/sda1 (/mnt/usb) on JioRouter .50&lt;br&gt;transmission-daemon — :9091 web/RPC&lt;br&gt;MiniDLNA 1.3.3 — :8200 UPnP streaming to smart TVs&lt;br&gt;Supervised locally via procd &amp;amp; mesh-poller" vertex="1">
-          <mxGeometry height="118" width="360" x="1180" y="390" as="geometry" />
+        <mxCell id="tplink" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;TP-Link Archer A6 v3 — Secondary AP · .12&lt;/b&gt;&lt;br&gt;Uplink: Cat6 into AP #2 LAN port (⚠ chained SPOF)&lt;br&gt;5G ch36 VHT80 · 2.4G ch6 HT20 · OpenWrt 23.05.5&lt;br&gt;Secondary DNS (adblock-fast fallback)&lt;br&gt;&lt;b&gt;Web redirect:&lt;/b&gt; /www/index.html → &lt;b&gt;http://192.168.0.50/mesh.html&lt;/b&gt;" vertex="1">
+          <mxGeometry height="118" width="420" x="1080" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="hub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#82b366;fillColor=#f6fff4;dashed=0;" value="JioRouter AX6000 (.50 Primary) &amp;amp; TP-Link Archer A6 (.12 Secondary) — OpenWrt Automation Hub" vertex="1">
-          <mxGeometry height="400" width="1000" x="250" y="590" as="geometry" />
+        <mxCell id="hub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=#f6fff4;strokeColor=#82b366;" value="&lt;b&gt;JioRouter AX6000 · 192.168.0.50 (OpenWrt SNAPSHOT MT7986 ARM64) — PRIMARY AUTOMATION HUB &amp;amp; USB MEDIA HOST&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:11px;font-weight:normal;color:#2d572c;&quot;&gt;Wi-Fi 6 (5G ch36 HE160 · 2.4G ch1 HE20 4x4) · Direct Cat6 to Nokia · Hosts mesh.html, ac.html, ucode pollers, REST APIs &amp;amp; USB 3.0 Media Storage&lt;/span&gt;" vertex="1">
+          <mxGeometry height="420" width="1380" x="140" y="570" as="geometry" />
         </mxCell>
-        <mxCell id="meshpoll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;mesh-poller.uc&lt;/b&gt;&lt;br&gt;procd, ~20 s cycle&lt;br&gt;RF/latency/clients/self-heal&lt;br&gt;Capabilities A–G" vertex="1">
-          <mxGeometry height="92" width="230" x="272" y="650" as="geometry" />
+        <mxCell id="meshpoll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;mesh-poller.uc&lt;/b&gt;&lt;br&gt;procd, ~2 s cycle&lt;br&gt;RF/latency/clients/self-heal&lt;br&gt;Capabilities A–G" vertex="1">
+          <mxGeometry height="92" width="220" x="160" y="630" as="geometry" />
         </mxCell>
         <mxCell id="roam" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;roam-daemon.uc&lt;/b&gt;&lt;br&gt;sticky-client watchdog&lt;br&gt;deauth via AP #2&lt;br&gt;invoked per poll cycle" vertex="1">
-          <mxGeometry height="92" width="200" x="514" y="650" as="geometry" />
+          <mxGeometry height="92" width="190" x="400" y="630" as="geometry" />
         </mxCell>
         <mxCell id="entpoll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;entertainment-poller.uc&lt;/b&gt;&lt;br&gt;3 s cycle · TV/Fire TV telemetry&lt;br&gt;app-aware DSP auto-switch&lt;br&gt;Shizuku/agent keep-alive" vertex="1">
-          <mxGeometry height="92" width="250" x="726" y="650" as="geometry" />
+          <mxGeometry height="92" width="220" x="610" y="630" as="geometry" />
         </mxCell>
         <mxCell id="acpoll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;ac-poller.uc&lt;/b&gt;&lt;br&gt;10 s cycle · MirAIe telemetry&lt;br&gt;energy ledger + 4 AI models" vertex="1">
-          <mxGeometry height="92" width="240" x="988" y="650" as="geometry" />
+          <mxGeometry height="92" width="220" x="850" y="630" as="geometry" />
         </mxCell>
-        <mxCell id="dns" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;dnsmasq + adblock-fast&lt;/b&gt;&lt;br&gt;27 k domains blocked&lt;br&gt;whole-home DNS + leases" vertex="1">
-          <mxGeometry height="80" width="230" x="272" y="756" as="geometry" />
+        <mxCell id="usb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;Local USB 3.0 Media Storage (28 GB ext4)&lt;/b&gt;&lt;br&gt;Directly mounted at /mnt/sda1 (/mnt/usb) on JioRouter .50&lt;br&gt;transmission-daemon :9091 · minidlnad :8200 UPnP&lt;br&gt;Supervised locally via procd &amp;amp; mesh-poller" vertex="1">
+          <mxGeometry height="92" width="410" x="1090" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="dns" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;dnsmasq + adblock-fast&lt;/b&gt;&lt;br&gt;28 k domains blocked&lt;br&gt;Primary whole-home DNS + leases" vertex="1">
+          <mxGeometry height="80" width="220" x="160" y="736" as="geometry" />
         </mxCell>
         <mxCell id="cgi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#ffe6cc;strokeColor=#d79b00;" value="&lt;b&gt;/www/cgi-bin  —  REST surface (ucode CGI)&lt;/b&gt;&lt;br&gt;mesh-api · mitv-api · firetv-api · ac-api&lt;br&gt;read cached state · write device control" vertex="1">
-          <mxGeometry height="80" width="462" x="514" y="756" as="geometry" />
+          <mxGeometry height="80" width="520" x="400" y="736" as="geometry" />
         </mxCell>
-        <mxCell id="web" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;/www  —  dashboards&lt;/b&gt;&lt;br&gt;mesh.html (all tabs)&lt;br&gt;ac.html (standalone)" vertex="1">
-          <mxGeometry height="80" width="240" x="988" y="756" as="geometry" />
+        <mxCell id="web" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;/www — dashboards (ON JIOROUTER .50)&lt;/b&gt;&lt;br&gt;&lt;b style=&quot;color:#6b21a8;font-size:12px;&quot;&gt;mesh.html (central single pane — http://192.168.0.50/mesh.html)&lt;/b&gt;&lt;br&gt;ac.html (standalone AC console — http://192.168.0.50/ac.html)" vertex="1">
+          <mxGeometry height="80" width="560" x="940" y="736" as="geometry" />
         </mxCell>
         <mxCell id="state" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#ffffff;strokeColor=#9e9e9e;dashed=1;" value="&lt;b&gt;/tmp state (tmpfs, atomic writes)  ·  /etc caches&lt;/b&gt;&lt;br&gt;mesh-status.json · entertainment-status.json · ac-status.json · mesh-history.tsv · dsp-auto.log · mesh-selfheal.log  |  /etc/mesh-vendor-cache" vertex="1">
-          <mxGeometry height="62" width="956" x="272" y="850" as="geometry" />
+          <mxGeometry height="62" width="1340" x="160" y="830" as="geometry" />
         </mxCell>
-        <mxCell id="ktune" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Kernel 5.15 tuning profile&lt;/b&gt;&lt;br&gt;sysctl BDP/fastopen/backlog · RPS 0xf · MIPS SMP IRQ affinity (2.4G→CPU1, 5G→CPU2-3)" vertex="1">
-          <mxGeometry height="50" width="956" x="272" y="924" as="geometry" />
+        <mxCell id="ktune" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;OpenWrt Kernel 6.6 Profile (JioRouter MT7986 ARM64) &amp;amp; Kernel 5.15 Profile (TP-Link MIPS)&lt;/b&gt;&lt;br&gt;Filogic 830 hardware flow offload · sysctl BDP/fastopen/backlog · RPS · zero-fork native ucode engine across all services" vertex="1">
+          <mxGeometry height="62" width="1340" x="160" y="906" as="geometry" />
         </mxCell>
         <mxCell id="av" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#9673a6;fillColor=#fbf8fd;dashed=0;" value="Managed A/V stack  (HDMI-CEC island)" vertex="1">
           <mxGeometry height="230" width="740" x="250" y="1030" as="geometry" />
@@ -156,14 +159,14 @@
         <mxCell id="sony" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;Sony HT-S40R 5.1&lt;/b&gt;&lt;br&gt;HDMI 2 ← plain ARC (not eARC)&lt;br&gt;Reachable only via CEC&lt;br&gt;Vendor frames: NOT injectable" vertex="1">
           <mxGeometry height="160" width="212" x="756" y="1078" as="geometry" />
         </mxCell>
-        <mxCell id="ac" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;Panasonic CS/CU-******&lt;/b&gt;&lt;br&gt;Wi-Fi module .4 (Espressif)&lt;br&gt;On TP-Link 2.4G ch6&lt;br&gt;Control = MirAIe MQTT only&lt;br&gt;(no LAN control protocol)" vertex="1">
+        <mxCell id="ac" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;Panasonic CS/CU-NU18AKY5WX&lt;/b&gt;&lt;br&gt;Wi-Fi module .4 (Espressif)&lt;br&gt;On TP-Link 2.4G ch6&lt;br&gt;Control = MirAIe MQTT only&lt;br&gt;(no LAN control protocol)" vertex="1">
           <mxGeometry height="160" width="236" x="1014" y="1078" as="geometry" />
         </mxCell>
         <mxCell id="clients" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#f5f5f5;strokeColor=#666666;" value="&lt;b&gt;Wi-Fi clients&lt;/b&gt;&lt;br&gt;phones, laptops, PC,&lt;br&gt;Mi TV, Fire TV, AC, IoT&lt;br&gt;&lt;br&gt;SSID U101 / U101-slow&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="160" width="190" x="40" y="1078" as="geometry" />
         </mxCell>
-        <mxCell id="user" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;👤 Operator browser&lt;/b&gt;&lt;br&gt;on the LAN&lt;br&gt;single pane of glass:&lt;br&gt;http://192.168.0.12/mesh.html" vertex="1">
-          <mxGeometry height="100" width="220" x="40" y="176" as="geometry" />
+        <mxCell id="user" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#e1d5e7;strokeColor=#9673a6;" value="&lt;b&gt;👤 Operator browser&lt;/b&gt;&lt;br&gt;on the LAN&lt;br&gt;single pane of glass:&lt;br&gt;&lt;b style=&quot;color:#6b21a8;font-size:12px;&quot;&gt;http://192.168.0.50/mesh.html&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;color:#666;&quot;&gt;(TP-Link .12/ redirects to .50)&lt;/span&gt;" vertex="1">
+          <mxGeometry height="100" width="250" x="40" y="176" as="geometry" />
         </mxCell>
         <mxCell id="clouds" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#d6b656;fillColor=#fffdf5;dashed=0;" value="External services (egress only)" vertex="1">
           <mxGeometry height="560" width="340" x="1600" y="176" as="geometry" />
@@ -186,34 +189,28 @@
         <mxCell id="e2" edge="1" parent="1" source="wan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;" target="nokia" value="GPON fiber">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3" edge="1" parent="1" source="nokia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2f5597;fontColor=#2f5597;" target="ap1" value="Cat6">
+        <mxCell id="e3" edge="1" parent="1" source="nokia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2f5597;fontColor=#2f5597;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.45;entryY=0;entryDx=0;entryDy=0;" target="hub" value="Cat6 (direct uplink to primary hub)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e4" edge="1" parent="1" source="nokia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2f5597;fontColor=#2f5597;" target="ap2" value="Cat6">
+        <mxCell id="e4" edge="1" parent="1" source="nokia" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2f5597;fontColor=#2f5597;exitX=0.6;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ap2" value="Cat6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e5" edge="1" parent="1" source="ap2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.35;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" target="hub" value="Cat6  — TP-Link hangs off AP #2, not the gateway">
+        <mxCell id="e5" edge="1" parent="1" source="ap2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#2f5597;fontColor=#2f5597;" target="tplink" value="Cat6 — TP-Link hangs off AP #2 LAN port (⚠ SPOF)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e6" edge="1" parent="1" source="ap2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#2f5597;fontColor=#2f5597;" target="usb" value="USB 2.0">
+        <mxCell id="e7" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#9673a6;fontColor=#9673a6;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" target="web" value="HTTP · http://192.168.0.50/mesh.html">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e7" edge="1" parent="1" source="user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;strokeColor=#9673a6;fontColor=#9673a6;" target="web" value="HTTP  ·  mesh.html">
+        <mxCell id="e8" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.1;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="nokia" value="SSH — show wifi client list / lan ip hosts">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e8" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.1;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="nokia" value="SSH — show wifi client list / lan ip hosts">
+        <mxCell id="e10" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.6;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="ap2" value="telnet / ssh — CLI + busybox shell">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e9" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="ap1" value="ssh — vendor CLI (1 session max)">
+        <mxCell id="e11" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#82b366;fontColor=#82b366;" target="usb" value="procd watchdog · local /mnt/sda1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e10" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.4;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="ap2" value="ssh — CLI + busybox shell">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e11" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="usb" value="start.sh watchdog · ls/rm queue">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e12" edge="1" parent="1" source="roam" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.6;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="ap2" value="hostapd_cli deauth / iwpriv kick">
+        <mxCell id="e12" edge="1" parent="1" source="roam" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#b85450;fontColor=#b85450;" target="ap2" value="hostapd_cli deauth / iwpriv kick">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e13" edge="1" parent="1" source="entpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.15;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#9673a6;fontColor=#9673a6;" target="mitv" value="adb :5555  +  HTTP :8080 / :9988">
@@ -246,7 +243,7 @@
         <mxCell id="e22" edge="1" parent="1" source="dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.9;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;strokeColor=#bf9000;fontColor=#bf9000;" target="bl" value="blocklist refresh">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e23" edge="1" parent="1" source="clients" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.1;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#999999;fontColor=#999999;" target="ap1" value="Wi-Fi">
+        <mxCell id="e23" edge="1" parent="1" source="clients" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.1;entryY=1;entryDx=0;entryDy=0;dashed=1;strokeColor=#999999;fontColor=#999999;" target="hub" value="Wi-Fi">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e24" edge="1" parent="1" source="meshpoll" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0.1;exitY=1;exitDx=0;exitDy=0;entryX=0.05;entryY=0;entryDx=0;entryDy=0;" target="state" value="writes mesh-status.json">
@@ -264,14 +261,14 @@
         <mxCell id="e28" edge="1" parent="1" source="cgi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="web" value="JSON">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e29" edge="1" parent="1" source="dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.9;entryDx=0;entryDy=0;dashed=1;strokeColor=#999999;fontColor=#999999;" target="nokia" value="DHCP option 6 points every client here">
+        <mxCell id="e29" edge="1" parent="1" source="dns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;labelBackgroundColor=#ffffff;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.9;entryDx=0;entryDy=0;dashed=1;strokeColor=#999999;fontColor=#999999;" target="nokia" value="DHCP option 6 points every client here (.50)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="leg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#999999;fillColor=#fafafa;dashed=0;" value="Legend / invariants" vertex="1">
-          <mxGeometry height="230" width="650" x="1290" y="1030" as="geometry" />
+          <mxGeometry height="230" width="670" x="1270" y="1030" as="geometry" />
         </mxCell>
-        <mxCell id="t30" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;" value="&lt;span style=&quot;color:#2f5597&quot;&gt;&amp;#9644;&amp;#9644;&lt;/span&gt; Cat6 / physical link &amp;#160;&amp;#160; &lt;span style=&quot;color:#b85450&quot;&gt;- - -&lt;/span&gt; management (telnet / SSH) &amp;#160;&amp;#160; &lt;span style=&quot;color:#9673a6&quot;&gt;&amp;#9644;&amp;#9644;&lt;/span&gt; A/V control (adb, HDMI, CEC)&lt;br&gt;&lt;span style=&quot;color:#bf9000&quot;&gt;- - -&lt;/span&gt; cloud egress &amp;#160;&amp;#160; &lt;span style=&quot;color:#999&quot;&gt;- - -&lt;/span&gt; Wi-Fi / DHCP&lt;br&gt;&lt;br&gt;&lt;b&gt;Invariants worth keeping in mind&lt;/b&gt;&lt;br&gt;&amp;#8226; One L3 subnet, zero routed hops &amp;#8212; latency differences are L2 switch hops only.&lt;br&gt;&amp;#8226; All hub logic is &lt;b&gt;ucode (.uc)&lt;/b&gt;; /bin/sh only wraps ping / adb / nc.&lt;br&gt;&amp;#8226; CGI never touches a device synchronously &amp;#8212; pollers own all device I/O, CGI reads /tmp.&lt;br&gt;&amp;#8226; Huawei APs accept exactly &lt;b&gt;one&lt;/b&gt; telnet session; the poller holds it most of the time.&lt;br&gt;&amp;#8226; Mi TV adb is single-authorised: drive it from the router only." vertex="1">
-          <mxGeometry height="180" width="610" x="1310" y="1066" as="geometry" />
+        <mxCell id="t30" parent="1" style="text;html=1;align=left;verticalAlign=top;whiteSpace=wrap;fontSize=11;" value="&lt;span style=&quot;color:#2f5597&quot;&gt;&amp;#9644;&amp;#9644;&lt;/span&gt; Cat6 / physical link &amp;#160;&amp;#160; &lt;span style=&quot;color:#b85450&quot;&gt;- - -&lt;/span&gt; management (telnet / SSH) &amp;#160;&amp;#160; &lt;span style=&quot;color:#9673a6&quot;&gt;&amp;#9644;&amp;#9644;&lt;/span&gt; A/V control (adb, HDMI, CEC)&lt;br&gt;&lt;span style=&quot;color:#bf9000&quot;&gt;- - -&lt;/span&gt; cloud egress &amp;#160;&amp;#160; &lt;span style=&quot;color:#999&quot;&gt;- - -&lt;/span&gt; Wi-Fi / DHCP&lt;br&gt;&lt;br&gt;&lt;b&gt;Invariants worth keeping in mind&lt;/b&gt;&lt;br&gt;&amp;#8226; One L3 subnet, zero routed hops &amp;#8212; latency differences are L2 switch hops only.&lt;br&gt;&amp;#8226; All hub logic is &lt;b&gt;ucode (.uc)&lt;/b&gt;; /bin/sh only wraps ping / adb / nc.&lt;br&gt;&amp;#8226; Central dashboard is hosted on &lt;b&gt;JioRouter AX6000 (.50)&lt;/b&gt;; TP-Link (.12) 302-redirects to it.&lt;br&gt;&amp;#8226; CGI never touches a device synchronously &amp;#8212; pollers own all device I/O, CGI reads /tmp.&lt;br&gt;&amp;#8226; Huawei APs accept exactly &lt;b&gt;one&lt;/b&gt; telnet session; the poller holds it most of the time.&lt;br&gt;&amp;#8226; Mi TV adb is single-authorised: drive it from the router only." vertex="1">
+          <mxGeometry height="180" width="630" x="1290" y="1066" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

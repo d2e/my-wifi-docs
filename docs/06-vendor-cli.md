@@ -58,8 +58,8 @@ Programmatically controls Nokia Master Gateway via SJCL AES-CBC + RSA-1024 encry
 - **Check Status**: `node nokia_wifi_control.js` (reads live 2.4 GHz and 5 GHz channel, SSID, BSSID).
 - **Set 5 GHz Channel**: `node nokia_wifi_control.js --5g <channel>` (e.g. `node nokia_wifi_control.js --5g 44`).
 - **Set 2.4 GHz Channel**: `node nokia_wifi_control.js --24g <channel>` (e.g. `node nokia_wifi_control.js --24g 11`).
-- **Set Master DHCP DNS**: `node nokia_wifi_control.js --set-dns 192.168.0.12 1.1.1.1` (configures Primary DNS to TP-Link Ad-Blocker, Secondary to Cloudflare fallback).
-- **Toggle YouTube Switch**: `node nokia_wifi_control.js --youtube <on|off|status>` (synchronizes Nokia Gateway Parental Control with TP-Link whole-home DNS blackhole).
+- **Set Master DHCP DNS**: `node nokia_wifi_control.js --set-dns 192.168.0.50 192.168.0.12` (configures Primary DNS to JioRouter Ad-Blocker, Secondary to TP-Link fallback).
+- **Toggle YouTube Switch**: `node nokia_wifi_control.js --youtube <on|off|status>` (synchronizes Nokia Gateway Parental Control with router whole-home DNS blackhole).
 - **Parental Control**: `node nokia_wifi_control.js --parental-control <on|off>`.
 
 ### Critical parsing gotchas (all already handled in `mesh-poller.sh`, but worth knowing if editing it)

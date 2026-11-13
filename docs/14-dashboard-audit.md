@@ -271,7 +271,7 @@ genuinely fail when the corresponding bug is deliberately reintroduced (not rubb
    Night-vs-Voice DRC distinction, stale/fully-null sessions). Run on the router (ucode isn't
    installed locally on macOS):
    ```bash
-   ssh root@192.168.0.12 'cd /usr/bin && ucode test-poller-lib.uc'
+   ssh root@192.168.0.50 'cd /usr/bin && ucode test-poller-lib.uc'
    ```
 2. **`regression-test.uc`** — live smoke test against the actually-running system: process
    health, `entertainment-status.json` schema/range validation, cross-checks the poller's
@@ -291,7 +291,7 @@ genuinely fail when the corresponding bug is deliberately reintroduced (not rubb
    for** — a third instance of this codebase's recurring ucode-regex gotcha; rewritten with
    plain `index()`/`substr()`. Run on demand after any deploy:
    ```bash
-   ssh root@192.168.0.12 ucode /usr/bin/regression-test.uc
+   ssh root@192.168.0.50 ucode /usr/bin/regression-test.uc
    ```
 3. **JVM unit tests for `tv-telemetry-agent`** (`ShowMetadataParserTest`, `TelemetryStateTest`,
    `TelemetryCollectorTest`) — `ShowMetadataParser` was extracted from `TvAccessibilityService`

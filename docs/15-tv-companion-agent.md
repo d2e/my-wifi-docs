@@ -45,7 +45,7 @@ adb -s 192.168.0.10:5555 shell am start-foreground-service -n com.home.tvagent/.
 ```
 
 ### 5. Router Integration (`/usr/bin/entertainment-poller.uc`)
-The router polling daemon on TP-Link (`192.168.0.12`) now queries the TV agent before falling back to ADB:
+The router polling daemon on JioRouter (`192.168.0.50`) now queries the TV agent before falling back to ADB:
 ```ucode
 // Fast path: query native on-device HTTP agent (sub-2ms)
 let pAgent = fs.popen(sprintf("curl -s -m 1 http://%s:8080/nowplaying 2>/dev/null", TV_IP));

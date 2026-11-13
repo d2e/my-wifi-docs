@@ -1,6 +1,6 @@
 ## ❄️ 12. Panasonic Smart AC Embedded Hub & Thermodynamic AI Engine
 
-As of 2026-08-30, the network hosts a **100% self-contained embedded Smart AC hub and AI prediction engine running 24/7 on the TP-Link Archer A6 router (`192.168.0.12`)** under OpenWrt:
+As of 2026-08-30, the network hosts a **100% self-contained embedded Smart AC hub and AI prediction engine running 24/7 on the JioRouter AX6000 (`192.168.0.50`)** under OpenWrt (with TP-Link `192.168.0.12` providing the 2.4 GHz radio link and 302-redirecting web requests):
 
 ### 1. Hardware & Space Profile
 - **AC Model**: Panasonic CS-CU-NU18AKY5WX (Inverter AC, Converti7)
@@ -21,10 +21,10 @@ As of 2026-08-30, the network hosts a **100% self-contained embedded Smart AC hu
 4. **802.11 Fresnel Micro-Motion Radar**: $93.9\%$ RF link stability index confirming calm, undisturbed room multipath conditions.
 
 ### 4. Router Service & UI Endpoints
-- **Whole-Home Mesh Manager**: `http://192.168.0.12/mesh.html` (Dedicated `❄️ Panasonic Smart AC` tab).
-- **Standalone AC Application**: `http://192.168.0.12/ac.html`.
-- **CGI REST API**: `http://192.168.0.12/cgi-bin/ac-api`.
-- **Procd Service**: `/etc/init.d/ac-poller` (`/usr/bin/ac-poller.uc`, pure ucode).
+- **Whole-Home Mesh Manager**: `http://192.168.0.50/mesh.html` (Dedicated `❄️ Panasonic Smart AC` tab; `192.168.0.12/` auto-redirects).
+- **Standalone AC Application**: `http://192.168.0.50/ac.html`.
+- **CGI REST API**: `http://192.168.0.50/cgi-bin/ac-api`.
+- **Procd Service**: `/etc/init.d/ac-poller` (`/usr/bin/ac-poller.uc`, pure ucode running on JioRouter).
 - **Resource Footprint**: `< 1.2 MB` RAM, `< 50 KB` Flash, `~0.1%` CPU. Zero laptop dependencies.
 
 ### 5. Real Energy Ledger & Real Device Control (2026-09-03 rework)
@@ -33,7 +33,7 @@ As of 2026-08-30, the network hosts a **100% self-contained embedded Smart AC hu
 - **Outdoor AQI & Weather (`aqi_data.outdoor`)**: Fixed Open-Meteo API query to use `current=pm2_5,pm10,european_aqi,us_aqi,uv_index` (the previous parameter `eu_aqi` was invalid, causing Open-Meteo to return an error JSON). Frontends now render live US AQI (`29 🟢 Good`), PM2.5, PM10, EU AQI, and UV Index with dynamic color badges and scale marker.
 - **Indoor AQI (`aqi_data.indoor`)**: explicitly `supported: false` — this model exposes no IAQ/PM2.5/dust sensors via MirAIe; frontends render `--`.
 - **Real device control (`ac-api` POST)**: maps UI commands (`power`, `temp`, `mode`, `fan` (UI `med` → MirAIe `medium`), `preset`, `converti`, `swing-v`, `swing-h`, `display`) to MirAIe **MQTT-over-TLS control** (`mqtt.miraie.in:8883`, username = homeId, password = access token, topic `<userId>/<homeId>/<deviceId>/control`, payload base `{"cnt":"an","ki":1,"sid":"1"}`), published via **`mosquitto_pub`** from `mosquitto-client-ssl`. Stdin reading is safely bounded using `CONTENT_LENGTH`. On successful publish, optimistic local updates are written to `/tmp/ac-status.json` so immediate polling reflects the new state instantly.
-- **Frontends**: Standalone `http://192.168.0.12/ac.html` and `http://192.168.0.12/mesh.html` (AC tab) dynamically synchronize button highlight states (Power, Temp Presets, Fan Speed, Converti, V-Swing, Panel LED Display) directly from reported live hardware status. Stale "Preview Mode" badges replaced with live hardware control indicators.
+- **Frontends**: Standalone `http://192.168.0.50/ac.html` and `http://192.168.0.50/mesh.html` (AC tab) dynamically synchronize button highlight states (Power, Temp Presets, Fan Speed, Converti, V-Swing, Panel LED Display) directly from reported live hardware status. Stale "Preview Mode" badges replaced with live hardware control indicators.
 
 ---
 
