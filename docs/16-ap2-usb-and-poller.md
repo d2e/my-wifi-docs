@@ -1,11 +1,15 @@
-## 🌊 16. AP2 USB Transmission Daemon, `mesh-poller` Reliability Overhaul & `.sh`→`.uc` Cutover (2026-09-09)
+## 🌊 16. USB Storage, Transmission Daemon, Media Stack & Poller Architecture Evolution
 
-A user-installed `transmission-daemon` (BitTorrent client) has been running for a while on a
-USB drive plugged into **Huawei AP #2** (`192.168.0.98`) — never previously documented anywhere
-in this file. It was found down; root-causing it surfaced several other real, previously-latent
-bugs, one of them predating today entirely.
+### ⚡ Architecture Evolution: Migration of USB Storage & Media Stack to JioRouter AX6000
+> **Permanent Migration Note**: The physical 28GB ext4 USB flash drive has been migrated from Huawei AP #2 to the **JioRouter AX6000 (`192.168.0.50`)**.
+> - **Block Device & Mount**: `/dev/sda1` is mounted at `/mnt/sda1` (with backward-compatible symlinks `/mnt/usb -> /mnt/sda1` and `/mnt/usb/data -> /mnt/sda1`).
+> - **Native Daemons**: Both `transmission-daemon` (web UI `http://192.168.0.50:9091/`) and `minidlnad` (DLNA streaming `http://192.168.0.50:8200/`) run natively under OpenWrt procd (`/etc/init.d/transmission`, `/etc/init.d/minidlna`) on the Filogic 830 quad-core ARM64 CPU with 512MB RAM.
+> - **Reliability Gains**: Moving USB storage away from Huawei AP #2 eliminated the AP's fragile 128MB RAM MIPS constraints, single-telnet lockouts, and multi-port `/mnt/usb/usb-_1/` path bugs.
+> - **AP #1 Deprecation**: Concurrently, **Huawei AP #1 (`192.168.0.110`) was deprecated and decommissioned**, with all telnet hooks purged from `mesh-poller.uc` to eliminate 14-32s polling delays.
 
-### What it is
+---
+
+### Historical AP2 Implementation & Root Cause Archive
 Installed at `/mnt/usb/usb-_1/transmission/` (also bind-mounted at `/mnt/ftproot/usb-_1/transmission/`
 for FTP access): `bin/transmission-daemon` + its own `ld-linux.so.3`/`libgetrandom_preload.so`,
 `start.sh`/`stop.sh`, `config/`, `web/` (the stock Transmission web UI), `transmission.log`,

@@ -8,8 +8,9 @@
     - **Jio AX6000 2.4G**: BSSID `8c:83:94:42:a6:d8`, Ch 1 HE20 (OpClass 81, PHY 0x0e).
     - **TP-Link Archer A6 5G**: BSSID `10:27:f5:b0:b2:0a`, Ch 44 VHT80 (OpClass 128, Center 42, PHY 0x09).
     - **TP-Link Archer A6 2.4G**: BSSID `10:27:f5:b0:b2:09`, Ch 6 HT20 (OpClass 81, PHY 0x07).
-    - **Huawei AP #1 5G**: BSSID `48:f8:db:6d:98:74`, Ch 36 VHT80 (OpClass 128, Center 42, PHY 0x09).
-    - **Huawei AP #1 2.4G**: BSSID `48:f8:db:6d:98:70`, Ch 11 HT20 (OpClass 81, PHY 0x07).
+    - **Huawei AP #2 5G**: BSSID `48:f8:db:6d:98:74`, Ch 52 DFS VHT80.
+    - **Huawei AP #2 2.4G**: BSSID `48:f8:db:6d:98:70`, Ch 11 HT20.
+    - *(Huawei AP #1 has been deprecated and retired from RRM tables)*.
     - **Nokia ONT 5G**: BSSID `e4:da:df:83:8e:ad`, Ch 44 VHT80 (OpClass 128, Center 42, PHY 0x09).
     - **Nokia ONT 2.4G**: BSSID `e4:da:df:83:8e:a9`, Ch 11 HT20 (OpClass 81, PHY 0x07, SSID `U101-slow`).
   - Added a 30-second ubus retry loop in TP-Link's `/usr/bin/seed-rrm.uc` so neighbor tables never fail to load if hostapd starts after `rc.local`.

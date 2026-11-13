@@ -192,8 +192,8 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
       </g>
       <g data-step="3">
         <rect class="nbox net" x="130" y="232" width="240" height="68"/>
-        <text class="nt" x="250" y="256">Huawei AP #1</text>
-        <text class="ns" x="250" y="277">Wi-Fi only &#8212; no routing</text>
+        <text class="nt" x="250" y="256">Jio AX6000 (Hub)</text>
+        <text class="ns" x="250" y="277">Wi-Fi 6 + USB Media Stack</text>
         <rect class="nbox net" x="590" y="232" width="240" height="68"/>
         <text class="nt" x="710" y="256">Huawei AP #2</text>
         <text class="ns" x="710" y="277">Wi-Fi only &#8212; no routing</text>
@@ -230,8 +230,8 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
       <rect class="nbox net" x="360" y="104" width="240" height="56"/>
       <text class="nt" x="480" y="132">Nokia Gateway</text>
       <rect class="nbox net" x="130" y="206" width="240" height="66"/>
-      <text class="nt" x="250" y="229">Huawei AP #1</text>
-      <text class="ns" x="250" y="251">keeps serving Wi-Fi</text>
+      <text class="nt" x="250" y="229">Jio AX6000 (Hub)</text>
+      <text class="ns" x="250" y="251">direct to Nokia + USB host</text>
       <g id="ap2g">
         <rect id="ap2r" class="nbox net" x="590" y="206" width="240" height="66"/>
         <text class="nt" x="710" y="229">Huawei AP #2</text>
@@ -296,7 +296,7 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
       <div class="cyc"><div class="k">01</div><div class="v">Ping the gateway and both access points</div></div>
       <div class="cyc"><div class="k">02</div><div class="v">Sweep the subnet to refresh who is out there</div></div>
       <div class="cyc"><div class="k">03</div><div class="v">Read its own two radios locally</div></div>
-      <div class="cyc"><div class="k">04</div><div class="v">Log in to Huawei AP #1, pull real signal data</div></div>
+      <div class="cyc"><div class="k">04</div><div class="v">JioRouter local storage, Transmission &amp; DLNA audit</div></div>
       <div class="cyc"><div class="k">05</div><div class="v">One visit to AP #2: stats, kicks, USB chores</div></div>
       <div class="cyc"><div class="k">06</div><div class="v">Ask the gateway for its clients and DHCP names</div></div>
       <div class="cyc"><div class="k">07</div><div class="v">Resolve unknown hardware makers, cache forever</div></div>
@@ -559,9 +559,9 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
     timers.push(setTimeout(down, 1400));
     timers.push(setInterval(function(){ down(); timers.push(setTimeout(up, 2600)); }, 5200));
   }
-  var CH5 = [['36','TP-Link',4,20,'#6ea8fe'],['44','Nokia',27,20,'#79c0ff'],
-             ['52','AP #2',50,20,'#56d364'],['149','AP #1',75,21,'#f0a35e']];
-  var CH24 = [['1','AP #1',2,27,'#6ea8fe'],['6','TP-Link',36,27,'#56d364'],
+  var CH5 = [['36','Jio + TP-Link',4,20,'#6ea8fe'],['44','Nokia',27,20,'#79c0ff'],
+             ['52','AP #2',50,20,'#56d364']];
+  var CH24 = [['1','Jio AX6000',2,27,'#6ea8fe'],['6','TP-Link',36,27,'#56d364'],
               ['11','AP #2 + Nokia',70,28,'#f0a35e']];
   function spectrum(s){
     [['#tr5', CH5], ['#tr24', CH24]].forEach(function(pair){

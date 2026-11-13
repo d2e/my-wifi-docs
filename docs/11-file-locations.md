@@ -23,6 +23,12 @@
 - `/etc/ac-poller.conf` — MirAIe cloud credentials for AC control.
 - `/etc/mesh-vendor-cache` — Persistent MAC→vendor lookup cache.
 - `/etc/mesh-youtube.state` — Whole-home YouTube blocking toggle state.
+- `/mnt/sda1` (symlink `/mnt/usb`) — 28GB ext4 USB 3.0 flash drive mount.
+- `/mnt/sda1/downloads` — Download destination for torrents and DLNA indexed media.
+- `/mnt/sda1/transmission` — Transmission daemon state, settings, and RPC assets.
+- `/etc/init.d/transmission` — Procd service definition for Transmission BitTorrent daemon (`http://192.168.0.50:9091/`).
+- `/etc/init.d/minidlna` — Procd service definition for MiniDLNA media streaming server (`http://192.168.0.50:8200/`).
+- `/tmp/mesh-pending-usb-deletes.txt` — Atomic queue for file and folder deletions triggered via the web UI.
 - `/tmp/mesh-status.json` — Current live mesh snapshot (tmpfs, regenerated every ~20s).
 - `/tmp/ac-status.json` — Current live AC telemetry and AI thermodynamic models (regenerated every 10s).
 - `/tmp/entertainment-status.json` — Current live TV / Fire TV / Audio status.

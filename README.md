@@ -20,32 +20,32 @@ The network operates on a single flat L3 subnet (`192.168.0.0/24`) with zero int
        │                     192.168.0.1                         │
        │       Master DHCP Server (Pool: 192.168.0.2 - .254)     │
        │       Advertises DNS: Primary .50  │  Secondary .12     │
-       └───┬────────────────────────┬────────────────────────┬───┘
-           │ Cat6 (LAN 1)           │ Cat6 (LAN 2)           │ Cat6 (LAN 3)
-           ▼                        ▼                        ▼
-┌──────────────────────┐ ┌──────────────────────┐ ┌──────────────────────┐
-│  Huawei AP #1        │ │  Huawei AP #2        │ │ JioRouter AX6000     │
-│  HG8145V5            │ │  HG8145V5            │ │ JIDU6101             │
-│  192.168.0.110       │ │  192.168.0.98        │ │ 192.168.0.50         │
-│                      │ │                      │ │                      │
-│  • Pure L2 AP        │ │  • Pure L2 AP        │ │  ★ PRIMARY HUB       │
-│  • Pinned RF channels│ │  • Daisy-chain uplink│ │  • Quad-core ARM64   │
-│  • Telnet CLI        │ │  • Real Busybox shell│ │  • OpenWrt SNAPSHOT  │
-└──────────────────────┘ └──┬─────────────────┬─┘ └──────────────────────┘
-                            │ Cat6 LAN        │ USB 2.0
-                            ▼                 ▼
-                 ┌────────────────────┐ ┌────────────────────────┐
-                 │ TP-Link Archer A6  │ │ 28 GB USB Storage      │
-                 │ v3 (192.168.0.12)  │ │ (ext4 on Huawei AP #2) │
-                 │                    │ │                        │
-                 │ • SECONDARY AP     │ │ • transmission-daemon  │
-                 │ • OpenWrt 23.05.5  │ │   (:9091 Web/RPC)      │
-                 │ • Fallback DNS     │ │ • MiniDLNA 1.3.3       │
-                 │ • Web redirects    │ │   (:8200 UPnP/DLNA)    │
-                 │   to Jio .50       │ └────────────────────────┘
-                 └────────────────────┘
-             ⚠ AP #2 is single point of failure
-               for TP-Link's network path
+       └───┬─────────────────────────────────────────────────┬───┘
+           │ Cat6 (LAN 1)                                    │ Cat6 (LAN 2)
+           ▼                                                 ▼
+┌───────────────────────────────────────┐         ┌──────────────────────┐
+│ JioRouter AX6000 (JIDU6101)           │         │  Huawei AP #2        │
+│ 192.168.0.50                          │         │  HG8145V5            │
+│                                       │         │  192.168.0.98        │
+│ ★ PRIMARY AUTOMATION HUB              │         │                      │
+│ • Replaced Huawei AP #1 (deprecated)  │         │ • Pure L2 AP         │
+│ • Wi-Fi 6 (802.11ax 4x4 MU-MIMO 160M) │         │ • Daisy-chain uplink │
+│ • OpenWrt SNAPSHOT (Quad-core ARM64)  │         │ • Real Busybox shell │
+│ • Primary DNS Sinkhole (adblock-fast) │         └──────────┬───────────┘
+│ • USB 3.0 Media Host Attached         │                    │ Cat6 LAN
+│   (/mnt/sda1 ext4 28GB)               │                    ▼
+│   - transmission-daemon (:9091)       │         ┌────────────────────┐
+│   - MiniDLNA 1.3.3 (:8200)            │         │ TP-Link Archer A6  │
+└───────────────────────────────────────┘         │ v3 (192.168.0.12)  │
+[Note: Huawei AP #1 (.110) decommissioned]        │                    │
+                                                  │ • SECONDARY AP     │
+                                                  │ • OpenWrt 23.05.5  │
+                                                  │ • Fallback DNS     │
+                                                  │ • Web redirects    │
+                                                  │   to Jio .50       │
+                                                  └────────────────────┘
+                                              ⚠ AP #2 is single point of failure
+                                                for TP-Link's network path
 ```
 
 ---
@@ -93,10 +93,10 @@ The network operates on a single flat L3 subnet (`192.168.0.0/24`) with zero int
 | Node | Model | IP | Role |
 |---|---|---|---|
 | **Nokia G-2425G-A** | MTK7528 GPON ONT | `192.168.0.1` | Fiber WAN Gateway, Master DHCP Server, 5G Ch 44 / 2.4G Ch 11 |
-| **Huawei HG8145V5 (AP #1)** | Dual-band AC1200 GPON | `192.168.0.110` | L2 Access Point, 5G Ch 149 / 2.4G Ch 1 |
-| **Huawei HG8145V5 (AP #2)** | Dual-band AC1200 GPON | `192.168.0.98` | L2 Access Point, 5G Ch 52 DFS / 2.4G Ch 11, USB DLNA/Torrent host |
-| **JioRouter AX6000 (JIDU6101)** | MT7986 ARM64 4x4 Wi-Fi 6 | `192.168.0.50` | Primary Automation Hub, Primary DNS (`adblock-fast`), 5G Ch 36/149 HE160 |
-| **TP-Link Archer A6 v3** | MediaTek MT7621AT | `192.168.0.12` | Secondary Access Point, Secondary DNS (`adblock-fast`), 5G Ch 44 / 2.4G Ch 6 |
+| **JioRouter AX6000 (JIDU6101)** | MT7986 ARM64 4x4 Wi-Fi 6 | `192.168.0.50` | Primary Automation Hub, AP #1 replacement, Native USB 3.0 Media Host (:9091 Transmission, :8200 MiniDLNA), Primary DNS (`adblock-fast`), 5G Ch 36 HE160 |
+| **Huawei HG8145V5 (AP #2)** | Dual-band AC1200 GPON | `192.168.0.98` | Secondary L2 Access Point, daisy-chains TP-Link, 5G Ch 52 DFS / 2.4G Ch 11 |
+| **TP-Link Archer A6 v3** | MediaTek MT7621AT | `192.168.0.12` | Secondary Access Point, Secondary DNS (`adblock-fast`), 5G Ch 36 / 2.4G Ch 6 |
+| **Huawei HG8145V5 (AP #1)** | Dual-band AC1200 GPON | `192.168.0.110` | **[DEPRECATED / DECOMMISSIONED]** Replaced by JioRouter AX6000 |
 | **Xiaomi Mi QLED 75** | MT9611 Android 11 | `192.168.0.10` | CEC Bus Master (0.0.0.0), Native Rust agent (:9988), Telemetry agent (:8080) |
 | **Amazon Fire TV 4K** | AFTMM Fire OS 6 | `192.168.0.7` | HDMI 1 Input, locked 4K@60, Dolby Digital Plus bitstream |
 | **Sony HT-S40R 5.1** | 600W S-Master Soundbar | CEC `2.0.0.0` | HDMI 2 ARC audio sink |

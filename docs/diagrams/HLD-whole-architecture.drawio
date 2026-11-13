@@ -16,13 +16,13 @@
         <mxCell id="acc" value="③  Wi-Fi access points — plain Wi-Fi only, no routing" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#6c8ebf;fillColor=#f6f9ff;dashed=0;" vertex="1" parent="1">
           <mxGeometry x="280" y="320" width="700" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="ap1" value="&lt;b&gt;Huawei AP #1 · .110&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="ap1" value="&lt;b&gt;JioRouter AX6000 · .50 (Replaces AP #1) + USB&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
           <mxGeometry x="302" y="365" width="300" height="56" as="geometry" />
         </mxCell>
         <mxCell id="ap2" value="&lt;b&gt;Huawei AP #2 · .98&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="658" y="365" width="300" height="56" as="geometry" />
         </mxCell>
-        <mxCell id="hub" value="④  Automation hub — TP-Link Archer A6 · 192.168.0.12 (OpenWrt)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#82b366;fillColor=#f6fff4;dashed=0;" vertex="1" parent="1">
+        <mxCell id="hub" value="④  Automation Core — JioRouter AX6000 (.50) &amp;amp; TP-Link Archer A6 (.12)" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#82b366;fillColor=#f6fff4;dashed=0;" vertex="1" parent="1">
           <mxGeometry x="260" y="480" width="760" height="170" as="geometry" />
         </mxCell>
         <mxCell id="poll" value="&lt;b&gt;Pollers&lt;/b&gt;&lt;br&gt;read everything,&lt;br&gt;every few seconds" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;fontSize=14;arcSize=8;spacing=4;fillColor=#d5e8d4;strokeColor=#82b366;verticalAlign=top;spacing=8;" vertex="1" parent="1">
@@ -105,16 +105,16 @@
         <mxCell id="nokia" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Nokia G-2425G-A  ·  192.168.0.1&lt;/b&gt;&lt;br&gt;GPON ONT + master gateway (MTK7528)&lt;br&gt;Master DHCP server · advertises DNS .12 → 1.1.1.1&lt;br&gt;Wi-Fi: 5G ch44 VHT80 · 2.4G ch11 HT20&lt;br&gt;Mgmt: web + SSH/telnet (restricted vendor CLI, no root)" vertex="1">
           <mxGeometry height="118" width="420" x="700" y="176" as="geometry" />
         </mxCell>
-        <mxCell id="ap1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Huawei HG8145V5 — AP #1  ·  .110&lt;/b&gt;&lt;br&gt;Pure L2 Wi-Fi AP (PON port unused)&lt;br&gt;5G ch149 · 2.4G ch1 · both pinned, 80/20 MHz&lt;br&gt;Mgmt: telnet vendor CLI (locked shell)" vertex="1">
+        <mxCell id="ap1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;JioRouter AX6000 — .50 (Replaces AP #1)&lt;/b&gt;&lt;br&gt;MT7986 Quad-Core ARM64 · OpenWrt SNAPSHOT&lt;br&gt;Wi-Fi 6: 5G ch36 HE160 · 2.4G ch1 HE20 (4x4 MU-MIMO)&lt;br&gt;Hosts USB 3.0 Media Stack &amp;amp; Primary Automation Hub" vertex="1">
           <mxGeometry height="118" width="360" x="170" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="ap2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Huawei HG8145V5 — AP #2  ·  .98&lt;/b&gt;&lt;br&gt;Pure L2 AP + TP-Link’s uplink  ⚠ single point of failure&lt;br&gt;5G ch52 (DFS) · 2.4G ch11 · both pinned&lt;br&gt;Mgmt: telnet vendor CLI + REAL busybox shell" vertex="1">
+        <mxCell id="ap2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="&lt;b&gt;Huawei HG8145V5 — AP #2  ·  .98&lt;/b&gt;&lt;br&gt;Pure L2 AP + TP-Link’s uplink  ⚠ single point of failure&lt;br&gt;5G ch52 (DFS) · 2.4G ch11 · both pinned&lt;br&gt;Mgmt: telnet vendor CLI (USB migrated to JioRouter)" vertex="1">
           <mxGeometry height="118" width="420" x="700" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="usb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;AP #2 USB services  (28 GB ext4)&lt;/b&gt;&lt;br&gt;transmission-daemon — :9091 web/RPC&lt;br&gt;MiniDLNA 1.3.3 — :8200 UPnP to the TVs&lt;br&gt;Unsupervised → watchdogged by mesh-poller (Cap. F)" vertex="1">
+        <mxCell id="usb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;JioRouter USB 3.0 Media Services (28 GB ext4)&lt;/b&gt;&lt;br&gt;Mounted at /mnt/sda1 (/mnt/usb) on JioRouter .50&lt;br&gt;transmission-daemon — :9091 web/RPC&lt;br&gt;MiniDLNA 1.3.3 — :8200 UPnP streaming to smart TVs&lt;br&gt;Supervised locally via procd &amp;amp; mesh-poller" vertex="1">
           <mxGeometry height="118" width="360" x="1180" y="390" as="geometry" />
         </mxCell>
-        <mxCell id="hub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#82b366;fillColor=#f6fff4;dashed=0;" value="TP-Link Archer A6 v3  ·  192.168.0.12  ·  OpenWrt 23.05.5  —  automation hub (ucode runtime)" vertex="1">
+        <mxCell id="hub" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=8;fontSize=13;fontStyle=1;arcSize=4;fillColor=none;strokeColor=#b0b0b0;dashed=1;strokeColor=#82b366;fillColor=#f6fff4;dashed=0;" value="JioRouter AX6000 (.50 Primary) &amp;amp; TP-Link Archer A6 (.12 Secondary) — OpenWrt Automation Hub" vertex="1">
           <mxGeometry height="400" width="1000" x="250" y="590" as="geometry" />
         </mxCell>
         <mxCell id="meshpoll" parent="1" style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fontSize=11;arcSize=6;fillColor=#d5e8d4;strokeColor=#82b366;" value="&lt;b&gt;mesh-poller.uc&lt;/b&gt;&lt;br&gt;procd, ~20 s cycle&lt;br&gt;RF/latency/clients/self-heal&lt;br&gt;Capabilities A–G" vertex="1">
