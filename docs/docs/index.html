@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Whole-Home Network &amp; Automation — Architecture</title>
+<style>
+:root{
+  --bg:#0d1117; --bg2:#161b22; --line:#2b3340;
+  --ink:#e6edf3; --dim:#8b949e; --faint:#5a6472;
+  --net:#6ea8fe; --dae:#7ee787; --api:#f0a35e; --ui:#c792ea;
+  --dev:#b3bcc9; --cloud:#e3c567; --warn:#ff7b72;
+  --radius:14px;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:"SF Mono",SFMono-Regular,ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--font);
+  overflow:hidden; -webkit-font-smoothing:antialiased;
+}
+#stage{position:fixed;inset:0}
+.slide{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  padding:4.2vh 5vw 9vh; opacity:0; pointer-events:none;
+  transition:opacity .45s ease, transform .45s ease; transform:translateY(14px);
+}
+.slide.active{opacity:1;pointer-events:auto;transform:none}
+h1{font-size:clamp(28px,4.6vw,62px);line-height:1.06;margin:0 0 .35em;letter-spacing:-.02em}
+h2{font-size:clamp(22px,2.9vw,40px);line-height:1.15;margin:0 0 .15em;letter-spacing:-.015em}
+.kicker{font:600 clamp(11px,1.05vw,14px)/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:1.1em}
+.sub{font-size:clamp(14px,1.45vw,21px);color:var(--dim);line-height:1.5;max-width:46em;margin:0 0 1.2em}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
+.center{align-items:center;text-align:center}
+b,strong{color:#fff;font-weight:650}
+code{font-family:var(--mono);font-size:.88em;color:var(--api);background:#ffffff0d;padding:.12em .4em;border-radius:5px}
+
+/* ---------- step reveal ---------- */
+[data-step]{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+[data-step].on{opacity:1;transform:none}
+
+/* ---------- chrome ---------- */
+#bar{position:fixed;left:0;top:0;height:3px;background:linear-gradient(90deg,var(--net),var(--ui));width:0;transition:width .35s ease;z-index:50}
+#foot{position:fixed;left:0;right:0;bottom:0;height:7vh;min-height:44px;display:flex;align-items:center;
+      gap:14px;padding:0 5vw;font-size:12px;color:var(--faint);z-index:40}
+#foot .spacer{flex:1}
+#dots{display:flex;gap:6px}
+#dots i{width:7px;height:7px;border-radius:50%;background:#30363d;display:block;cursor:pointer;transition:all .25s}
+#dots i.on{background:var(--net);transform:scale(1.35)}
+.btn{border:1px solid var(--line);background:#ffffff08;color:var(--dim);border-radius:8px;
+     padding:5px 11px;font:inherit;font-size:12px;cursor:pointer}
+.btn:hover{color:var(--ink);border-color:#3d4654}
+#notes{position:fixed;left:5vw;right:5vw;bottom:8.5vh;background:#010409f2;border:1px solid var(--line);
+       border-left:3px solid var(--api);border-radius:10px;padding:14px 18px;font-size:14px;line-height:1.5;
+       color:#c9d1d9;display:none;z-index:45;max-height:34vh;overflow:auto}
+#notes.show{display:block}
+#notes b{color:var(--api)}
+#help{position:fixed;inset:0;background:#010409e6;display:none;place-items:center;z-index:60}
+#help.show{display:grid}
+#help div{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:26px 32px;font-size:15px;line-height:2}
+kbd{font-family:var(--mono);font-size:12px;background:#ffffff12;border:1px solid var(--line);
+    border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--ink)}
+
+/* ---------- title slide ---------- */
+#t-bg{position:absolute;inset:0;overflow:hidden;z-index:-1;opacity:.5}
+#t-bg span{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--net);
+           animation:drift linear infinite;opacity:.5}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(var(--dx),var(--dy))}}
+
+/* ---------- stat counters ---------- */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 26px;width:100%;max-width:1100px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+.stat .n{font:700 clamp(26px,3.6vw,48px)/1 var(--font);letter-spacing:-.02em;color:#fff}
+.stat .n small{font-size:.5em;color:var(--dim);font-weight:500;margin-left:.25em}
+.stat .l{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.4}
+
+/* ---------- generic cards ---------- */
+.row{display:flex;gap:16px;width:100%}
+.card{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.card h3{margin:0 0 6px;font-size:clamp(15px,1.5vw,20px);letter-spacing:-.01em}
+.card p{margin:0;font-size:13.5px;color:var(--dim);line-height:1.5}
+.card.daemon{border-left:3px solid var(--dae)} .card.api{border-left:3px solid var(--api)}
+.card.ui{border-left:3px solid var(--ui)} .card.net{border-left:3px solid var(--net)}
+.card.warn{border-left:3px solid var(--warn)} .card.cloud{border-left:3px solid var(--cloud)}
+
+/* ---------- svg diagram ---------- */
+svg.diagram{width:100%;height:auto;max-height:62vh;display:block;margin:0 auto}
+.nbox{fill:var(--bg2);stroke:var(--line);stroke-width:1.5;rx:11}
+.nbox.net{stroke:var(--net)} .nbox.dae{stroke:var(--dae)} .nbox.dev{stroke:#4b5563}
+.nbox.cloud{stroke:var(--cloud)} .nbox.warn{stroke:var(--warn)}
+.nt{fill:#fff;font:600 16px var(--font);text-anchor:middle;dominant-baseline:middle}
+.ns{fill:var(--dim);font:400 12.5px var(--font);text-anchor:middle;dominant-baseline:middle}
+.link{stroke:#3a4452;stroke-width:2;fill:none}
+.link.live{stroke:var(--net);stroke-dasharray:7 7;animation:march 1.1s linear infinite}
+@keyframes march{to{stroke-dashoffset:-28}}
+.pkt{fill:var(--net)}
+.lbl{fill:var(--faint);font:500 11.5px var(--mono);text-anchor:middle}
+.x-mark{stroke:var(--warn);stroke-width:3;stroke-linecap:round}
+.ok-mark{stroke:var(--dae);stroke-width:3;stroke-linecap:round;fill:none}
+
+/* failure sequence (slide 4) */
+#s4 .dead{opacity:.22;transition:opacity .5s}
+#s4 .flash{animation:flash 1.1s ease-in-out infinite}
+@keyframes flash{0%,100%{stroke:var(--warn);filter:drop-shadow(0 0 7px #ff7b7266)}50%{stroke:#7d2b26;filter:none}}
+
+/* ---------- spectrum ---------- */
+.band{margin:0 0 26px}
+.band h4{margin:0 0 10px;font:600 13px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.track{position:relative;height:64px;background:var(--bg2);border:1px solid var(--line);border-radius:10px}
+.ch{position:absolute;top:7px;bottom:7px;border-radius:7px;display:grid;place-items:center;
+    font:600 12.5px var(--font);color:#06111f;opacity:0;transform:scaleX(.3);
+    transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+.ch.on{opacity:1;transform:none}
+.ch small{display:block;font-weight:500;font-size:10.5px;opacity:.75}
+
+/* ---------- poll cycle ---------- */
+.cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;width:100%}
+.cyc{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 13px;
+     transition:all .3s ease;position:relative}
+.cyc .k{font:600 10.5px var(--mono);color:var(--faint);letter-spacing:.1em}
+.cyc .v{font-size:13px;margin-top:5px;line-height:1.35;color:var(--dim)}
+.cyc.hot{border-color:var(--dae);background:#0f2016;transform:translateY(-4px)}
+.cyc.hot .v{color:var(--ink)}
+.cyc.hot .k{color:var(--dae)}
+
+/* ---------- lists ---------- */
+ul.plain{list-style:none;padding:0;margin:0;display:grid;gap:12px;width:100%;max-width:1000px}
+ul.plain li{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--api);
+            border-radius:11px;padding:15px 18px;font-size:clamp(14px,1.35vw,18px);line-height:1.45}
+ul.plain li span{display:block;color:var(--dim);font-size:13.5px;margin-top:5px;line-height:1.5}
+.tag{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+     padding:3px 8px;border-radius:999px;border:1px solid currentColor;margin-right:9px;vertical-align:1px}
+.tag.ok{color:var(--dae)} .tag.no{color:var(--warn)}
+ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-height:1.5;width:auto}
+@media (max-width:860px){
+  .stats{grid-template-columns:repeat(2,1fr)} .row{flex-direction:column} .cycle{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="stage">
+
+<!-- 1 ------------------------------------------------------------------ -->
+<section class="slide" data-notes="Set the frame: this is a house, not a datacentre. Four Wi-Fi radios from three different vendors, one 20-dollar-class router doing all the automation, and everything you will see was verified on the live hardware rather than designed on paper.">
+  <div id="t-bg"></div>
+  <div class="body center">
+    <div class="kicker" data-step="1">High-Level Design &nbsp;·&nbsp; verified live 2026-10-20</div>
+    <h1 data-step="1">Whole-Home Network<br>&amp; Automation</h1>
+    <p class="sub" style="text-align:center" data-step="2">
+      Four Wi-Fi radios, three vendors, one flat network &#8212; and one small OpenWrt router
+      that polls all of it and puts the whole house on a single screen.</p>
+    <p style="color:var(--faint);font-size:13px" data-step="3">Press <kbd>&#8594;</kbd> to walk through it &nbsp;·&nbsp; <kbd>N</kbd> for speaker notes</p>
+  </div>
+</section>
+
+<!-- 2 ------------------------------------------------------------------ -->
+<section class="slide" data-notes="Anchor the scale before any detail. The important one is the zero: no vendor cloud, no hub, no subscription is involved in running the network itself. Only the air conditioner forces a cloud round trip, and that is the manufacturer's choice, not ours.">
+  <div class="kicker">The house, in numbers</div>
+  <h2>Small enough to hold in your head</h2>
+  <div class="body">
+    <div class="stats">
+      <div class="stat" data-step="1"><div class="n" data-count="4">0</div><div class="l">active Wi-Fi nodes &#8212; Nokia, Jio AX6000, AP #2, TP-Link</div></div>
+      <div class="stat" data-step="1"><div class="n" data-count="1">0</div><div class="l">flat network, <b>zero</b> routed hops below the gateway</div></div>
+      <div class="stat" data-step="2"><div class="n" data-count="13">0</div><div class="l">devices typically connected across the four radios</div></div>
+      <div class="stat" data-step="2"><div class="n" data-count="5">0</div><div class="l">background daemons, all on one router</div></div>
+      <div class="stat" data-step="3"><div class="n" data-count="27333">0</div><div class="l">ad &amp; tracker domains blocked for every device</div></div>
+      <div class="stat" data-step="3"><div class="n" data-count="0">0</div><div class="l">cloud services needed to run the network</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 ------------------------------------------------------------------ -->
+<section class="slide" id="s3" data-notes="Walk the path in. Fibre to the Nokia gateway, which hands out every address. JioRouter AX6000 connects directly to Nokia and is the primary automation hub and USB media host. Huawei AP #2 is a pure access point, and TP-Link hangs off AP #2.">
+  <div class="kicker">Step 1 &#8212; the physical path</div>
+  <h2>How the internet reaches the hub</h2>
+  <div class="body">
+    <svg class="diagram" viewBox="0 0 960 470" role="img" aria-label="Internet to gateway to access points to hub">
+      <path id="p1" class="link" d="M480 76 L480 118"/>
+      <path id="p2" class="link" d="M420 184 L250 184 L250 232"/>
+      <path id="p3" class="link" d="M540 184 L710 184 L710 232"/>
+      <path id="p4" class="link" d="M710 300 L710 342"/>
+      <g data-step="1">
+        <rect class="nbox cloud" x="370" y="28" width="220" height="48"/>
+        <text class="nt" x="480" y="52">&#127758; Fiber Internet</text>
+      </g>
+      <g data-step="2">
+        <rect class="nbox net" x="360" y="118" width="240" height="66"/>
+        <text class="nt" x="480" y="142">Nokia Gateway</text>
+        <text class="ns" x="480" y="163">hands out every address</text>
+      </g>
+      <g data-step="3">
+        <rect class="nbox dae" x="120" y="232" width="260" height="68"/>
+        <text class="nt" x="250" y="256">Jio AX6000 &#8212; the hub</text>
+        <text class="ns" x="250" y="277">runs every automation &amp; USB host</text>
+        <rect class="nbox net" x="590" y="232" width="240" height="68"/>
+        <text class="nt" x="710" y="256">Huawei AP #2</text>
+        <text class="ns" x="710" y="277">Wi-Fi only &#8212; no routing</text>
+      </g>
+      <g data-step="4">
+        <rect class="nbox net" x="540" y="342" width="340" height="80"/>
+        <text class="nt" x="710" y="370">TP-Link Archer A6</text>
+        <text class="ns" x="710" y="394">Secondary AP · chained off AP #2</text>
+      </g>
+      <text class="lbl" x="505" y="100">fibre</text>
+      <text class="lbl" x="300" y="172">cable</text>
+      <text class="lbl" x="660" y="172">cable</text>
+      <text class="lbl" x="792" y="326">TP-Link&#8217;s only way out</text>
+      <circle class="pkt" r="4"><animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
+      <circle class="pkt" r="4"><animateMotion dur="2.1s" begin="0.4s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle>
+      <circle class="pkt" r="4"><animateMotion dur="2.1s" begin="0.7s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
+      <circle class="pkt" r="4"><animateMotion dur="1.4s" begin="1.1s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></circle>
+    </svg>
+  </div>
+</section>
+
+<!-- 4 ------------------------------------------------------------------ -->
+<section class="slide" id="s4" data-notes="This is the structural risk for the secondary AP: AP #2 is a single point of failure for TP-Link. If AP #2 loses power, TP-Link loses its path to the gateway and the internet. But the primary automation hub (Jio AX6000) connects directly to Nokia, so dashboards, USB storage, and pollers stay up.">
+  <div class="kicker">Step 1b &#8212; the risk that comes with it</div>
+  <h2>One cable decides a lot</h2>
+  <div class="body">
+    <svg class="diagram" viewBox="0 0 960 400" style="max-height:48vh">
+      <path class="link" d="M480 68 L480 104"/>
+      <path class="link" d="M420 160 L250 160 L250 206"/>
+      <path id="f3" class="link" d="M540 160 L710 160 L710 206"/>
+      <path id="f4" class="link" d="M710 272 L710 308"/>
+      <rect class="nbox cloud" x="370" y="24" width="220" height="44"/>
+      <text class="nt" x="480" y="46">&#127758; Internet</text>
+      <rect class="nbox net" x="360" y="104" width="240" height="56"/>
+      <text class="nt" x="480" y="132">Nokia Gateway</text>
+      <rect class="nbox dae" x="120" y="206" width="260" height="66"/>
+      <text class="nt" x="250" y="229">Jio AX6000 (Hub)</text>
+      <text class="ns" x="250" y="251">direct to Nokia + USB host</text>
+      <g id="ap2g">
+        <rect id="ap2r" class="nbox net" x="590" y="206" width="240" height="66"/>
+        <text class="nt" x="710" y="229">Huawei AP #2</text>
+        <text class="ns" x="710" y="251">carries TP-Link&#8217;s uplink</text>
+      </g>
+      <g id="hubg">
+        <rect class="nbox net" x="540" y="308" width="340" height="74"/>
+        <text class="nt" x="710" y="333">TP-Link Archer A6</text>
+        <text class="ns" x="710" y="356">cut off if AP #2 fails</text>
+      </g>
+    </svg>
+    <div class="row" style="margin-top:22px;max-width:980px;margin-left:auto;margin-right:auto">
+      <div class="card warn" data-step="1"><h3>What goes down if AP #2 fails</h3><p>TP-Link&#8217;s radios and secondary DNS fallback &#8212; anything connected to TP-Link loses its path out.</p></div>
+      <div class="card" data-step="2"><h3>What survives on JioRouter hub</h3><p>The primary hub (Jio AX6000) is direct to Nokia: dashboards (mesh.html), USB media, all pollers, and Nokia Wi-Fi stay 100% online.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ------------------------------------------------------------------ -->
+<section class="slide" id="s5" data-notes="Four radios in one house will fight each other unless you pin them. Every channel here is fixed, not auto. The two 2.4 gigahertz radios that share channel eleven are the two physically furthest apart, with concrete between them. And because a power cut returns the Huawei units to auto-select, the hub re-pins them automatically within a cycle.">
+  <div class="kicker">Step 2 &#8212; the radio plan</div>
+  <h2>Four radios that stay out of each other&#8217;s way</h2>
+  <div class="body">
+    <div class="band" data-step="1">
+      <h4>5 GHz &#8212; four non-overlapping channels</h4>
+      <div class="track" id="tr5"></div>
+    </div>
+    <div class="band" data-step="2">
+      <h4>2.4 GHz &#8212; the classic 1 / 6 / 11 plan</h4>
+      <div class="track" id="tr24"></div>
+    </div>
+    <div class="row" data-step="3" style="margin-top:4px">
+      <div class="card net"><h3>Everything is pinned</h3><p>No radio is left on auto-select. Channel, width and beamforming are written explicitly to each vendor&#8217;s own CLI or web API.</p></div>
+      <div class="card daemon"><h3>&#8230; and re-pinned by itself</h3><p>A reboot sends the Huawei radios back to auto. The hub spots the <code>(auto)</code> suffix within ~20&nbsp;s and writes the plan back.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 ------------------------------------------------------------------ -->
+<section class="slide" data-notes="The hub does exactly three things. Pollers read, APIs write, the dashboard shows. Keeping those three separate is what makes the whole thing feel instant, which is the next slide.">
+  <div class="kicker">Step 3 &#8212; the hub</div>
+  <h2>One router, three jobs</h2>
+  <p class="sub">JioRouter AX6000 &#183; 192.168.0.50 &#183; OpenWrt. Everything runs in <b>ucode</b>, the native OpenWrt engine &#8212; no Python, no Node, no container.</p>
+  <div class="body">
+    <div class="row">
+      <div class="card daemon" data-step="1"><h3>&#128266; Pollers</h3><p><b>Read everything, constantly.</b> Mesh every ~20&nbsp;s, the TVs every 3&nbsp;s, the air conditioner every 10&nbsp;s. They are the only thing that ever touches a device for telemetry.</p></div>
+      <div class="card api" data-step="2"><h3>&#9881; APIs</h3><p><b>Turn a click into a real command.</b> Four small REST endpoints that log into the access points, drive the TVs, and publish to the AC&#8217;s cloud.</p></div>
+      <div class="card ui" data-step="3"><h3>&#128250; Dashboard</h3><p><b>One screen for the house.</b> Network, home theatre, climate, downloads &#8212; served straight off the router at <code>mesh.html</code>.</p></div>
+    </div>
+    <div class="row" data-step="4" style="margin-top:18px">
+      <div class="card"><h3 style="font-size:15px">Why it matters that these are separate</h3><p>A web request never waits on a device. The pollers own all device I/O and leave their results in a file; the APIs just read that file. That is the difference between a dashboard that answers in milliseconds and one that hangs for half a minute behind a telnet login.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ------------------------------------------------------------------ -->
+<section class="slide" id="s7" data-notes="This is the heartbeat of the whole system. Nine steps, about twenty seconds, forever. Note step five: the Huawei access point allows exactly one telnet session at a time, so the hub logs in, does everything it needs in one visit, and gets out. Step eight is where it fixes things it finds wrong, without being asked.">
+  <div class="kicker">Step 4 &#8212; the heartbeat</div>
+  <h2>One poll cycle, every ~20 seconds</h2>
+  <div class="body">
+    <div class="cycle" id="cyc">
+      <div class="cyc"><div class="k">01</div><div class="v">Ping the gateway and both access points</div></div>
+      <div class="cyc"><div class="k">02</div><div class="v">Sweep the subnet to refresh who is out there</div></div>
+      <div class="cyc"><div class="k">03</div><div class="v">Read its own two radios locally</div></div>
+      <div class="cyc"><div class="k">04</div><div class="v">JioRouter local storage, Transmission &amp; DLNA audit</div></div>
+      <div class="cyc"><div class="k">05</div><div class="v">One visit to AP #2: stats, kicks, USB chores</div></div>
+      <div class="cyc"><div class="k">06</div><div class="v">Ask the gateway for its clients and DHCP names</div></div>
+      <div class="cyc"><div class="k">07</div><div class="v">Resolve unknown hardware makers, cache forever</div></div>
+      <div class="cyc"><div class="k">08</div><div class="v">Fix what drifted: channels, roaming, downloads</div></div>
+      <div class="cyc"><div class="k">09</div><div class="v">Write one JSON file &#8212; atomically</div></div>
+      <div class="cyc" style="border-color:var(--ui);background:#17121f"><div class="k" style="color:var(--ui)">OUT</div><div class="v">That file <b>is</b> the dashboard&#8217;s entire data source</div></div>
+    </div>
+    <div class="row" data-step="1" style="margin-top:22px">
+      <div class="card warn"><h3>The constraint that shapes it</h3><p>Each Huawei access point accepts <b>one</b> telnet session, ever. Leave one half-open and the next cycle is locked out, so the whole visit is budgeted, batched and torn down cleanly.</p></div>
+      <div class="card daemon"><h3>Self-healing, not alerting</h3><p>Drifted channel, stopped download daemon, sticky client on a weak signal &#8212; the cycle corrects them and writes a line to a log instead of asking anyone to intervene.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 ------------------------------------------------------------------ -->
+<section class="slide" id="s8" data-notes="A quick contrast slide. The naive design logs into devices when the page loads, which is slow and, on hardware that allows one session, actively harmful. Ours decouples them with a file.">
+  <div class="kicker">Step 5 &#8212; why it feels instant</div>
+  <h2>Nobody waits for a device</h2>
+  <div class="body">
+    <svg class="diagram" viewBox="0 0 960 300" style="max-height:34vh">
+      <g data-step="1">
+        <rect class="nbox dae" x="40" y="40" width="210" height="62"/>
+        <text class="nt" x="145" y="62">Pollers</text><text class="ns" x="145" y="84">every 3&#8211;20 s</text>
+        <path id="q1" class="link live" d="M250 71 L370 71"/>
+        <rect class="nbox" x="370" y="40" width="220" height="62" style="stroke-dasharray:4 4"/>
+        <text class="nt" x="480" y="62">one JSON file</text><text class="ns" x="480" y="84">in memory, on the router</text>
+        <path id="q2" class="link live" d="M590 71 L710 71"/>
+        <rect class="nbox" x="710" y="40" width="210" height="62" style="stroke:var(--ui)"/>
+        <text class="nt" x="815" y="62">Dashboard</text><text class="ns" x="815" y="84">reads the file, &lt;1 ms</text>
+        <circle class="pkt" r="4"><animateMotion dur="1.3s" repeatCount="indefinite"><mpath href="#q1"/></animateMotion></circle>
+        <circle class="pkt" r="4" style="fill:var(--ui)"><animateMotion dur="1.3s" begin=".3s" repeatCount="indefinite"><mpath href="#q2"/></animateMotion></circle>
+      </g>
+      <g data-step="2" opacity=".85">
+        <rect class="nbox warn" x="200" y="180" width="560" height="78" style="stroke-dasharray:5 5"/>
+        <text class="nt" x="480" y="206" style="fill:var(--warn)">The version we do <tspan font-style="italic">not</tspan> build</text>
+        <text class="ns" x="480" y="232">page load &#8594; telnet login &#8594; wait &#8594; parse &#8594; render</text>
+        <line class="x-mark" x1="240" y1="196" x2="300" y2="242"/><line class="x-mark" x1="300" y1="196" x2="240" y2="242"/>
+      </g>
+    </svg>
+    <p class="sub" data-step="3" style="margin:18px auto 0;text-align:center">
+      It also protects the hardware: a dashboard that opened its own telnet session would collide
+      with the poller and lock the access point out of both.</p>
+  </div>
+</section>
+
+<!-- 9 ------------------------------------------------------------------ -->
+<section class="slide" id="s9" data-notes="The home theatre is the most involved part, and the honest framing is: we control a lot, and we proved that some things are simply not reachable. The television is the CEC bus master, so everything to the soundbar goes through it. Volume, power and system-audio work. The Sony's own proprietary sound-field commands do not, and we verified that four different ways before accepting it.">
+  <div class="kicker">Step 6 &#8212; the home theatre</div>
+  <h2>What we can drive, and what we proved we can&#8217;t</h2>
+  <div class="body">
+    <svg class="diagram" viewBox="0 0 960 250" style="max-height:28vh">
+      <rect class="nbox dae" x="40" y="94" width="200" height="62"/>
+      <text class="nt" x="140" y="116">The hub</text><text class="ns" x="140" y="138">over your Wi-Fi</text>
+      <path id="tv1" class="link live" d="M240 125 L370 125"/>
+      <rect class="nbox dev" x="370" y="78" width="230" height="94" style="stroke:var(--ui)"/>
+      <text class="nt" x="485" y="106">Mi TV 75&#8221;</text><text class="ns" x="485" y="128">the CEC bus master</text><text class="ns" x="485" y="148">everything routes through it</text>
+      <path id="tv2" class="link live" d="M600 125 L730 125"/>
+      <rect class="nbox dev" x="730" y="94" width="190" height="62"/>
+      <text class="nt" x="825" y="116">Sony 5.1</text><text class="ns" x="825" y="138">soundbar, over HDMI</text>
+      <circle class="pkt" r="4"><animateMotion dur="1.2s" repeatCount="indefinite"><mpath href="#tv1"/></animateMotion></circle>
+      <circle class="pkt" r="4" style="fill:var(--ui)"><animateMotion dur="1.2s" begin=".25s" repeatCount="indefinite"><mpath href="#tv2"/></animateMotion></circle>
+    </svg>
+    <ul class="plain" style="margin:20px auto 0;max-width:1060px">
+      <li data-step="1" style="border-left-color:var(--dae)"><span class="tag ok">works</span>Volume, mute, power, system-audio, picture and sound profiles, one-click scenes
+        <span>Each one verified by watching the actual HDMI-CEC frames on the bus, not by trusting the command&#8217;s return code.</span></li>
+      <li data-step="2" style="border-left-color:var(--warn)"><span class="tag no">closed</span>The soundbar&#8217;s own proprietary sound-field commands, and bass / surround trims
+        <span>Four separate routes tested and ruled out. One of them reports success and transmits nothing &#8212; which is exactly why we verify against the bus.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 10 ----------------------------------------------------------------- -->
+<section class="slide" id="s10" data-notes="The air conditioner is the one thing in the house with no local control protocol. Pressing a button on our own dashboard sends a message to the manufacturer's cloud in order to reach a unit that is eight metres away on the same Wi-Fi. We cache aggressively so the display keeps working when that cloud does not.">
+  <div class="kicker">Step 7 &#8212; the exception</div>
+  <h2>The air conditioner has to go outside</h2>
+  <div class="body">
+    <svg class="diagram" viewBox="0 0 960 300" style="max-height:36vh">
+      <path id="a1" class="link live" d="M250 90 L430 90 L430 56 L560 56"/>
+      <path id="a2" class="link live" d="M760 90 L760 140 L430 140 L430 206 L560 206"/>
+      <rect class="nbox dae" x="40" y="58" width="210" height="64"/>
+      <text class="nt" x="145" y="82">The hub</text><text class="ns" x="145" y="104">your button press</text>
+      <rect class="nbox cloud" x="560" y="24" width="200" height="64"/>
+      <text class="nt" x="660" y="48">Maker&#8217;s cloud</text><text class="ns" x="660" y="70">the only control path</text>
+      <rect class="nbox dev" x="560" y="174" width="200" height="64"/>
+      <text class="nt" x="660" y="198">The AC unit</text><text class="ns" x="660" y="220">8 m away, same Wi-Fi</text>
+      <circle class="pkt" r="4" style="fill:var(--cloud)"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#a1"/></animateMotion></circle>
+      <circle class="pkt" r="4" style="fill:var(--cloud)"><animateMotion dur="2s" begin="1s" repeatCount="indefinite"><mpath href="#a2"/></animateMotion></circle>
+      <text class="lbl" x="300" y="78">press</text>
+      <text class="lbl" x="300" y="158">&#8230; and back down</text>
+    </svg>
+    <div class="row" data-step="1" style="margin-top:20px;max-width:1020px;margin-left:auto;margin-right:auto">
+      <div class="card cloud"><h3>What we get from it anyway</h3><p>Real energy use per day and per month, straight from the vendor&#8217;s own meter data &#8212; cached for 15 minutes so the dashboard stays useful when the cloud is not.</p></div>
+      <div class="card daemon"><h3>What we read locally</h3><p>Signal strength, link rate and retry rate come from our own radio, not the cloud. The unit sits on the hub&#8217;s 2.4&nbsp;GHz at about &#8722;60&nbsp;dBm.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 ----------------------------------------------------------------- -->
+<section class="slide" id="s11" data-notes="My favourite bug, because it explains why deleting files never freed any space. The download folder was pointed at a path that looked right but was a four kilobyte scratch area in memory, not the 28 gigabyte drive. Deleting videos from the real drive could never help, because nothing was being written there.">
+  <div class="kicker">Step 8 &#8212; a bug worth showing</div>
+  <h2>&#8220;Deleting files never freed any space&#8221;</h2>
+  <div class="body">
+    <svg class="diagram" viewBox="0 0 960 290" style="max-height:34vh">
+      <g data-step="1">
+        <rect class="nbox warn" x="90" y="52" width="330" height="170"/>
+        <text class="nt" x="255" y="84" style="fill:var(--warn)">Where it was writing</text>
+        <text class="ns" x="255" y="112">a scratch area in memory</text>
+        <text class="nt" x="255" y="152" style="font-size:30px;fill:var(--warn)">4 KB</text>
+        <text class="ns" x="255" y="186">&#8220;No space left on device&#8221;, instantly</text>
+        <line class="x-mark" x1="118" y1="74" x2="150" y2="106"/><line class="x-mark" x1="150" y1="74" x2="118" y2="106"/>
+      </g>
+      <g data-step="2">
+        <rect class="nbox" x="540" y="52" width="330" height="170" style="stroke:var(--dae)"/>
+        <text class="nt" x="705" y="84" style="fill:var(--dae)">Where everyone looked</text>
+        <text class="ns" x="705" y="112">the actual USB drive</text>
+        <text class="nt" x="705" y="152" style="font-size:30px;fill:var(--dae)">28 GB</text>
+        <text class="ns" x="705" y="186">31% used, 18 GB free the whole time</text>
+        <path class="ok-mark" d="M568 90 l14 14 l24 -28"/>
+      </g>
+      <g data-step="3">
+        <path class="link live" d="M420 137 L540 137"/>
+        <text class="lbl" x="480" y="118">path fix</text>
+      </g>
+    </svg>
+    <p class="sub" data-step="4" style="margin:18px auto 0;text-align:center;max-width:52em">
+      Fixing the setting was not enough: the download already in flight had cached the old path
+      in its own resume file, and survived both a config change and a restart.
+      <b>The lesson that stuck:</b> when a path fix &#8220;doesn&#8217;t take&#8221;, check what in-flight state
+      cached the old value before you doubt the fix.</p>
+  </div>
+</section>
+
+<!-- 12 ----------------------------------------------------------------- -->
+<section class="slide" data-notes="If someone remembers only one slide, make it this one. These four rules came out of real incidents in this house, and all of them generalise well beyond it.">
+  <div class="kicker">What the project taught us</div>
+  <h2>Four rules, each bought with a real outage</h2>
+  <div class="body">
+    <ul class="plain">
+      <li data-step="1">A write that reports success is <b>not</b> evidence it took effect
+        <span>Settings that read back correctly, APIs returning success, commands exiting zero &#8212; all three have lied on this hardware. Verify against the subsystem&#8217;s own state, never the setter&#8217;s return value.</span></li>
+      <li data-step="2">The end state looking right doesn&#8217;t mean the mechanism ran
+        <span>A keep-alive sat broken for weeks while its monitor stayed green, because the processes it was supposed to revive happened to already be running.</span></li>
+      <li data-step="3">Deploy first, then test
+        <span>Running the suite before copying the file tests the previous copy and passes for the wrong reason.</span></li>
+      <li data-step="4">A confident explanation that contradicts the timeline is still wrong
+        <span>An exhaustively evidenced &#8220;soundbar firmware defect&#8221; was disproved by a reboot &#8212; the user had said it worked yesterday, which no permanent defect can explain.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 13 ----------------------------------------------------------------- -->
+<section class="slide" data-notes="Close by pointing at where the detail lives, so nobody has to take notes. Sixteen reference sections, two draw.io files, and this deck.">
+  <div class="kicker">Where the detail lives</div>
+  <h2>Everything here is written down</h2>
+  <div class="body">
+    <div class="row">
+      <div class="card net" data-step="1"><h3>CLAUDE.md</h3><p>The index. Standing rules up front, then one file per subsystem under <code>docs/</code> &#8212; sixteen sections, numbered the way the code comments already reference them.</p></div>
+      <div class="card ui" data-step="2"><h3>docs/diagrams/</h3><p><b>HLD</b> &#8212; this story on one sheet, plus a detailed page.<br><b>LLD</b> &#8212; five pages: topology &amp; RF, the poll cycle, the A/V plane, the AC, and the deploy &amp; test map.</p></div>
+      <div class="card api" data-step="3"><h3>This deck</h3><p>A single self-contained HTML file. No build step, no network, no dependencies &#8212; it runs from a USB stick or straight off the router.</p></div>
+    </div>
+    <p class="sub" data-step="4" style="margin:26px auto 0;text-align:center">
+      <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> move &#183; <kbd>N</kbd> notes &#183; <kbd>F</kbd> fullscreen &#183; <kbd>?</kbd> help</p>
+  </div>
+</section>
+
+</div>
+
+<div id="foot">
+  <button class="btn" id="prev">&#8592;</button>
+  <button class="btn" id="next">&#8594;</button>
+  <span id="num">1 / 13</span>
+  <div class="spacer"></div>
+  <div id="dots"></div>
+  <div class="spacer"></div>
+  <button class="btn" id="noteBtn">notes <kbd>N</kbd></button>
+  <button class="btn" id="fsBtn">fullscreen <kbd>F</kbd></button>
+</div>
+<div id="notes"></div>
+<div id="help"><div>
+  <b>Keyboard</b><br>
+  <kbd>&#8594;</kbd> / <kbd>space</kbd> next build or slide &nbsp; <kbd>&#8592;</kbd> back<br>
+  <kbd>&#8593;</kbd> / <kbd>&#8595;</kbd> jump whole slides &nbsp; <kbd>Home</kbd> / <kbd>End</kbd> first / last<br>
+  <kbd>N</kbd> speaker notes &nbsp; <kbd>F</kbd> fullscreen &nbsp; <kbd>?</kbd> this help &nbsp; <kbd>Esc</kbd> close
+</div></div>
+
+<script>
+(function(){
+  "use strict";
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var cur = 0, step = 0, timers = [];
+  var ALL = /[?&]all\b/.test(location.search);  /* ?all = reveal every build (handout / print view) */
+  var bar = document.getElementById('bar'), num = document.getElementById('num'),
+      dots = document.getElementById('dots'), notes = document.getElementById('notes'),
+      help = document.getElementById('help');
+
+  slides.forEach(function(s, i){
+    var d = document.createElement('i');
+    d.addEventListener('click', function(){ go(i); });
+    dots.appendChild(d);
+  });
+
+  function maxStep(s){
+    var n = 0;
+    s.querySelectorAll('[data-step]').forEach(function(el){
+      n = Math.max(n, parseInt(el.getAttribute('data-step'), 10) || 0);
+    });
+    return n;
+  }
+  function paint(){
+    var s = slides[cur];
+    s.querySelectorAll('[data-step]').forEach(function(el){
+      el.classList.toggle('on', (parseInt(el.getAttribute('data-step'), 10) || 0) <= step);
+    });
+    bar.style.width = ((cur + 1) / slides.length * 100) + '%';
+    num.textContent = (cur + 1) + ' / ' + slides.length;
+    Array.prototype.forEach.call(dots.children, function(d, i){ d.classList.toggle('on', i === cur); });
+    notes.innerHTML = '<b>Speaker notes &#8212; slide ' + (cur + 1) + '</b><br>' + (s.getAttribute('data-notes') || '');
+  }
+  function clearTimers(){ timers.forEach(clearInterval); timers.forEach(clearTimeout); timers = []; }
+
+  function go(i, atEnd){
+    if (i < 0 || i >= slides.length) return;
+    clearTimers();
+    slides[cur].classList.remove('active');
+    cur = i;
+    slides[cur].classList.add('active');
+    step = (ALL || atEnd) ? maxStep(slides[cur]) : 0;
+    paint();
+    onEnter(slides[cur]);
+  }
+  function next(){ if (!ALL && step < maxStep(slides[cur])) { step++; paint(); } else { go(cur + 1); } }
+  function prev(){ if (step > 0) { step--; paint(); } else { go(cur - 1, true); } }
+
+  /* ---------- per-slide animations ---------- */
+  function onEnter(s){
+    if (s.querySelector('[data-count]')) countUp(s);
+    if (s.id === 's4') failLoop(s);
+    if (s.id === 's5') spectrum(s);
+    if (s.id === 's7') cycleLoop(s);
+  }
+  function countUp(s){
+    s.querySelectorAll('[data-count]').forEach(function(el){
+      var target = parseInt(el.getAttribute('data-count'), 10), t0 = null, dur = 900;
+      function frame(ts){
+        if (!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(target * e).toLocaleString('en-US');
+        if (k < 1) requestAnimationFrame(frame);
+      }
+      el.textContent = '0';
+      requestAnimationFrame(frame);
+    });
+  }
+  function failLoop(s){
+    var ap2 = s.querySelector('#ap2r'), hub = s.querySelector('#hubg'),
+        l3 = s.querySelector('#f3'), l4 = s.querySelector('#f4');
+    function down(){ ap2.classList.add('flash'); hub.classList.add('dead'); l3.classList.add('dead'); l4.classList.add('dead'); }
+    function up(){ ap2.classList.remove('flash'); hub.classList.remove('dead'); l3.classList.remove('dead'); l4.classList.remove('dead'); }
+    up();
+    timers.push(setTimeout(down, 1400));
+    timers.push(setInterval(function(){ down(); timers.push(setTimeout(up, 2600)); }, 5200));
+  }
+  var CH5 = [['36','Jio + TP-Link',4,20,'#6ea8fe'],['44','Nokia',27,20,'#79c0ff'],
+             ['52','AP #2',50,20,'#56d364']];
+  var CH24 = [['1','Jio AX6000',2,27,'#6ea8fe'],['6','TP-Link',36,27,'#56d364'],
+              ['11','AP #2 + Nokia',70,28,'#f0a35e']];
+  function spectrum(s){
+    [['#tr5', CH5], ['#tr24', CH24]].forEach(function(pair){
+      var track = s.querySelector(pair[0]);
+      if (!track.childElementCount){
+        pair[1].forEach(function(c){
+          var d = document.createElement('div');
+          d.className = 'ch';
+          d.style.left = c[2] + '%'; d.style.width = c[3] + '%'; d.style.background = c[4];
+          d.innerHTML = 'ch ' + c[0] + '<small>' + c[1] + '</small>';
+          track.appendChild(d);
+        });
+      }
+      Array.prototype.forEach.call(track.children, function(d){ d.classList.remove('on'); });
+      Array.prototype.forEach.call(track.children, function(d, i){
+        timers.push(setTimeout(function(){ d.classList.add('on'); }, 220 + i * 150));
+      });
+    });
+  }
+  function cycleLoop(s){
+    var items = s.querySelectorAll('#cyc .cyc'), i = 0;
+    function tick(){
+      items.forEach(function(el){ el.classList.remove('hot'); });
+      items[i].classList.add('hot');
+      i = (i + 1) % items.length;
+    }
+    tick();
+    timers.push(setInterval(tick, 900));
+  }
+
+  /* ---------- title background ---------- */
+  (function(){
+    var bg = document.getElementById('t-bg');
+    for (var i = 0; i < 26; i++){
+      var sp = document.createElement('span');
+      sp.style.left = Math.random() * 100 + '%';
+      sp.style.top = Math.random() * 100 + '%';
+      sp.style.setProperty('--dx', (Math.random() * 300 - 150) + 'px');
+      sp.style.setProperty('--dy', (Math.random() * 300 - 150) + 'px');
+      sp.style.animationDuration = (9 + Math.random() * 14) + 's';
+      sp.style.animationDirection = 'alternate';
+      sp.style.opacity = 0.18 + Math.random() * 0.4;
+      bg.appendChild(sp);
+    }
+  })();
+
+  /* ---------- input ---------- */
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape'){ help.classList.remove('show'); notes.classList.remove('show'); return; }
+    if (e.key === '?' ){ help.classList.toggle('show'); return; }
+    if (e.key === 'n' || e.key === 'N'){ notes.classList.toggle('show'); return; }
+    if (e.key === 'f' || e.key === 'F'){ toggleFs(); return; }
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); prev(); }
+    else if (e.key === 'ArrowDown'){ e.preventDefault(); go(cur + 1); }
+    else if (e.key === 'ArrowUp'){ e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home'){ go(0); }
+    else if (e.key === 'End'){ go(slides.length - 1); }
+  });
+  function toggleFs(){
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+  }
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+  document.getElementById('noteBtn').addEventListener('click', function(){ notes.classList.toggle('show'); });
+  document.getElementById('fsBtn').addEventListener('click', toggleFs);
+  help.addEventListener('click', function(){ help.classList.remove('show'); });
+  var x0 = null;
+  document.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) (dx < 0 ? next : prev)();
+    x0 = null;
+  }, {passive:true});
+
+  /* deep link: #5 opens slide 5 */
+  var want = parseInt((location.hash || '').replace('#',''), 10);
+  go(isNaN(want) ? 0 : Math.min(slides.length, Math.max(1, want)) - 1);
+})();
+</script>
+</body>
+</html>
