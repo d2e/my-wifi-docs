@@ -3,6 +3,8 @@
 This repository contains the complete **system architecture, physical & logical network design, RF spectrum plans, hardware matrix, and operational documentation** for the whole-home multi-AP Wi-Fi 6 mesh and home automation ecosystem.
 
 > **Note on Accuracy**: All documentation in this repository reflects the **actual verified state** of the network, confirmed by direct live hardware inspection.
+>
+> 🌐 **Live Interactive Deck**: The animated 13-slide architecture walkthrough is deployed live at **[https://d2e.github.io/my-wifi-docs/](https://d2e.github.io/my-wifi-docs/)** (or directly at [`presentation/architecture.html`](https://d2e.github.io/my-wifi-docs/presentation/architecture.html)).
 
 ---
 

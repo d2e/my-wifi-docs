@@ -161,7 +161,7 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
   <h2>Small enough to hold in your head</h2>
   <div class="body">
     <div class="stats">
-      <div class="stat" data-step="1"><div class="n" data-count="4">0</div><div class="l">Wi-Fi access points &#8212; Nokia, two Huawei, one TP-Link</div></div>
+      <div class="stat" data-step="1"><div class="n" data-count="4">0</div><div class="l">active Wi-Fi nodes &#8212; Nokia, Jio AX6000, AP #2, TP-Link</div></div>
       <div class="stat" data-step="1"><div class="n" data-count="1">0</div><div class="l">flat network, <b>zero</b> routed hops below the gateway</div></div>
       <div class="stat" data-step="2"><div class="n" data-count="13">0</div><div class="l">devices typically connected across the four radios</div></div>
       <div class="stat" data-step="2"><div class="n" data-count="5">0</div><div class="l">background daemons, all on one router</div></div>
@@ -172,7 +172,7 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
 </section>
 
 <!-- 3 ------------------------------------------------------------------ -->
-<section class="slide" id="s3" data-notes="Walk the path in. Fibre to the Nokia gateway, which hands out every address. Two Huawei boxes are pure access points. The punchline is the last hop: the TP-Link automation hub does not hang off the gateway, it hangs off access point two.">
+<section class="slide" id="s3" data-notes="Walk the path in. Fibre to the Nokia gateway, which hands out every address. JioRouter AX6000 connects directly to Nokia and is the primary automation hub and USB media host. Huawei AP #2 is a pure access point, and TP-Link hangs off AP #2.">
   <div class="kicker">Step 1 &#8212; the physical path</div>
   <h2>How the internet reaches the hub</h2>
   <div class="body">
@@ -191,22 +191,22 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
         <text class="ns" x="480" y="163">hands out every address</text>
       </g>
       <g data-step="3">
-        <rect class="nbox net" x="130" y="232" width="240" height="68"/>
-        <text class="nt" x="250" y="256">Jio AX6000 (Hub)</text>
-        <text class="ns" x="250" y="277">Wi-Fi 6 + USB Media Stack</text>
+        <rect class="nbox dae" x="120" y="232" width="260" height="68"/>
+        <text class="nt" x="250" y="256">Jio AX6000 &#8212; the hub</text>
+        <text class="ns" x="250" y="277">runs every automation &amp; USB host</text>
         <rect class="nbox net" x="590" y="232" width="240" height="68"/>
         <text class="nt" x="710" y="256">Huawei AP #2</text>
         <text class="ns" x="710" y="277">Wi-Fi only &#8212; no routing</text>
       </g>
       <g data-step="4">
-        <rect class="nbox dae" x="540" y="342" width="340" height="80"/>
-        <text class="nt" x="710" y="370">TP-Link Archer A6 &#8212; the hub</text>
-        <text class="ns" x="710" y="394">runs every automation in this deck</text>
+        <rect class="nbox net" x="540" y="342" width="340" height="80"/>
+        <text class="nt" x="710" y="370">TP-Link Archer A6</text>
+        <text class="ns" x="710" y="394">Secondary AP · chained off AP #2</text>
       </g>
       <text class="lbl" x="505" y="100">fibre</text>
       <text class="lbl" x="300" y="172">cable</text>
       <text class="lbl" x="660" y="172">cable</text>
-      <text class="lbl" x="792" y="326">the hub&#8217;s only way out</text>
+      <text class="lbl" x="792" y="326">TP-Link&#8217;s only way out</text>
       <circle class="pkt" r="4"><animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
       <circle class="pkt" r="4"><animateMotion dur="2.1s" begin="0.4s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle>
       <circle class="pkt" r="4"><animateMotion dur="2.1s" begin="0.7s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
@@ -216,7 +216,7 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
 </section>
 
 <!-- 4 ------------------------------------------------------------------ -->
-<section class="slide" id="s4" data-notes="This is the structural risk, and it is worth saying out loud because it is invisible in any logical diagram. Access point two is a single point of failure for the hub. If it loses power, the hub keeps running happily and can still see its own clients, but the dashboard, the DNS ad-blocking and every poller lose their path to the gateway and the internet.">
+<section class="slide" id="s4" data-notes="This is the structural risk for the secondary AP: AP #2 is a single point of failure for TP-Link. If AP #2 loses power, TP-Link loses its path to the gateway and the internet. But the primary automation hub (Jio AX6000) connects directly to Nokia, so dashboards, USB storage, and pollers stay up.">
   <div class="kicker">Step 1b &#8212; the risk that comes with it</div>
   <h2>One cable decides a lot</h2>
   <div class="body">
@@ -229,23 +229,23 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
       <text class="nt" x="480" y="46">&#127758; Internet</text>
       <rect class="nbox net" x="360" y="104" width="240" height="56"/>
       <text class="nt" x="480" y="132">Nokia Gateway</text>
-      <rect class="nbox net" x="130" y="206" width="240" height="66"/>
+      <rect class="nbox dae" x="120" y="206" width="260" height="66"/>
       <text class="nt" x="250" y="229">Jio AX6000 (Hub)</text>
       <text class="ns" x="250" y="251">direct to Nokia + USB host</text>
       <g id="ap2g">
         <rect id="ap2r" class="nbox net" x="590" y="206" width="240" height="66"/>
         <text class="nt" x="710" y="229">Huawei AP #2</text>
-        <text class="ns" x="710" y="251">carries the hub&#8217;s uplink</text>
+        <text class="ns" x="710" y="251">carries TP-Link&#8217;s uplink</text>
       </g>
       <g id="hubg">
-        <rect class="nbox dae" x="540" y="308" width="340" height="74"/>
-        <text class="nt" x="710" y="333">TP-Link hub</text>
-        <text class="ns" x="710" y="356">still running &#8212; but cut off</text>
+        <rect class="nbox net" x="540" y="308" width="340" height="74"/>
+        <text class="nt" x="710" y="333">TP-Link Archer A6</text>
+        <text class="ns" x="710" y="356">cut off if AP #2 fails</text>
       </g>
     </svg>
     <div class="row" style="margin-top:22px;max-width:980px;margin-left:auto;margin-right:auto">
-      <div class="card warn" data-step="1"><h3>What goes with it</h3><p>Dashboard, whole-home DNS and ad-blocking, every poller &#8212; and the internet path for anything behind the hub.</p></div>
-      <div class="card" data-step="2"><h3>What survives</h3><p>Both Huawei radios, the gateway, and the hub&#8217;s own Wi-Fi clients. The hub is alive, just unreachable.</p></div>
+      <div class="card warn" data-step="1"><h3>What goes down if AP #2 fails</h3><p>TP-Link&#8217;s radios and secondary DNS fallback &#8212; anything connected to TP-Link loses its path out.</p></div>
+      <div class="card" data-step="2"><h3>What survives on JioRouter hub</h3><p>The primary hub (Jio AX6000) is direct to Nokia: dashboards (mesh.html), USB media, all pollers, and Nokia Wi-Fi stay 100% online.</p></div>
     </div>
   </div>
 </section>
