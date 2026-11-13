@@ -23,14 +23,14 @@ body{
 #stage{position:fixed;inset:0}
 .slide{
   position:absolute; inset:0; display:flex; flex-direction:column;
-  padding:4.2vh 5vw 9vh; opacity:0; pointer-events:none;
+  padding:3.8vh 4.8vw 8.5vh; opacity:0; pointer-events:none;
   transition:opacity .45s ease, transform .45s ease; transform:translateY(14px);
 }
 .slide.active{opacity:1;pointer-events:auto;transform:none}
-h1{font-size:clamp(28px,4.6vw,62px);line-height:1.06;margin:0 0 .35em;letter-spacing:-.02em}
-h2{font-size:clamp(22px,2.9vw,40px);line-height:1.15;margin:0 0 .15em;letter-spacing:-.015em}
-.kicker{font:600 clamp(11px,1.05vw,14px)/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:1.1em}
-.sub{font-size:clamp(14px,1.45vw,21px);color:var(--dim);line-height:1.5;max-width:46em;margin:0 0 1.2em}
+h1{font-size:clamp(28px,4.5vw,60px);line-height:1.06;margin:0 0 .35em;letter-spacing:-.02em}
+h2{font-size:clamp(22px,2.8vw,38px);line-height:1.15;margin:0 0 .15em;letter-spacing:-.015em}
+.kicker{font:600 clamp(11px,1.05vw,14px)/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--faint);margin-bottom:.9em}
+.sub{font-size:clamp(13.5px,1.4vw,20px);color:var(--dim);line-height:1.5;max-width:50em;margin:0 0 1.1em}
 .body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}
 .center{align-items:center;text-align:center}
 b,strong{color:#fff;font-weight:650}
@@ -43,13 +43,13 @@ code{font-family:var(--mono);font-size:.88em;color:var(--api);background:#ffffff
 /* ---------- chrome ---------- */
 #bar{position:fixed;left:0;top:0;height:3px;background:linear-gradient(90deg,var(--net),var(--ui));width:0;transition:width .35s ease;z-index:50}
 #foot{position:fixed;left:0;right:0;bottom:0;height:7vh;min-height:44px;display:flex;align-items:center;
-      gap:14px;padding:0 5vw;font-size:12px;color:var(--faint);z-index:40}
+      gap:14px;padding:0 4.8vw;font-size:12px;color:var(--faint);z-index:40}
 #foot .spacer{flex:1}
 #dots{display:flex;gap:6px}
 #dots i{width:7px;height:7px;border-radius:50%;background:#30363d;display:block;cursor:pointer;transition:all .25s}
 #dots i.on{background:var(--net);transform:scale(1.35)}
 .btn{border:1px solid var(--line);background:#ffffff08;color:var(--dim);border-radius:8px;
-     padding:5px 11px;font:inherit;font-size:12px;cursor:pointer}
+     padding:5px 12px;font:inherit;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{color:var(--ink);border-color:#3d4654}
 #notes{position:fixed;left:5vw;right:5vw;bottom:8.5vh;background:#010409f2;border:1px solid var(--line);
        border-left:3px solid var(--api);border-radius:10px;padding:14px 18px;font-size:14px;line-height:1.5;
@@ -69,72 +69,117 @@ kbd{font-family:var(--mono);font-size:12px;background:#ffffff12;border:1px solid
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(var(--dx),var(--dy))}}
 
 /* ---------- stat counters ---------- */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 26px;width:100%;max-width:1100px}
-.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
-.stat .n{font:700 clamp(26px,3.6vw,48px)/1 var(--font);letter-spacing:-.02em;color:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 24px;width:100%;max-width:1100px}
+.stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.stat .n{font:700 clamp(24px,3.4vw,44px)/1 var(--font);letter-spacing:-.02em;color:#fff}
 .stat .n small{font-size:.5em;color:var(--dim);font-weight:500;margin-left:.25em}
 .stat .l{font-size:13px;color:var(--dim);margin-top:8px;line-height:1.4}
 
 /* ---------- generic cards ---------- */
 .row{display:flex;gap:16px;width:100%}
 .card{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
-.card h3{margin:0 0 6px;font-size:clamp(15px,1.5vw,20px);letter-spacing:-.01em}
-.card p{margin:0;font-size:13.5px;color:var(--dim);line-height:1.5}
+.card h3{margin:0 0 6px;font-size:clamp(15px,1.45vw,19px);letter-spacing:-.01em}
+.card p{margin:0;font-size:13px;color:var(--dim);line-height:1.5}
 .card.daemon{border-left:3px solid var(--dae)} .card.api{border-left:3px solid var(--api)}
 .card.ui{border-left:3px solid var(--ui)} .card.net{border-left:3px solid var(--net)}
 .card.warn{border-left:3px solid var(--warn)} .card.cloud{border-left:3px solid var(--cloud)}
 
-/* ---------- svg diagram ---------- */
-svg.diagram{width:100%;height:auto;max-height:62vh;display:block;margin:0 auto}
-.nbox{fill:var(--bg2);stroke:var(--line);stroke-width:1.5;rx:11}
-.nbox.net{stroke:var(--net)} .nbox.dae{stroke:var(--dae)} .nbox.dev{stroke:#4b5563}
-.nbox.cloud{stroke:var(--cloud)} .nbox.warn{stroke:var(--warn)}
-.nt{fill:#fff;font:600 16px var(--font);text-anchor:middle;dominant-baseline:middle}
-.ns{fill:var(--dim);font:400 12.5px var(--font);text-anchor:middle;dominant-baseline:middle}
-.link{stroke:#3a4452;stroke-width:2;fill:none}
-.link.live{stroke:var(--net);stroke-dasharray:7 7;animation:march 1.1s linear infinite}
-@keyframes march{to{stroke-dashoffset:-28}}
-.pkt{fill:var(--net)}
-.lbl{fill:var(--faint);font:500 11.5px var(--mono);text-anchor:middle}
-.x-mark{stroke:var(--warn);stroke-width:3;stroke-linecap:round}
-.ok-mark{stroke:var(--dae);stroke-width:3;stroke-linecap:round;fill:none}
+/* ---------- draw.io architecture slide ---------- */
+.diag-header-row{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:8px; gap:12px; flex-wrap:wrap;
+}
+.diag-tabs{display:flex;gap:8px;align-items:center}
+.diag-tab-btn{
+  background:#ffffff0a; border:1px solid var(--line); color:var(--dim);
+  border-radius:8px; padding:6px 14px; font:600 12px var(--font); cursor:pointer;
+  transition:all .2s ease;
+}
+.diag-tab-btn:hover{color:#fff;border-color:var(--faint)}
+.diag-tab-btn.active{background:var(--net);color:#080c12;border-color:var(--net)}
+.diag-container{
+  flex:1; min-height:0; background:#080c10; border:1px solid var(--line);
+  border-radius:var(--radius); position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center; padding:10px;
+}
+.diag-pane{
+  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+}
+.diag-pane.hidden{display:none}
+.diag-pane svg.drawio-diag{
+  max-width:100%; max-height:51vh; width:100%; height:auto; display:block;
+  filter:drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+}
+.diag-callouts{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px; width:100%;
+}
+.diag-callout{
+  background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:10px 14px;
+}
+.diag-callout h4{
+  margin:0 0 3px; font-size:12.5px; font-weight:600; color:var(--ink);
+}
+.diag-callout p{
+  margin:0; font-size:11.5px; color:var(--dim); line-height:1.4;
+}
 
-/* failure sequence (slide 4) */
-#s4 .dead{opacity:.22;transition:opacity .5s}
-#s4 .flash{animation:flash 1.1s ease-in-out infinite}
-@keyframes flash{0%,100%{stroke:var(--warn);filter:drop-shadow(0 0 7px #ff7b7266)}50%{stroke:#7d2b26;filter:none}}
+/* ---------- lightbox modal ---------- */
+#diagModal{
+  position:fixed; inset:0; background:#05070ae6; backdrop-filter:blur(6px);
+  display:none; flex-direction:column; z-index:70; padding:18px 24px;
+}
+#diagModal.show{display:flex}
+.diag-modal-bar{
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;
+}
+.diag-modal-title{font:600 16px var(--font);color:var(--ink)}
+.diag-modal-tools{display:flex;gap:10px;align-items:center}
+.diag-modal-viewport{
+  flex:1; min-height:0; background:#080c12; border:1px solid var(--line);
+  border-radius:12px; overflow:auto; display:flex; align-items:center;
+  justify-content:center; padding:24px; position:relative;
+}
+#diagModalBody{
+  display:inline-block; transition:transform .2s ease; transform-origin:center center;
+}
+#diagModalBody svg{
+  display:block; max-width:88vw; max-height:82vh; height:auto; width:auto;
+}
 
 /* ---------- spectrum ---------- */
-.band{margin:0 0 26px}
-.band h4{margin:0 0 10px;font:600 13px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
-.track{position:relative;height:64px;background:var(--bg2);border:1px solid var(--line);border-radius:10px}
+.band{margin:0 0 22px}
+.band h4{margin:0 0 8px;font:600 12.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.track{position:relative;height:60px;background:var(--bg2);border:1px solid var(--line);border-radius:10px}
 .ch{position:absolute;top:7px;bottom:7px;border-radius:7px;display:grid;place-items:center;
-    font:600 12.5px var(--font);color:#06111f;opacity:0;transform:scaleX(.3);
+    font:600 12px var(--font);color:#06111f;opacity:0;transform:scaleX(.3);
     transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
 .ch.on{opacity:1;transform:none}
-.ch small{display:block;font-weight:500;font-size:10.5px;opacity:.75}
+.ch small{display:block;font-weight:500;font-size:10px;opacity:.8}
 
 /* ---------- poll cycle ---------- */
-.cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;width:100%}
-.cyc{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 13px;
+.cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;width:100%}
+.cyc{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:11px 12px;
      transition:all .3s ease;position:relative}
-.cyc .k{font:600 10.5px var(--mono);color:var(--faint);letter-spacing:.1em}
-.cyc .v{font-size:13px;margin-top:5px;line-height:1.35;color:var(--dim)}
-.cyc.hot{border-color:var(--dae);background:#0f2016;transform:translateY(-4px)}
+.cyc .k{font:600 10px var(--mono);color:var(--faint);letter-spacing:.1em}
+.cyc .v{font-size:12px;margin-top:4px;line-height:1.35;color:var(--dim)}
+.cyc.hot{border-color:var(--dae);background:#0f2016;transform:translateY(-3px)}
 .cyc.hot .v{color:var(--ink)}
 .cyc.hot .k{color:var(--dae)}
 
 /* ---------- lists ---------- */
-ul.plain{list-style:none;padding:0;margin:0;display:grid;gap:12px;width:100%;max-width:1000px}
+ul.plain{list-style:none;padding:0;margin:0;display:grid;gap:11px;width:100%;max-width:1050px}
 ul.plain li{background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--api);
-            border-radius:11px;padding:15px 18px;font-size:clamp(14px,1.35vw,18px);line-height:1.45}
-ul.plain li span{display:block;color:var(--dim);font-size:13.5px;margin-top:5px;line-height:1.5}
-.tag{display:inline-block;font:600 10.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;
-     padding:3px 8px;border-radius:999px;border:1px solid currentColor;margin-right:9px;vertical-align:1px}
+            border-radius:10px;padding:14px 16px;font-size:clamp(13.5px,1.3vw,17px);line-height:1.45}
+ul.plain li span{display:block;color:var(--dim);font-size:12.5px;margin-top:4px;line-height:1.45}
+.tag{display:inline-block;font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+     padding:3px 8px;border-radius:999px;border:1px solid currentColor;margin-right:8px;vertical-align:1px}
 .tag.ok{color:var(--dae)} .tag.no{color:var(--warn)}
-ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-height:1.5;width:auto}
+
 @media (max-width:860px){
-  .stats{grid-template-columns:repeat(2,1fr)} .row{flex-direction:column} .cycle{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .row{flex-direction:column}
+  .cycle{grid-template-columns:repeat(2,1fr)}
+  .diag-callouts{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -142,401 +187,343 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
 <div id="bar"></div>
 <div id="stage">
 
-<!-- 1 ------------------------------------------------------------------ -->
-<section class="slide" data-notes="Set the frame: this is a house, not a datacentre. Four Wi-Fi radios from three different vendors, one 20-dollar-class router doing all the automation, and everything you will see was verified on the live hardware rather than designed on paper.">
+<!-- 1: TITLE ------------------------------------------------------------ -->
+<section class="slide" data-notes="Set the frame: this is a real-world multi-AP gigabit deployment, reverse-engineered and automated. Four Wi-Fi radios from three vendors, custom ucode engine on OpenWrt, zero vendor clouds, and verified directly against live hardware.">
   <div id="t-bg"></div>
+  <div class="kicker">Real-World Reverse-Engineered Home Automation</div>
+  <h1>Whole-Home Network &amp; Automation</h1>
+  <p class="sub">A multi-AP gigabit deployment: zero vendor clouds, custom ucode engine on OpenWrt, autonomous self-healing, and reverse-engineered A/V &amp; climate controls.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+    <span class="btn" style="pointer-events:none;color:var(--net);border-color:var(--net)">Wi-Fi 6 Mesh · MT7986 ARM64</span>
+    <span class="btn" style="pointer-events:none;color:var(--dae);border-color:var(--dae)">ucode Runtime (.uc)</span>
+    <span class="btn" style="pointer-events:none;color:var(--api);border-color:var(--api)">HDMI-CEC &amp; ARC Reverse Engineering</span>
+    <span class="btn" style="pointer-events:none;color:var(--ui);border-color:var(--ui)">Local-First · Zero Cloud</span>
+  </div>
+</section>
+
+<!-- 2: NUMBERS ---------------------------------------------------------- -->
+<section class="slide" data-notes="Anchor the scale before any detail. The critical takeaway is the zero: no vendor cloud, no subscriptions, no external hub runs the network or mesh. Verified 100% on live physical hardware.">
+  <div class="kicker">Scale &amp; Verified Reality</div>
+  <h2>The deployment in numbers</h2>
+  <p class="sub">Every metric and interface verified against live physical hardware, not marketing spec sheets.</p>
   <div class="body center">
-    <div class="kicker" data-step="1">High-Level Design &nbsp;·&nbsp; verified live 2026-10-20</div>
-    <h1 data-step="1">Whole-Home Network<br>&amp; Automation</h1>
-    <p class="sub" style="text-align:center" data-step="2">
-      Four Wi-Fi radios, three vendors, one flat network &#8212; and one small OpenWrt router
-      that polls all of it and puts the whole house on a single screen.</p>
-    <p style="color:var(--faint);font-size:13px" data-step="3">Press <kbd>&#8594;</kbd> to walk through it &nbsp;·&nbsp; <kbd>N</kbd> for speaker notes</p>
-  </div>
-</section>
-
-<!-- 2 ------------------------------------------------------------------ -->
-<section class="slide" data-notes="Anchor the scale before any detail. The important one is the zero: no vendor cloud, no hub, no subscription is involved in running the network itself. Only the air conditioner forces a cloud round trip, and that is the manufacturer's choice, not ours.">
-  <div class="kicker">The house, in numbers</div>
-  <h2>Small enough to hold in your head</h2>
-  <div class="body">
     <div class="stats">
-      <div class="stat" data-step="1"><div class="n" data-count="4">0</div><div class="l">active Wi-Fi nodes &#8212; Nokia, Jio AX6000, AP #2, TP-Link</div></div>
-      <div class="stat" data-step="1"><div class="n" data-count="1">0</div><div class="l">flat network, <b>zero</b> routed hops below the gateway</div></div>
-      <div class="stat" data-step="2"><div class="n" data-count="13">0</div><div class="l">devices typically connected across the four radios</div></div>
-      <div class="stat" data-step="2"><div class="n" data-count="5">0</div><div class="l">background daemons, all on one router</div></div>
-      <div class="stat" data-step="3"><div class="n" data-count="27333">0</div><div class="l">ad &amp; tracker domains blocked for every device</div></div>
-      <div class="stat" data-step="3"><div class="n" data-count="0">0</div><div class="l">cloud services needed to run the network</div></div>
+      <div class="stat" data-step="1">
+        <div class="n" data-count="4">0</div>
+        <div class="l">Physical nodes &#8212; 1 ONT Gateway, 3 Access Points across 3 distinct hardware vendors</div>
+      </div>
+      <div class="stat" data-step="1">
+        <div class="n" data-count="3">0</div>
+        <div class="l">Radio vendor chipsets &#8212; Nokia (MTK), Jio (MediaTek Filogic 830), TP-Link (Qualcomm)</div>
+      </div>
+      <div class="stat" data-step="2">
+        <div class="n" data-count="28">0</div>
+        <div class="l">Active Wi-Fi &amp; wired clients &#8212; workstations, laptops, phones, smart TVs, climate &amp; IoT</div>
+      </div>
+      <div class="stat" data-step="2">
+        <div class="n" style="color:var(--dae)" data-count="0">0</div>
+        <div class="l">Vendor cloud dependencies &#8212; mesh routing, roaming, adblock &amp; automation run 100% locally</div>
+      </div>
+      <div class="stat" data-step="3">
+        <div class="n" data-count="1"><small>/24</small>0</div>
+        <div class="l">Flat L3 subnet &#8212; 192.168.0.0/24 with zero double-NAT or internal routing bottlenecks</div>
+      </div>
+      <div class="stat" data-step="3">
+        <div class="n" style="color:var(--net)">&lt;20<small>ms</small></div>
+        <div class="l">Per-hop wired LAN latency floor; sub-millisecond local telemetry cache reads from RAM</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 3 ------------------------------------------------------------------ -->
-<section class="slide" id="s3" data-notes="Walk the path in. Fibre to the Nokia gateway, which hands out every address. JioRouter AX6000 connects directly to Nokia and is the primary automation hub and USB media host. Huawei AP #2 is a pure access point, and TP-Link hangs off AP #2.">
-  <div class="kicker">Step 1 &#8212; the physical path</div>
-  <h2>How the internet reaches the hub</h2>
-  <div class="body">
-    <svg class="diagram" viewBox="0 0 960 470" role="img" aria-label="Internet to gateway to access points to hub">
-      <path id="p1" class="link" d="M480 76 L480 118"/>
-      <path id="p2" class="link" d="M420 184 L250 184 L250 232"/>
-      <path id="p3" class="link" d="M540 184 L710 184 L710 232"/>
-      <path id="p4" class="link" d="M710 300 L710 342"/>
-      <g data-step="1">
-        <rect class="nbox cloud" x="370" y="28" width="220" height="48"/>
-        <text class="nt" x="480" y="52">&#127758; Fiber Internet</text>
-      </g>
-      <g data-step="2">
-        <rect class="nbox net" x="360" y="118" width="240" height="66"/>
-        <text class="nt" x="480" y="142">Nokia Gateway</text>
-        <text class="ns" x="480" y="163">hands out every address</text>
-      </g>
-      <g data-step="3">
-        <rect class="nbox dae" x="120" y="232" width="260" height="68"/>
-        <text class="nt" x="250" y="256">Jio AX6000 &#8212; the hub</text>
-        <text class="ns" x="250" y="277">runs every automation &amp; USB host</text>
-        <rect class="nbox net" x="590" y="232" width="240" height="68"/>
-        <text class="nt" x="710" y="256">Huawei AP #2</text>
-        <text class="ns" x="710" y="277">Wi-Fi only &#8212; no routing</text>
-      </g>
-      <g data-step="4">
-        <rect class="nbox net" x="540" y="342" width="340" height="80"/>
-        <text class="nt" x="710" y="370">TP-Link Archer A6</text>
-        <text class="ns" x="710" y="394">Secondary AP · chained off AP #2</text>
-      </g>
-      <text class="lbl" x="505" y="100">fibre</text>
-      <text class="lbl" x="300" y="172">cable</text>
-      <text class="lbl" x="660" y="172">cable</text>
-      <text class="lbl" x="792" y="326">TP-Link&#8217;s only way out</text>
-      <circle class="pkt" r="4"><animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
-      <circle class="pkt" r="4"><animateMotion dur="2.1s" begin="0.4s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle>
-      <circle class="pkt" r="4"><animateMotion dur="2.1s" begin="0.7s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
-      <circle class="pkt" r="4"><animateMotion dur="1.4s" begin="1.1s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></circle>
-    </svg>
+<!-- 3: DRAW.IO ARCHITECTURE SLIDE ---------------------------------------- -->
+<section class="slide" id="s-arch" data-notes="This is the central architecture blueprint exported directly from the verified draw.io source model. Nokia ONT is the master gateway. JioRouter AX6000 (.50) is the primary Wi-Fi 6 AP, automation hub, and USB media host. Huawei AP #2 carries TP-Link on a daisy-chain SPOF link. Switch between HLD and Deep-Dive flows using the tabs.">
+  <div class="diag-header-row">
+    <div>
+      <div class="kicker">Step 1 &#8212; System Architecture (draw.io)</div>
+      <h2>Whole-home system blueprint</h2>
+    </div>
+    <div class="diag-tabs">
+      <button class="diag-tab-btn active" id="tabHld1">HLD Overview (1-Slide)</button>
+      <button class="diag-tab-btn" id="tabHld2">Deep-Dive Flows &amp; Daemons</button>
+      <button class="btn" id="zoomDiagBtn">🔍 Zoom / Lightbox (Z)</button>
+    </div>
   </div>
-</section>
-
-<!-- 4 ------------------------------------------------------------------ -->
-<section class="slide" id="s4" data-notes="This is the structural risk for the secondary AP: AP #2 is a single point of failure for TP-Link. If AP #2 loses power, TP-Link loses its path to the gateway and the internet. But the primary automation hub (Jio AX6000) connects directly to Nokia, so dashboards, USB storage, and pollers stay up.">
-  <div class="kicker">Step 1b &#8212; the risk that comes with it</div>
-  <h2>One cable decides a lot</h2>
-  <div class="body">
-    <svg class="diagram" viewBox="0 0 960 400" style="max-height:48vh">
-      <path class="link" d="M480 68 L480 104"/>
-      <path class="link" d="M420 160 L250 160 L250 206"/>
-      <path id="f3" class="link" d="M540 160 L710 160 L710 206"/>
-      <path id="f4" class="link" d="M710 272 L710 308"/>
-      <rect class="nbox cloud" x="370" y="24" width="220" height="44"/>
-      <text class="nt" x="480" y="46">&#127758; Internet</text>
-      <rect class="nbox net" x="360" y="104" width="240" height="56"/>
-      <text class="nt" x="480" y="132">Nokia Gateway</text>
-      <rect class="nbox dae" x="120" y="206" width="260" height="66"/>
-      <text class="nt" x="250" y="229">Jio AX6000 (Hub)</text>
-      <text class="ns" x="250" y="251">direct to Nokia + USB host</text>
-      <g id="ap2g">
-        <rect id="ap2r" class="nbox net" x="590" y="206" width="240" height="66"/>
-        <text class="nt" x="710" y="229">Huawei AP #2</text>
-        <text class="ns" x="710" y="251">carries TP-Link&#8217;s uplink</text>
-      </g>
-      <g id="hubg">
-        <rect class="nbox net" x="540" y="308" width="340" height="74"/>
-        <text class="nt" x="710" y="333">TP-Link Archer A6</text>
-        <text class="ns" x="710" y="356">cut off if AP #2 fails</text>
-      </g>
-    </svg>
-    <div class="row" style="margin-top:22px;max-width:980px;margin-left:auto;margin-right:auto">
-      <div class="card warn" data-step="1"><h3>What goes down if AP #2 fails</h3><p>TP-Link&#8217;s radios and secondary DNS fallback &#8212; anything connected to TP-Link loses its path out.</p></div>
-      <div class="card" data-step="2"><h3>What survives on JioRouter hub</h3><p>The primary hub (Jio AX6000) is direct to Nokia: dashboards (mesh.html), USB media, all pollers, and Nokia Wi-Fi stay 100% online.</p></div>
+  <div class="diag-container">
+    <div class="diag-pane" id="paneHld1">
+      <svg id="svgHld1" class="drawio-diag" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="background: transparent; background-color: transparent; color-scheme: dark;" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1342px" height="917px" viewBox="0 0 1342 917"><defs/><g><g data-cell-id="0"><g data-cell-id="1"><g data-cell-id="t1"><g><rect x="0" y="0" width="1340" height="60" fill="none" stroke="none" pointer-events="all"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 1338px; height: 1px; padding-top: 7px; margin-left: 2px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b style="font-size:22px">Whole-Home Network &amp; Automation — High-Level Design</b><br /><span style="font-size: 13px; color: rgb(164, 164, 164);">One flat network. JioRouter AX6000 (192.168.0.50) is the central automation hub &amp; hosts the dashboard.</span></div></div></div></foreignObject><text x="2" y="20" fill="#000000" font-family="Helvetica" font-size="13px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="2" y="20">Whole-Home Network &amp; Automation — High-Level Design</tspan><tspan x="2" y="36">One flat network. JioRouter AX6000 (192.168.0.50) is the central automation hub &amp; hosts the dashboard.</tspan></text></switch></g></g></g><g data-cell-id="net"><g transform="translate(0.5,0.5)"><rect x="540" y="84" width="280" height="56" rx="4.48" ry="4.48" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 274px; height: 1px; padding-top: 112px; margin-left: 543px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; "><b>① 🌐 Fiber Internet</b></div></div></div></foreignObject><text x="680" y="116" fill="#000000" font-family="Helvetica" font-size="14px" text-anchor="middle" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">① 🌐 Fiber Internet</text></switch></g></g></g><g data-cell-id="gw"><g transform="translate(0.5,0.5)"><rect x="480" y="180" width="400" height="76" rx="6.08" ry="6.08" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(29, 41, 59); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 386px; height: 1px; padding-top: 193px; margin-left: 487px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; "><b>② Nokia Gateway · 192.168.0.1</b><br />gives every device its address + Wi-Fi</div></div></div></foreignObject><text x="680" y="207" fill="#000000" font-family="Helvetica" font-size="14px" text-anchor="middle" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);"><tspan x="680" y="207">② Nokia Gateway · 192.168.0.1</tspan><tspan x="680" y="224">gives every device its address + Wi-Fi</tspan></text></switch></g></g></g><g data-cell-id="acc"><g transform="translate(0.5,0.5)"><rect x="220" y="296" width="700" height="120" rx="4.8" ry="4.8" fill="#f6f9ff" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(21, 24, 29); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 686px; height: 1px; padding-top: 309px; margin-left: 228px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">③  Secondary Access Points — plain Wi-Fi only, no routing</div></div></div></foreignObject><text x="228" y="322" fill="#000000" font-family="Helvetica" font-size="13px" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">③ Secondary Access Points — plain Wi-Fi only, no routing</text></switch></g></g></g><g data-cell-id="ap2"><g transform="translate(0.5,0.5)"><rect x="242" y="341" width="300" height="56" rx="4.48" ry="4.48" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(29, 41, 59); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 294px; height: 1px; padding-top: 369px; margin-left: 245px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Huawei AP #2 · .98</b><br />Secondary L2 AP (5G ch52 / 2.4G ch11)</div></div></div></foreignObject><text x="392" y="365" fill="#000000" font-family="Helvetica" font-size="13px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="392" y="365">Huawei AP #2 · .98</tspan><tspan x="392" y="381">Secondary L2 AP (5G ch52 / 2.4G ch11)</tspan></text></switch></g></g></g><g data-cell-id="tplink"><g transform="translate(0.5,0.5)"><rect x="598" y="341" width="300" height="56" rx="4.48" ry="4.48" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(29, 41, 59); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 294px; height: 1px; padding-top: 369px; margin-left: 601px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>TP-Link Archer A6 · .12</b><br />Secondary AP (chained off AP #2)</div></div></div></foreignObject><text x="748" y="365" fill="#000000" font-family="Helvetica" font-size="13px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="748" y="365">TP-Link Archer A6 · .12</tspan><tspan x="748" y="381">Secondary AP (chained off AP #2)</tspan></text></switch></g></g></g><g data-cell-id="hub"><g transform="translate(0.5,0.5)"><rect x="200" y="456" width="760" height="170" rx="6.8" ry="6.8" fill="#f6fff4" stroke="#82b366" pointer-events="all" style="fill: rgb(15, 23, 14); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 746px; height: 1px; padding-top: 469px; margin-left: 208px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">④  Primary Automation Hub &amp; Wi-Fi 6 AP — JioRouter AX6000 · 192.168.0.50 (OpenWrt)</div></div></div></foreignObject><text x="208" y="482" fill="#000000" font-family="Helvetica" font-size="13px" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">④ Primary Automation Hub &amp; Wi-Fi 6 AP — JioRouter AX6000 · 192.168.0.50 (OpenWrt)</text></switch></g></g></g><g data-cell-id="poll"><g transform="translate(0.5,0.5)"><rect x="224" y="504" width="230" height="96" rx="7.68" ry="7.68" fill="#d5e8d4" stroke="#82b366" pointer-events="all" style="fill: rgb(31, 47, 30); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 216px; height: 1px; padding-top: 517px; margin-left: 231px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Pollers</b><br />read everything,<br />every few seconds</div></div></div></foreignObject><text x="339" y="531" fill="#000000" font-family="Helvetica" font-size="14px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="339" y="531">Pollers</tspan><tspan x="339" y="548">read everything,</tspan><tspan x="339" y="565">every few seconds</tspan></text></switch></g></g></g><g data-cell-id="api"><g transform="translate(0.5,0.5)"><rect x="470" y="504" width="230" height="96" rx="7.68" ry="7.68" fill="#ffe6cc" stroke="#d79b00" pointer-events="all" style="fill: rgb(54, 33, 10); stroke: rgb(153, 101, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 216px; height: 1px; padding-top: 517px; margin-left: 477px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>APIs</b><br />turn clicks into<br />real device commands</div></div></div></foreignObject><text x="585" y="531" fill="#000000" font-family="Helvetica" font-size="14px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="585" y="531">APIs</tspan><tspan x="585" y="548">turn clicks into</tspan><tspan x="585" y="565">real device commands</tspan></text></switch></g></g></g><g data-cell-id="dash"><g transform="translate(0.5,0.5)"><rect x="716" y="504" width="230" height="96" rx="7.68" ry="7.68" fill="#e1d5e7" stroke="#9673a6" pointer-events="all" style="fill: rgb(57, 47, 63); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 216px; height: 1px; padding-top: 517px; margin-left: 723px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Dashboard</b><br /><b style="color: rgb(229, 165, 255);">mesh.html on Jio .50</b><br />single pane for whole house</div></div></div></foreignObject><text x="831" y="531" fill="#000000" font-family="Helvetica" font-size="14px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="831" y="531">Dashboard</tspan><tspan x="831" y="548">mesh.html on Jio .50</tspan><tspan x="831" y="565">single pane for whole house</tspan></text></switch></g></g></g><g data-cell-id="user"><g transform="translate(0.5,0.5)"><rect x="0" y="476" width="170" height="130" rx="10.4" ry="10.4" fill="#e1d5e7" stroke="#9673a6" pointer-events="all" style="fill: rgb(57, 47, 63); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 156px; height: 1px; padding-top: 489px; margin-left: 7px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>👤 You</b><br />any browser<br />on the home<br />Wi-Fi</div></div></div></foreignObject><text x="85" y="503" fill="#000000" font-family="Helvetica" font-size="14px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="85" y="503">👤 You</tspan><tspan x="85" y="520">any browser</tspan><tspan x="85" y="537">on the home</tspan><tspan x="85" y="554">Wi-Fi</tspan></text></switch></g></g></g><g data-cell-id="cloud"><g transform="translate(0.5,0.5)"><rect x="1000" y="476" width="340" height="130" rx="10.4" ry="10.4" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 326px; height: 1px; padding-top: 489px; margin-left: 1007px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 14px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>☁ Outside services</b><br />weather · air quality<br />AC maker’s cloud<br />TV poster lookup</div></div></div></foreignObject><text x="1170" y="503" fill="#000000" font-family="Helvetica" font-size="14px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1170" y="503">☁ Outside services</tspan><tspan x="1170" y="520">weather · air quality</tspan><tspan x="1170" y="537">AC maker’s cloud</tspan><tspan x="1170" y="554">TV poster lookup</tspan></text></switch></g></g></g><g data-cell-id="things"><g transform="translate(0.5,0.5)"><rect x="40" y="676" width="1300" height="150" rx="6" ry="6" fill="#fbf8fd" stroke="#9673a6" pointer-events="all" style="fill: rgb(25, 22, 26); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 1286px; height: 1px; padding-top: 689px; margin-left: 48px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">⑤  What the hub looks after</div></div></div></foreignObject><text x="48" y="702" fill="#000000" font-family="Helvetica" font-size="13px" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">⑤ What the hub looks after</text></switch></g></g></g><g data-cell-id="m1"><g transform="translate(0.5,0.5)"><rect x="62" y="724" width="300" height="82" rx="6.56" ry="6.56" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 286px; height: 1px; padding-top: 737px; margin-left: 69px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>📶 Wi-Fi mesh</b><br />channels, roaming,<br />ad-blocking, who is connected</div></div></div></foreignObject><text x="212" y="750" fill="#000000" font-family="Helvetica" font-size="13px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="212" y="750">📶 Wi-Fi mesh</tspan><tspan x="212" y="766">channels, roaming,</tspan><tspan x="212" y="782">ad-blocking, who is connected</tspan></text></switch></g></g></g><g data-cell-id="m2"><g transform="translate(0.5,0.5)"><rect x="376" y="724" width="300" height="82" rx="6.56" ry="6.56" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 286px; height: 1px; padding-top: 737px; margin-left: 383px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>🎬 Home theatre</b><br />TV, Fire TV, soundbar:<br />picture, sound, scenes</div></div></div></foreignObject><text x="526" y="750" fill="#000000" font-family="Helvetica" font-size="13px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="526" y="750">🎬 Home theatre</tspan><tspan x="526" y="766">TV, Fire TV, soundbar:</tspan><tspan x="526" y="782">picture, sound, scenes</tspan></text></switch></g></g></g><g data-cell-id="m3"><g transform="translate(0.5,0.5)"><rect x="690" y="724" width="300" height="82" rx="6.56" ry="6.56" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 286px; height: 1px; padding-top: 737px; margin-left: 697px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>❄ Smart AC</b><br />control, running cost,<br />comfort prediction</div></div></div></foreignObject><text x="840" y="750" fill="#000000" font-family="Helvetica" font-size="13px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="840" y="750">❄ Smart AC</tspan><tspan x="840" y="766">control, running cost,</tspan><tspan x="840" y="782">comfort prediction</tspan></text></switch></g></g></g><g data-cell-id="m4"><g transform="translate(0.5,0.5)"><rect x="1004" y="724" width="300" height="82" rx="6.56" ry="6.56" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 286px; height: 1px; padding-top: 737px; margin-left: 1011px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>💾 Media drive</b><br />Local USB on JioRouter .50:<br />Transmission &amp; MiniDLNA</div></div></div></foreignObject><text x="1154" y="750" fill="#000000" font-family="Helvetica" font-size="13px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1154" y="750">💾 Media drive</tspan><tspan x="1154" y="766">Local USB on JioRouter .50:</tspan><tspan x="1154" y="782">Transmission &amp; MiniDLNA</tspan></text></switch></g></g></g><g data-cell-id="t2"><g><rect x="40" y="856" width="1300" height="60" fill="none" stroke="none" pointer-events="all"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 1298px; height: 1px; padding-top: 863px; margin-left: 42px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><span style="font-size: 12px; color: rgb(164, 164, 164);"><b>How to read it:</b> top to bottom is the physical path into the house — everything below the gateway is one flat network. Box ⑤ (JioRouter AX6000 .50) connects directly to Nokia and automates everything; everything in ⑥ is reached from there. Detail lives on page 2 and in the LLD set.</span></div></div></div></foreignObject><text x="42" y="875" fill="#000000" font-family="Helvetica" font-size="12px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="42" y="875">How to read it: top to bottom is the physical path into the house — everything below the gateway is one flat network. Box ⑤ (JioRouter AX6000 .50) connects directly to Nokia and automates everything; everything in ⑥ is reached from there.</tspan><tspan x="42" y="889">Detail lives on page 2 and in the LLD set.</tspan></text></switch></g></g></g><g data-cell-id="e3"><g transform="translate(0.5,0.5)"><path d="M 680 140 L 680 173.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: var(--ge-light-color, #ffffff);"/><path d="M 680 178.88 L 676.5 171.88 L 680 173.63 L 683.5 171.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: var(--ge-light-color, #ffffff); stroke: var(--ge-light-color, #ffffff);"/></g></g><g data-cell-id="e4"><g transform="translate(0.5,0.5)"><path d="M 580 256 L 580 356 L 542 356 L 542 449.63" fill="none" stroke="#2f5597" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(137, 170, 227);"/><path d="M 542 454.88 L 538.5 447.88 L 542 449.63 L 545.5 447.88 Z" fill="#2f5597" stroke="#2f5597" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(137, 170, 227); stroke: rgb(137, 170, 227);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 356px; margin-left: 561px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #2f5597; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #89aae3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Cat6 (direct uplink)</div></div></div></foreignObject><text x="561" y="359" fill="#2f5597" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(137, 170, 227);">Cat6 (direct uplink)</text></switch></g></g></g><g data-cell-id="e5"><g transform="translate(0.5,0.5)"><path d="M 780 256 L 780 298.5 L 392 298.5 L 392 334.63" fill="none" stroke="#2f5597" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(137, 170, 227);"/><path d="M 392 339.88 L 388.5 332.88 L 392 334.63 L 395.5 332.88 Z" fill="#2f5597" stroke="#2f5597" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(137, 170, 227); stroke: rgb(137, 170, 227);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 299px; margin-left: 586px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #2f5597; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #89aae3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Cat6</div></div></div></foreignObject><text x="586" y="302" fill="#2f5597" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(137, 170, 227);">Cat6</text></switch></g></g></g><g data-cell-id="e6"><g transform="translate(0.5,0.5)"><path d="M 542 369 L 591.63 369" fill="none" stroke="#2f5597" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(137, 170, 227);"/><path d="M 596.88 369 L 589.88 372.5 L 591.63 369 L 589.88 365.5 Z" fill="#2f5597" stroke="#2f5597" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(137, 170, 227); stroke: rgb(137, 170, 227);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 369px; margin-left: 570px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #2f5597; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #89aae3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Cat6 (chained SPOF)</div></div></div></foreignObject><text x="570" y="372" fill="#2f5597" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(137, 170, 227);">Cat6 (chained SPOF)</text></switch></g></g></g><g data-cell-id="e7"><g transform="translate(0.5,0.5)"><path d="M 170 515 L 443 515 L 443 532.8 L 709.63 532.8" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 714.88 532.8 L 707.88 536.3 L 709.63 532.8 L 707.88 529.3 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 524px; margin-left: 443px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">opens http://192.168.0.50/mesh.html</div></div></div></foreignObject><text x="443" y="527" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">opens http://192.168.0.50/mesh.html</text></switch></g></g></g><g data-cell-id="e8"><g transform="translate(0.5,0.5)"><path d="M 700 580.8 L 850 580.8 L 993.63 580.03" fill="none" stroke="#bf9000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(154, 114, 0);"/><path d="M 998.88 580.01 L 991.9 583.54 L 993.63 580.03 L 991.86 576.54 Z" fill="#bf9000" stroke="#bf9000" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(154, 114, 0); stroke: rgb(154, 114, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 581px; margin-left: 850px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #bf9000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9a7200; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">internet</div></div></div></foreignObject><text x="850" y="584" fill="#bf9000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(154, 114, 0);">internet</text></switch></g></g></g><g data-cell-id="e9"><g transform="translate(0.5,0.5)"><path d="M 390 626 L 390 675 L 212 675 L 212 717.63" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 212 722.88 L 208.5 715.88 L 212 717.63 L 215.5 715.88 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 675px; margin-left: 301px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Wi-Fi + router logins</div></div></div></foreignObject><text x="301" y="678" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">Wi-Fi + router logins</text></switch></g></g></g><g data-cell-id="e10"><g transform="translate(0.5,0.5)"><path d="M 580 626 L 580 675 L 526 675 L 526 717.63" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 526 722.88 L 522.5 715.88 L 526 717.63 L 529.5 715.88 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 675px; margin-left: 553px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">remote control over Wi-Fi</div></div></div></foreignObject><text x="553" y="678" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">remote control over Wi-Fi</text></switch></g></g></g><g data-cell-id="e11"><g transform="translate(0.5,0.5)"><path d="M 770 626 L 770 675 L 840 675 L 840 717.63" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 840 722.88 L 836.5 715.88 L 840 717.63 L 843.5 715.88 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 675px; margin-left: 805px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">via the AC cloud</div></div></div></foreignObject><text x="805" y="678" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">via the AC cloud</text></switch></g></g></g><g data-cell-id="e12"><g transform="translate(0.5,0.5)"><path d="M 922 626 L 922 675 L 1154 675 L 1154 717.63" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 1154 722.88 L 1150.5 715.88 L 1154 717.63 L 1157.5 715.88 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 675px; margin-left: 1038px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">USB 2.0 storage</div></div></div></foreignObject><text x="1038" y="678" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">USB 2.0 storage</text></switch></g></g></g></g></g></g><switch><g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/><a transform="translate(0,-5)" xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems" target="_blank"><text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text></a></switch></svg>
+    </div>
+    <div class="diag-pane hidden" id="paneHld2">
+      <svg id="svgHld2" class="drawio-diag" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" style="background: transparent; background-color: transparent; color-scheme: dark;" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1902px" height="1246px" viewBox="0 0 1902 1246"><defs/><g><g data-cell-id="0"><g data-cell-id="1"><g data-cell-id="t1"><g><rect x="0" y="0" width="1400" height="60" fill="none" stroke="none" pointer-events="all"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 1398px; height: 1px; padding-top: 7px; margin-left: 2px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b style="font-size:20px">HLD — Whole-Home Gigabit Mesh &amp; Automation Architecture</b><br /><span style="color: rgb(164, 164, 164);">Single flat L3 subnet 192.168.0.0/24 · zero routers below the gateway · JioRouter AX6000 (192.168.0.50) is the primary automation hub · TP-Link Archer A6 (.12) is secondary AP</span></div></div></div></foreignObject><text x="2" y="19" fill="#000000" font-family="Helvetica" font-size="12px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="2" y="19">HLD — Whole-Home Gigabit Mesh &amp; Automation Architecture</tspan><tspan x="2" y="33">Single flat L3 subnet 192.168.0.0/24 · zero routers below the gateway · JioRouter AX6000 (192.168.0.50) is the primary automation hub · TP-Link Archer A6 (.12) is secondary AP</tspan></text></switch></g></g></g><g data-cell-id="wan"><g transform="translate(0.5,0.5)"><rect x="720" y="80" width="300" height="44" rx="2.64" ry="2.64" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 290px; height: 1px; padding-top: 102px; margin-left: 725px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; "><b>Fiber WAN — ISP GPON</b></div></div></div></foreignObject><text x="870" y="105" fill="#000000" font-family="Helvetica" font-size="11px" text-anchor="middle" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">Fiber WAN — ISP GPON</text></switch></g></g></g><g data-cell-id="nokia"><g transform="translate(0.5,0.5)"><rect x="660" y="160" width="420" height="118" rx="7.08" ry="7.08" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(29, 41, 59); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 410px; height: 1px; padding-top: 171px; margin-left: 666px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Nokia G-2425G-A  ·  192.168.0.1</b><br />GPON ONT + master gateway (MTK7528)<br />Master DHCP server · advertises DNS .50 → .12 → 1.1.1.1<br />Wi-Fi: 5G ch44 VHT80 · 2.4G ch11 HT20<br />Mgmt: web + SSH/telnet (restricted vendor CLI, no root)</div></div></div></foreignObject><text x="666" y="182" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="666" y="182">Nokia G-2425G-A · 192.168.0.1</tspan><tspan x="666" y="195">GPON ONT + master gateway (MTK7528)</tspan><tspan x="666" y="208">Master DHCP server · advertises DNS .50 → .12 → 1.1.1.1</tspan><tspan x="666" y="221">Wi-Fi: 5G ch44 VHT80 · 2.4G ch11 HT20</tspan><tspan x="666" y="234">Mgmt: web + SSH/telnet (restricted vendor CLI, no root)</tspan></text></switch></g></g></g><g data-cell-id="ap1"><g transform="translate(0.5,0.5)"><rect x="40" y="374" width="360" height="118" rx="7.08" ry="7.08" fill="#f8cecc" stroke="#b85450" stroke-dasharray="3 3" pointer-events="all" style="fill: rgb(81, 45, 43); stroke: rgb(215, 129, 126);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 350px; height: 1px; padding-top: 385px; margin-left: 46px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Huawei HG8145V5 — AP #1  ·  .110</b><br /><span style="color: rgb(215, 129, 126); font-weight: bold;">[DEPRECATED / DECOMMISSIONED]</span><br />Replaced by JioRouter AX6000 (.50)<br />Permanently removed from active RF mesh &amp; poller loops</div></div></div></foreignObject><text x="46" y="396" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="46" y="396">Huawei HG8145V5 — AP #1 · .110</tspan><tspan x="46" y="409">[DEPRECATED / DECOMMISSIONED]</tspan><tspan x="46" y="422">Replaced by JioRouter AX6000 (.50)</tspan><tspan x="46" y="435">Permanently removed from active RF mesh &amp; poller loops</tspan></text></switch></g></g></g><g data-cell-id="ap2"><g transform="translate(0.5,0.5)"><rect x="520" y="374" width="420" height="118" rx="7.08" ry="7.08" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(29, 41, 59); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 410px; height: 1px; padding-top: 385px; margin-left: 526px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Huawei HG8145V5 — AP #2  ·  .98</b><br />Pure L2 AP + TP-Link’s uplink  ⚠ single point of failure<br />5G ch52 (DFS) · 2.4G ch11 · both pinned<br />Mgmt: telnet vendor CLI (USB migrated to JioRouter)</div></div></div></foreignObject><text x="526" y="396" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="526" y="396">Huawei HG8145V5 — AP #2 · .98</tspan><tspan x="526" y="409">Pure L2 AP + TP-Link’s uplink ⚠ single point of failure</tspan><tspan x="526" y="422">5G ch52 (DFS) · 2.4G ch11 · both pinned</tspan><tspan x="526" y="435">Mgmt: telnet vendor CLI (USB migrated to JioRouter)</tspan></text></switch></g></g></g><g data-cell-id="tplink"><g transform="translate(0.5,0.5)"><rect x="1040" y="374" width="420" height="118" rx="7.08" ry="7.08" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(29, 41, 59); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 410px; height: 1px; padding-top: 385px; margin-left: 1046px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>TP-Link Archer A6 v3 — Secondary AP · .12</b><br />Uplink: Cat6 into AP #2 LAN port (⚠ chained SPOF)<br />5G ch36 VHT80 · 2.4G ch6 HT20 · OpenWrt 23.05.5<br />Secondary DNS (adblock-fast fallback)<br /><b>Web redirect:</b> /www/index.html → <b>http://192.168.0.50/mesh.html</b></div></div></div></foreignObject><text x="1046" y="396" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1046" y="396">TP-Link Archer A6 v3 — Secondary AP · .12</tspan><tspan x="1046" y="409">Uplink: Cat6 into AP #2 LAN port (⚠ chained SPOF)</tspan><tspan x="1046" y="422">5G ch36 VHT80 · 2.4G ch6 HT20 · OpenWrt 23.05.5</tspan><tspan x="1046" y="435">Secondary DNS (adblock-fast fallback)</tspan><tspan x="1046" y="448">Web redirect: /www/index.html → http://192.168.0.50/mesh.html</tspan></text></switch></g></g></g><g data-cell-id="hub"><g transform="translate(0.5,0.5)"><rect x="100" y="554" width="1380" height="420" rx="16.8" ry="16.8" fill="#f6fff4" stroke="#82b366" pointer-events="all" style="fill: rgb(15, 23, 14); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 1366px; height: 1px; padding-top: 567px; margin-left: 108px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; "><b>JioRouter AX6000 · 192.168.0.50 (OpenWrt SNAPSHOT MT7986 ARM64) — PRIMARY AUTOMATION HUB &amp; USB MEDIA HOST</b><br /><span style="font-size: 11px; font-weight: normal; color: rgb(147, 183, 146);">Wi-Fi 6 (5G ch36 HE160 · 2.4G ch1 HE20 4x4) · Direct Cat6 to Nokia · Hosts mesh.html, ac.html, ucode pollers, REST APIs &amp; USB 2.0 Media Storage</span></div></div></div></foreignObject><text x="108" y="580" fill="#000000" font-family="Helvetica" font-size="13px" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);"><tspan x="108" y="580">JioRouter AX6000 · 192.168.0.50 (OpenWrt SNAPSHOT MT7986 ARM64) — PRIMARY AUTOMATION HUB &amp; USB MEDIA HOST</tspan><tspan x="108" y="596">Wi-Fi 6 (5G ch36 HE160 · 2.4G ch1 HE20 4x4) · Direct Cat6 to Nokia · Hosts mesh.html, ac.html, ucode pollers, REST APIs &amp; USB 2.0 Media Storage</tspan></text></switch></g></g></g><g data-cell-id="meshpoll"><g transform="translate(0.5,0.5)"><rect x="120" y="614" width="220" height="92" rx="5.52" ry="5.52" fill="#d5e8d4" stroke="#82b366" pointer-events="all" style="fill: rgb(31, 47, 30); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 210px; height: 1px; padding-top: 625px; margin-left: 126px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>mesh-poller.uc</b><br />procd, ~2 s cycle<br />RF/latency/clients/self-heal<br />Capabilities A–G</div></div></div></foreignObject><text x="126" y="636" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="126" y="636">mesh-poller.uc</tspan><tspan x="126" y="649">procd, ~2 s cycle</tspan><tspan x="126" y="662">RF/latency/clients/self-heal</tspan><tspan x="126" y="675">Capabilities A–G</tspan></text></switch></g></g></g><g data-cell-id="roam"><g transform="translate(0.5,0.5)"><rect x="360" y="614" width="190" height="92" rx="5.52" ry="5.52" fill="#d5e8d4" stroke="#82b366" pointer-events="all" style="fill: rgb(31, 47, 30); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 180px; height: 1px; padding-top: 625px; margin-left: 366px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>roam-daemon.uc</b><br />sticky-client watchdog<br />deauth via AP #2<br />invoked per poll cycle</div></div></div></foreignObject><text x="366" y="636" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="366" y="636">roam-daemon.uc</tspan><tspan x="366" y="649">sticky-client watchdog</tspan><tspan x="366" y="662">deauth via AP #2</tspan><tspan x="366" y="675">invoked per poll cycle</tspan></text></switch></g></g></g><g data-cell-id="entpoll"><g transform="translate(0.5,0.5)"><rect x="570" y="614" width="220" height="92" rx="5.52" ry="5.52" fill="#d5e8d4" stroke="#82b366" pointer-events="all" style="fill: rgb(31, 47, 30); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 210px; height: 1px; padding-top: 625px; margin-left: 576px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>entertainment-poller.uc</b><br />3 s cycle · TV/Fire TV telemetry<br />app-aware DSP auto-switch<br />Shizuku/agent keep-alive</div></div></div></foreignObject><text x="576" y="636" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="576" y="636">entertainment-poller.uc</tspan><tspan x="576" y="649">3 s cycle · TV/Fire TV telemetry</tspan><tspan x="576" y="662">app-aware DSP auto-switch</tspan><tspan x="576" y="675">Shizuku/agent keep-alive</tspan></text></switch></g></g></g><g data-cell-id="acpoll"><g transform="translate(0.5,0.5)"><rect x="810" y="614" width="220" height="92" rx="5.52" ry="5.52" fill="#d5e8d4" stroke="#82b366" pointer-events="all" style="fill: rgb(31, 47, 30); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 210px; height: 1px; padding-top: 625px; margin-left: 816px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>ac-poller.uc</b><br />10 s cycle · MirAIe telemetry<br />energy ledger + 4 AI models</div></div></div></foreignObject><text x="816" y="636" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="816" y="636">ac-poller.uc</tspan><tspan x="816" y="649">10 s cycle · MirAIe telemetry</tspan><tspan x="816" y="662">energy ledger + 4 AI models</tspan></text></switch></g></g></g><g data-cell-id="usb"><g transform="translate(0.5,0.5)"><rect x="1050" y="614" width="410" height="92" rx="5.52" ry="5.52" fill="#d5e8d4" stroke="#82b366" pointer-events="all" style="fill: rgb(31, 47, 30); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 400px; height: 1px; padding-top: 625px; margin-left: 1056px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Local USB 2.0 Media Storage (28 GB ext4)</b><br />Directly mounted at /mnt/sda1 (/mnt/usb) on JioRouter .50<br />transmission-daemon :9091 · minidlnad :8200 UPnP<br />Supervised locally via procd &amp; mesh-poller</div></div></div></foreignObject><text x="1056" y="636" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1056" y="636">Local USB 2.0 Media Storage (28 GB ext4)</tspan><tspan x="1056" y="649">Directly mounted at /mnt/sda1 (/mnt/usb) on JioRouter .50</tspan><tspan x="1056" y="662">transmission-daemon :9091 · minidlnad :8200 UPnP</tspan><tspan x="1056" y="675">Supervised locally via procd &amp; mesh-poller</tspan></text></switch></g></g></g><g data-cell-id="dns"><g transform="translate(0.5,0.5)"><rect x="120" y="720" width="220" height="80" rx="4.8" ry="4.8" fill="#d5e8d4" stroke="#82b366" pointer-events="all" style="fill: rgb(31, 47, 30); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 210px; height: 1px; padding-top: 731px; margin-left: 126px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>dnsmasq + adblock-fast</b><br />28 k domains blocked<br />Primary whole-home DNS + leases</div></div></div></foreignObject><text x="126" y="742" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="126" y="742">dnsmasq + adblock-fast</tspan><tspan x="126" y="755">28 k domains blocked</tspan><tspan x="126" y="768">Primary whole-home DNS + leases</tspan></text></switch></g></g></g><g data-cell-id="cgi"><g transform="translate(0.5,0.5)"><rect x="360" y="720" width="520" height="80" rx="4.8" ry="4.8" fill="#ffe6cc" stroke="#d79b00" pointer-events="all" style="fill: rgb(54, 33, 10); stroke: rgb(153, 101, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 510px; height: 1px; padding-top: 731px; margin-left: 366px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>/www/cgi-bin  —  REST surface (ucode CGI)</b><br />mesh-api · mitv-api · firetv-api · ac-api<br />read cached state · write device control</div></div></div></foreignObject><text x="366" y="742" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="366" y="742">/www/cgi-bin — REST surface (ucode CGI)</tspan><tspan x="366" y="755">mesh-api · mitv-api · firetv-api · ac-api</tspan><tspan x="366" y="768">read cached state · write device control</tspan></text></switch></g></g></g><g data-cell-id="web"><g transform="translate(0.5,0.5)"><rect x="900" y="720" width="560" height="80" rx="4.8" ry="4.8" fill="#e1d5e7" stroke="#9673a6" pointer-events="all" style="fill: rgb(57, 47, 63); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 550px; height: 1px; padding-top: 731px; margin-left: 906px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>/www — dashboards (ON JIOROUTER .50)</b><br /><b style="color: rgb(229, 165, 255); font-size: 12px;">mesh.html (central single pane — http://192.168.0.50/mesh.html)</b><br />ac.html (standalone AC console — http://192.168.0.50/ac.html)</div></div></div></foreignObject><text x="906" y="742" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="906" y="742">/www — dashboards (ON JIOROUTER .50)</tspan><tspan x="906" y="755">mesh.html (central single pane — http://192.168.0.50/mesh.html)</tspan><tspan x="906" y="768">ac.html (standalone AC console — http://192.168.0.50/ac.html)</tspan></text></switch></g></g></g><g data-cell-id="state"><g transform="translate(0.5,0.5)"><rect x="120" y="814" width="1340" height="62" rx="3.72" ry="3.72" fill="#ffffff" stroke="#9e9e9e" stroke-dasharray="3 3" pointer-events="all" style="fill: rgb(18, 18, 18); stroke: rgb(101, 101, 101);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 1330px; height: 1px; padding-top: 825px; margin-left: 126px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>/tmp state (tmpfs, atomic writes)  ·  /etc caches</b><br />mesh-status.json · entertainment-status.json · ac-status.json · mesh-history.tsv · dsp-auto.log · mesh-selfheal.log  |  /etc/mesh-vendor-cache</div></div></div></foreignObject><text x="126" y="836" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="126" y="836">/tmp state (tmpfs, atomic writes) · /etc caches</tspan><tspan x="126" y="849">mesh-status.json · entertainment-status.json · ac-status.json · mesh-history.tsv · dsp-auto.log · mesh-selfheal.log | /etc/mesh-vendor-cache</tspan></text></switch></g></g></g><g data-cell-id="ktune"><g transform="translate(0.5,0.5)"><rect x="120" y="890" width="1340" height="62" rx="3.72" ry="3.72" fill="#dae8fc" stroke="#6c8ebf" pointer-events="all" style="fill: rgb(29, 41, 59); stroke: rgb(92, 121, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 1330px; height: 1px; padding-top: 901px; margin-left: 126px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>OpenWrt Kernel 6.6 Profile (JioRouter MT7986 ARM64) &amp; Kernel 5.15 Profile (TP-Link MIPS)</b><br />Filogic 830 hardware flow offload · sysctl BDP/fastopen/backlog · RPS · zero-fork native ucode engine across all services</div></div></div></foreignObject><text x="126" y="912" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="126" y="912">OpenWrt Kernel 6.6 Profile (JioRouter MT7986 ARM64) &amp; Kernel 5.15 Profile (TP-Link MIPS)</tspan><tspan x="126" y="925">Filogic 830 hardware flow offload · sysctl BDP/fastopen/backlog · RPS · zero-fork native ucode engine across all services</tspan></text></switch></g></g></g><g data-cell-id="av"><g transform="translate(0.5,0.5)"><rect x="210" y="1014" width="740" height="230" rx="9.2" ry="9.2" fill="#fbf8fd" stroke="#9673a6" pointer-events="all" style="fill: rgb(25, 22, 26); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 726px; height: 1px; padding-top: 1027px; margin-left: 218px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">Managed A/V stack  (HDMI-CEC island)</div></div></div></foreignObject><text x="218" y="1040" fill="#000000" font-family="Helvetica" font-size="13px" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">Managed A/V stack (HDMI-CEC island)</text></switch></g></g></g><g data-cell-id="mitv"><g transform="translate(0.5,0.5)"><rect x="232" y="1062" width="250" height="160" rx="9.6" ry="9.6" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 240px; height: 1px; padding-top: 1073px; margin-left: 238px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Xiaomi Mi QLED 75  ·  .10</b><br />Android 11 / build 8835 · MT9611<br />CEC bus master (0.0.0.0)<br />adb :5555 — ROUTER ONLY<br />tv-telemetry-agent :8080<br />mitv-rust-agent :9988</div></div></div></foreignObject><text x="238" y="1084" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="238" y="1084">Xiaomi Mi QLED 75 · .10</tspan><tspan x="238" y="1097">Android 11 / build 8835 · MT9611</tspan><tspan x="238" y="1110">CEC bus master (0.0.0.0)</tspan><tspan x="238" y="1123">adb :5555 — ROUTER ONLY</tspan><tspan x="238" y="1136">tv-telemetry-agent :8080</tspan><tspan x="238" y="1149">mitv-rust-agent :9988</tspan></text></switch></g></g></g><g data-cell-id="firetv"><g transform="translate(0.5,0.5)"><rect x="494" y="1062" width="210" height="160" rx="9.6" ry="9.6" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 200px; height: 1px; padding-top: 1073px; margin-left: 500px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Fire TV Stick 4K  ·  .7</b><br />Fire OS 6 (Android 7.1.2)<br />HDMI 1 → Mi TV<br />adb :5555<br />E-AC3 passthrough, 4K60 locked</div></div></div></foreignObject><text x="500" y="1084" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="500" y="1084">Fire TV Stick 4K · .7</tspan><tspan x="500" y="1097">Fire OS 6 (Android 7.1.2)</tspan><tspan x="500" y="1110">HDMI 1 → Mi TV</tspan><tspan x="500" y="1123">adb :5555</tspan><tspan x="500" y="1136">E-AC3 passthrough, 4K60 locked</tspan></text></switch></g></g></g><g data-cell-id="sony"><g transform="translate(0.5,0.5)"><rect x="716" y="1062" width="212" height="160" rx="9.6" ry="9.6" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 202px; height: 1px; padding-top: 1073px; margin-left: 722px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Sony HT-S40R 5.1</b><br />HDMI 2 ← plain ARC (not eARC)<br />Reachable only via CEC<br />Vendor frames: NOT injectable</div></div></div></foreignObject><text x="722" y="1084" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="722" y="1084">Sony HT-S40R 5.1</tspan><tspan x="722" y="1097">HDMI 2 ← plain ARC (not eARC)</tspan><tspan x="722" y="1110">Reachable only via CEC</tspan><tspan x="722" y="1123">Vendor frames: NOT injectable</tspan></text></switch></g></g></g><g data-cell-id="ac"><g transform="translate(0.5,0.5)"><rect x="974" y="1062" width="236" height="160" rx="9.6" ry="9.6" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 226px; height: 1px; padding-top: 1073px; margin-left: 980px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Panasonic CS/CU-NU18AKY5WX</b><br />Wi-Fi module .4 (Espressif)<br />On TP-Link 2.4G ch6<br />Control = MirAIe MQTT only<br />(no LAN control protocol)</div></div></div></foreignObject><text x="980" y="1084" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="980" y="1084">Panasonic CS/CU-NU18AKY5WX</tspan><tspan x="980" y="1097">Wi-Fi module .4 (Espressif)</tspan><tspan x="980" y="1110">On TP-Link 2.4G ch6</tspan><tspan x="980" y="1123">Control = MirAIe MQTT only</tspan><tspan x="980" y="1136">(no LAN control protocol)</tspan></text></switch></g></g></g><g data-cell-id="clients"><g transform="translate(0.5,0.5)"><rect x="0" y="1062" width="190" height="160" rx="9.6" ry="9.6" fill="#f5f5f5" stroke="#666666" pointer-events="all" style="fill: rgb(26, 26, 26); stroke: rgb(149, 149, 149);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 180px; height: 1px; padding-top: 1073px; margin-left: 6px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Wi-Fi clients</b><br />phones, laptops, PC,<br />Mi TV, Fire TV, AC, IoT<br /><br />SSID U101 / U101-slow<div><br /></div></div></div></div></foreignObject><text x="6" y="1084" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="6" y="1084">Wi-Fi clients</tspan><tspan x="6" y="1097">phones, laptops, PC,</tspan><tspan x="6" y="1110">Mi TV, Fire TV, AC, IoT</tspan><tspan x="6" y="1123"></tspan><tspan x="6" y="1136">SSID U101 / U101-slow</tspan><tspan x="6" y="1149"></tspan></text></switch></g></g></g><g data-cell-id="user"><g transform="translate(0.5,0.5)"><rect x="0" y="160" width="250" height="100" rx="6" ry="6" fill="#e1d5e7" stroke="#9673a6" pointer-events="all" style="fill: rgb(57, 47, 63); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 240px; height: 1px; padding-top: 171px; margin-left: 6px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>👤 Operator browser</b><br />on the LAN<br />single pane of glass:<br /><b style="color: rgb(229, 165, 255); font-size: 12px;">http://192.168.0.50/mesh.html</b><br /><span style="font-size: 10px; color: rgb(149, 149, 149);">(TP-Link .12/ redirects to .50)</span></div></div></div></foreignObject><text x="6" y="182" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="6" y="182">👤 Operator browser</tspan><tspan x="6" y="195">on the LAN</tspan><tspan x="6" y="208">single pane of glass:</tspan><tspan x="6" y="221">http://192.168.0.50/mesh.html</tspan><tspan x="6" y="234">(TP-Link .12/ redirects to .50)</tspan></text></switch></g></g></g><g data-cell-id="clouds"><g transform="translate(0.5,0.5)"><rect x="1560" y="160" width="340" height="560" rx="13.6" ry="13.6" fill="#fffdf5" stroke="#d6b656" pointer-events="all" style="fill: rgb(22, 20, 14); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 326px; height: 1px; padding-top: 173px; margin-left: 1568px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">External services (egress only)</div></div></div></foreignObject><text x="1568" y="186" fill="#000000" font-family="Helvetica" font-size="13px" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">External services (egress only)</text></switch></g></g></g><g data-cell-id="miraie"><g transform="translate(0.5,0.5)"><rect x="1580" y="210" width="300" height="90" rx="5.4" ry="5.4" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 290px; height: 1px; padding-top: 221px; margin-left: 1586px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>MirAIe cloud</b><br />REST powerConsumption<br />MQTT/TLS :8883 control<br />the only path to the AC</div></div></div></foreignObject><text x="1586" y="232" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1586" y="232">MirAIe cloud</tspan><tspan x="1586" y="245">REST powerConsumption</tspan><tspan x="1586" y="258">MQTT/TLS :8883 control</tspan><tspan x="1586" y="271">the only path to the AC</tspan></text></switch></g></g></g><g data-cell-id="meteo"><g transform="translate(0.5,0.5)"><rect x="1580" y="314" width="300" height="76" rx="4.56" ry="4.56" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 290px; height: 1px; padding-top: 325px; margin-left: 1586px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Open-Meteo</b><br />weather, AQI/PM2.5, UV<br />CDD cost forecast</div></div></div></foreignObject><text x="1586" y="336" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1586" y="336">Open-Meteo</tspan><tspan x="1586" y="349">weather, AQI/PM2.5, UV</tspan><tspan x="1586" y="362">CDD cost forecast</tspan></text></switch></g></g></g><g data-cell-id="jw"><g transform="translate(0.5,0.5)"><rect x="1580" y="404" width="300" height="86" rx="5.16" ry="5.16" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 290px; height: 1px; padding-top: 415px; margin-left: 1586px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>JustWatch / TVMaze / iTunes</b><br />show + poster enrichment<br />gated by TitleMatcher</div></div></div></foreignObject><text x="1586" y="426" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1586" y="426">JustWatch / TVMaze / iTunes</tspan><tspan x="1586" y="439">show + poster enrichment</tspan><tspan x="1586" y="452">gated by TitleMatcher</tspan></text></switch></g></g></g><g data-cell-id="mv"><g transform="translate(0.5,0.5)"><rect x="1580" y="504" width="300" height="70" rx="4.2" ry="4.2" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 290px; height: 1px; padding-top: 515px; margin-left: 1586px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>api.macvendors.com</b><br />MAC → vendor, cached forever</div></div></div></foreignObject><text x="1586" y="526" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1586" y="526">api.macvendors.com</tspan><tspan x="1586" y="539">MAC → vendor, cached forever</tspan></text></switch></g></g></g><g data-cell-id="bl"><g transform="translate(0.5,0.5)"><rect x="1580" y="588" width="300" height="86" rx="5.16" ry="5.16" fill="#fff2cc" stroke="#d6b656" pointer-events="all" style="fill: rgb(40, 29, 0); stroke: rgb(109, 81, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 290px; height: 1px; padding-top: 599px; margin-left: 1586px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b>Blocklist sources</b><br />AdAway · SomeoneWhoCares<br />AdGuard CNAME · Yoyo · NoCoin</div></div></div></foreignObject><text x="1586" y="610" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1586" y="610">Blocklist sources</tspan><tspan x="1586" y="623">AdAway · SomeoneWhoCares</tspan><tspan x="1586" y="636">AdGuard CNAME · Yoyo · NoCoin</tspan></text></switch></g></g></g><g data-cell-id="e2"><g transform="translate(0.5,0.5)"><path d="M 870 124 L 870 153.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: var(--ge-light-color, #ffffff);"/><path d="M 870 158.88 L 866.5 151.88 L 870 153.63 L 873.5 151.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: var(--ge-light-color, #ffffff); stroke: var(--ge-light-color, #ffffff);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 142px; margin-left: 870px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">GPON fiber</div></div></div></foreignObject><text x="870" y="145" fill="#000000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);">GPON fiber</text></switch></g></g></g><g data-cell-id="e3"><g transform="translate(0.5,0.5)"><path d="M 744 278 L 744 416 L 721 416 L 721 547.63" fill="none" stroke="#2f5597" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(137, 170, 227);"/><path d="M 721 552.88 L 717.5 545.88 L 721 547.63 L 724.5 545.88 Z" fill="#2f5597" stroke="#2f5597" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(137, 170, 227); stroke: rgb(137, 170, 227);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 416px; margin-left: 732px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #2f5597; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #89aae3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Cat6 (direct uplink to primary hub)</div></div></div></foreignObject><text x="732" y="419" fill="#2f5597" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(137, 170, 227);">Cat6 (direct uplink to primary hub)</text></switch></g></g></g><g data-cell-id="e4"><g transform="translate(0.5,0.5)"><path d="M 912 278 L 912 326 L 730 326 L 730 367.63" fill="none" stroke="#2f5597" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(137, 170, 227);"/><path d="M 730 372.88 L 726.5 365.88 L 730 367.63 L 733.5 365.88 Z" fill="#2f5597" stroke="#2f5597" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(137, 170, 227); stroke: rgb(137, 170, 227);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 326px; margin-left: 821px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #2f5597; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #89aae3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Cat6</div></div></div></foreignObject><text x="821" y="329" fill="#2f5597" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(137, 170, 227);">Cat6</text></switch></g></g></g><g data-cell-id="e5"><g transform="translate(0.5,0.5)"><path d="M 940 433 L 1033.63 433" fill="none" stroke="#2f5597" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(137, 170, 227);"/><path d="M 1038.88 433 L 1031.88 436.5 L 1033.63 433 L 1031.88 429.5 Z" fill="#2f5597" stroke="#2f5597" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(137, 170, 227); stroke: rgb(137, 170, 227);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 433px; margin-left: 990px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #2f5597; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #89aae3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Cat6 — TP-Link hangs off AP #2 LAN port (⚠ SPOF)</div></div></div></foreignObject><text x="990" y="436" fill="#2f5597" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(137, 170, 227);">Cat6 — TP-Link hangs off AP #2 LAN port (⚠ SPOF)</text></switch></g></g></g><g data-cell-id="e7"><g transform="translate(0.5,0.5)"><path d="M 125 260 L 125 490 L 1040 490 L 1040 713.63" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 1040 718.88 L 1036.5 711.88 L 1040 713.63 L 1043.5 711.88 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 490px; margin-left: 583px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">HTTP · http://192.168.0.50/mesh.html</div></div></div></foreignObject><text x="583" y="493" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">HTTP · http://192.168.0.50/mesh.html</text></switch></g></g></g><g data-cell-id="e8"><g transform="translate(0.5,0.5)"><path d="M 175 614 L 175 446 L 702 446 L 702 284.37" fill="none" stroke="#b85450" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(215, 129, 126);"/><path d="M 702 279.12 L 705.5 286.12 L 702 284.37 L 698.5 286.12 Z" fill="#b85450" stroke="#b85450" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(215, 129, 126); stroke: rgb(215, 129, 126);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 446px; margin-left: 439px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #b85450; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #d7817e; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">SSH — show wifi client list / lan ip hosts</div></div></div></foreignObject><text x="439" y="449" fill="#b85450" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(215, 129, 126);">SSH — show wifi client list / lan ip hosts</text></switch></g></g></g><g data-cell-id="e10"><g transform="translate(0.5,0.5)"><path d="M 252 614 L 252 553 L 625 553 L 625 498.37" fill="none" stroke="#b85450" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(215, 129, 126);"/><path d="M 625 493.12 L 628.5 500.12 L 625 498.37 L 621.5 500.12 Z" fill="#b85450" stroke="#b85450" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(215, 129, 126); stroke: rgb(215, 129, 126);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 553px; margin-left: 439px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #b85450; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #d7817e; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">telnet / ssh — CLI + busybox shell</div></div></div></foreignObject><text x="439" y="556" fill="#b85450" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(215, 129, 126);">telnet / ssh — CLI + busybox shell</text></switch></g></g></g><g data-cell-id="e11"><g transform="translate(0.5,0.5)"><path d="M 340 660 L 1043.63 660" fill="none" stroke="#82b366" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(68, 110, 44);"/><path d="M 1048.88 660 L 1041.88 663.5 L 1043.63 660 L 1041.88 656.5 Z" fill="#82b366" stroke="#82b366" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(68, 110, 44); stroke: rgb(68, 110, 44);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 660px; margin-left: 695px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #82b366; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #446e2c; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">procd watchdog · local /mnt/sda1</div></div></div></foreignObject><text x="695" y="663" fill="#82b366" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(68, 110, 44);">procd watchdog · local /mnt/sda1</text></switch></g></g></g><g data-cell-id="e12"><g transform="translate(0.5,0.5)"><path d="M 455 614 L 455 553 L 730 553 L 730 498.37" fill="none" stroke="#b85450" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(215, 129, 126);"/><path d="M 730 493.12 L 733.5 500.12 L 730 498.37 L 726.5 500.12 Z" fill="#b85450" stroke="#b85450" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(215, 129, 126); stroke: rgb(215, 129, 126);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 553px; margin-left: 593px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #b85450; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #d7817e; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">hostapd_cli deauth / iwpriv kick</div></div></div></foreignObject><text x="593" y="556" fill="#b85450" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(215, 129, 126);">hostapd_cli deauth / iwpriv kick</text></switch></g></g></g><g data-cell-id="e13"><g transform="translate(0.5,0.5)"><path d="M 603 706 L 603 884 L 357 884 L 357 1055.63" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 357 1060.88 L 353.5 1053.88 L 357 1055.63 L 360.5 1053.88 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 884px; margin-left: 480px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">adb :5555  +  HTTP :8080 / :9988</div></div></div></foreignObject><text x="480" y="887" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">adb :5555  +  HTTP :8080 / :9988</text></switch></g></g></g><g data-cell-id="e14"><g transform="translate(0.5,0.5)"><path d="M 680 706 L 680 884 L 599 884 L 599 1055.63" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 599 1060.88 L 595.5 1053.88 L 599 1055.63 L 602.5 1053.88 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 884px; margin-left: 639px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">adb :5555</div></div></div></foreignObject><text x="639" y="887" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">adb :5555</text></switch></g></g></g><g data-cell-id="e15"><g transform="translate(0.5,0.5)"><path d="M 494 1142 L 488.37 1142" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 483.12 1142 L 490.12 1138.5 L 488.37 1142 L 490.12 1145.5 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 1142px; margin-left: 488px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">HDMI 1</div></div></div></foreignObject><text x="488" y="1145" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">HDMI 1</text></switch></g></g></g><g data-cell-id="e16"><g transform="translate(0.5,0.5)"><path d="M 482 1198 L 709.63 1198" fill="none" stroke="#9673a6" stroke-miterlimit="10" pointer-events="stroke" style="stroke: rgb(149, 119, 163);"/><path d="M 714.88 1198 L 707.88 1201.5 L 709.63 1198 L 707.88 1194.5 Z" fill="#9673a6" stroke="#9673a6" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(149, 119, 163); stroke: rgb(149, 119, 163);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 1198px; margin-left: 599px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #9673a6; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9577a3; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">HDMI 2 ARC + CEC (volume/power/system-audio)</div></div></div></foreignObject><text x="599" y="1201" fill="#9673a6" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(149, 119, 163);">HDMI 2 ARC + CEC (volume/power/system-audio)</text></switch></g></g></g><g data-cell-id="e17"><g transform="translate(0.5,0.5)"><path d="M 1030 641.6 L 1305 641.6 L 1305 255 L 1573.63 255" fill="none" stroke="#bf9000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(154, 114, 0);"/><path d="M 1578.88 255 L 1571.88 258.5 L 1573.63 255 L 1571.88 251.5 Z" fill="#bf9000" stroke="#bf9000" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(154, 114, 0); stroke: rgb(154, 114, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 449px; margin-left: 1305px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #bf9000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9a7200; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">HTTPS REST + mosquitto_pub MQTT/TLS</div></div></div></foreignObject><text x="1305" y="452" fill="#bf9000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(154, 114, 0);">HTTPS REST + mosquitto_pub MQTT/TLS</text></switch></g></g></g><g data-cell-id="e18"><g transform="translate(0.5,0.5)"><path d="M 1730 300 L 1730 1078 L 1216.37 1078" fill="none" stroke="#bf9000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(154, 114, 0);"/><path d="M 1211.12 1078 L 1218.12 1074.5 L 1216.37 1078 L 1218.12 1081.5 Z" fill="#bf9000" stroke="#bf9000" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(154, 114, 0); stroke: rgb(154, 114, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 949px; margin-left: 1730px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #bf9000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9a7200; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">cloud → device control</div></div></div></foreignObject><text x="1730" y="952" fill="#bf9000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(154, 114, 0);">cloud → device control</text></switch></g></g></g><g data-cell-id="e19"><g transform="translate(0.5,0.5)"><path d="M 1030 669.2 L 1305 669.2 L 1305 352 L 1573.63 352" fill="none" stroke="#bf9000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(154, 114, 0);"/><path d="M 1578.88 352 L 1571.88 355.5 L 1573.63 352 L 1571.88 348.5 Z" fill="#bf9000" stroke="#bf9000" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(154, 114, 0); stroke: rgb(154, 114, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 510px; margin-left: 1305px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #bf9000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9a7200; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">weather / AQI</div></div></div></foreignObject><text x="1305" y="513" fill="#bf9000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(154, 114, 0);">weather / AQI</text></switch></g></g></g><g data-cell-id="e20"><g transform="translate(0.5,0.5)"><path d="M 790 632.4 L 1185 632.4 L 1185 429.8 L 1573.63 429.8" fill="none" stroke="#bf9000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(154, 114, 0);"/><path d="M 1578.88 429.8 L 1571.88 433.3 L 1573.63 429.8 L 1571.88 426.3 Z" fill="#bf9000" stroke="#bf9000" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(154, 114, 0); stroke: rgb(154, 114, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 531px; margin-left: 1185px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #bf9000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9a7200; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">poster + show enrichment</div></div></div></foreignObject><text x="1185" y="534" fill="#bf9000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(154, 114, 0);">poster + show enrichment</text></switch></g></g></g><g data-cell-id="e21"><g transform="translate(0.5,0.5)"><path d="M 340 692.2 L 960 692.2 L 960 539 L 1573.63 539" fill="none" stroke="#bf9000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(154, 114, 0);"/><path d="M 1578.88 539 L 1571.88 542.5 L 1573.63 539 L 1571.88 535.5 Z" fill="#bf9000" stroke="#bf9000" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(154, 114, 0); stroke: rgb(154, 114, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 615px; margin-left: 960px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #bf9000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9a7200; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">MAC vendor lookup</div></div></div></foreignObject><text x="960" y="618" fill="#bf9000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(154, 114, 0);">MAC vendor lookup</text></switch></g></g></g><g data-cell-id="e22"><g transform="translate(0.5,0.5)"><path d="M 340 792 L 960 792 L 960 631 L 1573.63 631" fill="none" stroke="#bf9000" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(154, 114, 0);"/><path d="M 1578.88 631 L 1571.88 634.5 L 1573.63 631 L 1571.88 627.5 Z" fill="#bf9000" stroke="#bf9000" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(154, 114, 0); stroke: rgb(154, 114, 0);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 711px; margin-left: 960px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #bf9000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #9a7200; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">blocklist refresh</div></div></div></foreignObject><text x="960" y="714" fill="#bf9000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(154, 114, 0);">blocklist refresh</text></switch></g></g></g><g data-cell-id="e23"><g transform="translate(0.5,0.5)"><path d="M 95 1062 L 95 1018 L 238 1018 L 238 980.37" fill="none" stroke="#999999" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(106, 106, 106);"/><path d="M 238 975.12 L 241.5 982.12 L 238 980.37 L 234.5 982.12 Z" fill="#999999" stroke="#999999" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(106, 106, 106); stroke: rgb(106, 106, 106);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 1018px; margin-left: 167px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #999999; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #6a6a6a; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">Wi-Fi</div></div></div></foreignObject><text x="167" y="1021" fill="#999999" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(106, 106, 106);">Wi-Fi</text></switch></g></g></g><g data-cell-id="e24"><g transform="translate(0.5,0.5)"><path d="M 142 706 L 142 760 L 187 760 L 187 807.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: var(--ge-light-color, #ffffff);"/><path d="M 187 812.88 L 183.5 805.88 L 187 807.63 L 190.5 805.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: var(--ge-light-color, #ffffff); stroke: var(--ge-light-color, #ffffff);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 760px; margin-left: 165px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">writes mesh-status.json</div></div></div></foreignObject><text x="165" y="763" fill="#000000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);">writes mesh-status.json</text></switch></g></g></g><g data-cell-id="e25"><g transform="translate(0.5,0.5)"><path d="M 768 706 L 768 760 L 857 760 L 857 807.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: var(--ge-light-color, #ffffff);"/><path d="M 857 812.88 L 853.5 805.88 L 857 807.63 L 860.5 805.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: var(--ge-light-color, #ffffff); stroke: var(--ge-light-color, #ffffff);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 760px; margin-left: 813px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">writes entertainment-status.json</div></div></div></foreignObject><text x="813" y="763" fill="#000000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);">writes entertainment-status.json</text></switch></g></g></g><g data-cell-id="e26"><g transform="translate(0.5,0.5)"><path d="M 1008 706 L 1008 760 L 1393 760 L 1393 807.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: var(--ge-light-color, #ffffff);"/><path d="M 1393 812.88 L 1389.5 805.88 L 1393 807.63 L 1396.5 805.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: var(--ge-light-color, #ffffff); stroke: var(--ge-light-color, #ffffff);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 760px; margin-left: 1201px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">writes ac-status.json</div></div></div></foreignObject><text x="1201" y="763" fill="#000000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);">writes ac-status.json</text></switch></g></g></g><g data-cell-id="e27"><g transform="translate(0.5,0.5)"><path d="M 656 814 L 656 804 L 568 804 L 568 806.37" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: var(--ge-light-color, #ffffff);"/><path d="M 568 801.12 L 571.5 808.12 L 568 806.37 L 564.5 808.12 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: var(--ge-light-color, #ffffff); stroke: var(--ge-light-color, #ffffff);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 804px; margin-left: 615px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">read by CGI (no live device I/O on the request path)</div></div></div></foreignObject><text x="615" y="807" fill="#000000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);">read by CGI (no live device I/O on the request path)</text></switch></g></g></g><g data-cell-id="e28"><g transform="translate(0.5,0.5)"><path d="M 880 760 L 893.63 760" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="stroke" style="stroke: var(--ge-light-color, #ffffff);"/><path d="M 898.88 760 L 891.88 763.5 L 893.63 760 L 891.88 756.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="all" style="fill: var(--ge-light-color, #ffffff); stroke: var(--ge-light-color, #ffffff);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 760px; margin-left: 890px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #000000; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">JSON</div></div></div></foreignObject><text x="890" y="763" fill="#000000" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: var(--ge-light-color, #ffffff);">JSON</text></switch></g></g></g><g data-cell-id="e29"><g transform="translate(0.5,0.5)"><path d="M 120 760 L 110 760 L 110 266.2 L 653.63 266.2" fill="none" stroke="#999999" stroke-miterlimit="10" stroke-dasharray="3 3" pointer-events="stroke" style="stroke: rgb(106, 106, 106);"/><path d="M 658.88 266.2 L 651.88 269.7 L 653.63 266.2 L 651.88 262.7 Z" fill="#999999" stroke="#999999" stroke-miterlimit="10" pointer-events="all" style="fill: rgb(106, 106, 106); stroke: rgb(106, 106, 106);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 266px; margin-left: 133px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; color: #999999; background-color: #ffffff; "><div style="display: inline-block; font-size: 10px; font-family: Helvetica; color: #6a6a6a; line-height: 1.2; pointer-events: all; background-color: #121212; white-space: nowrap; ">DHCP option 6 points every client here (.50)</div></div></div></foreignObject><text x="133" y="269" fill="#999999" font-family="Helvetica" font-size="10px" text-anchor="middle" style="fill: rgb(106, 106, 106);">DHCP option 6 points every client here (.50)</text></switch></g></g></g><g data-cell-id="leg"><g transform="translate(0.5,0.5)"><rect x="1230" y="1014" width="670" height="230" rx="9.2" ry="9.2" fill="#fafafa" stroke="#999999" pointer-events="all" style="fill: rgb(22, 22, 22); stroke: rgb(106, 106, 106);"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 656px; height: 1px; padding-top: 1027px; margin-left: 1238px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 13px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">Legend / invariants</div></div></div></foreignObject><text x="1238" y="1040" fill="#000000" font-family="Helvetica" font-size="13px" font-weight="bold" style="fill: var(--ge-light-color, #ffffff);">Legend / invariants</text></switch></g></g></g><g data-cell-id="t30"><g><rect x="1250" y="1050" width="630" height="180" fill="none" stroke="none" pointer-events="all"/></g><g><g><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 628px; height: 1px; padding-top: 1057px; margin-left: 1252px;"><div style="box-sizing: border-box; font-size: 0; text-align: left; color: #000000; "><div style="display: inline-block; font-size: 11px; font-family: Helvetica; color: var(--ge-light-color, #ffffff); line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><span style="color: rgb(137, 170, 227);">▬▬</span> Cat6 / physical link    <span style="color: rgb(215, 129, 126);">- - -</span> management (telnet / SSH)    <span style="color: rgb(149, 119, 163);">▬▬</span> A/V control (adb, HDMI, CEC)<br /><span style="color: rgb(154, 114, 0);">- - -</span> cloud egress    <span style="color: rgb(106, 106, 106);">- - -</span> Wi-Fi / DHCP<br /><br /><b>Invariants worth keeping in mind</b><br />• One L3 subnet, zero routed hops — latency differences are L2 switch hops only.<br />• All hub logic is <b>ucode (.uc)</b>; /bin/sh only wraps ping / adb / nc.<br />• Central dashboard is hosted on <b>JioRouter AX6000 (.50)</b>; TP-Link (.12) 302-redirects to it.<br />• CGI never touches a device synchronously — pollers own all device I/O, CGI reads /tmp.<br />• Huawei APs accept exactly <b>one</b> telnet session; the poller holds it most of the time.<br />• Mi TV adb is single-authorised: drive it from the router only.</div></div></div></foreignObject><text x="1252" y="1068" fill="#000000" font-family="Helvetica" font-size="11px" style="fill: var(--ge-light-color, #ffffff);"><tspan x="1252" y="1068">▬▬ Cat6 / physical link - - - management (telnet / SSH) ▬▬ A/V control (adb, HDMI, CEC)</tspan><tspan x="1252" y="1081">- - - cloud egress - - - Wi-Fi / DHCP</tspan><tspan x="1252" y="1094"></tspan><tspan x="1252" y="1107">Invariants worth keeping in mind</tspan><tspan x="1252" y="1120">• One L3 subnet, zero routed hops — latency differences are L2 switch hops only.</tspan><tspan x="1252" y="1133">• All hub logic is ucode (.uc); /bin/sh only wraps ping / adb / nc.</tspan><tspan x="1252" y="1146">• Central dashboard is hosted on JioRouter AX6000 (.50); TP-Link (.12) 302-redirects to it.</tspan><tspan x="1252" y="1159">• CGI never touches a device synchronously — pollers own all device I/O, CGI reads /tmp.</tspan><tspan x="1252" y="1172">• Huawei APs accept exactly one telnet session; the poller holds it most of the time.</tspan><tspan x="1252" y="1185">• Mi TV adb is single-authorised: drive it from the router only.</tspan></text></switch></g></g></g></g></g></g><switch><g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/><a transform="translate(0,-5)" xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems" target="_blank"><text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text></a></switch></svg>
+    </div>
+  </div>
+  <div class="diag-callouts">
+    <div class="diag-callout">
+      <h4>① Flat L3 Subnet</h4>
+      <p>Nokia ONT (<code>.1</code>) is master DHCP. All APs run L2 bridging. Zero double-NAT; latency differences are switch hops.</p>
+    </div>
+    <div class="diag-callout" style="border-left:3px solid var(--dae)">
+      <h4>② Jio AX6000 (<code>.50</code>) Automation Hub</h4>
+      <p>Primary Wi-Fi 6 AP, <code>mesh.html</code> host, ucode pollers, and local USB 2.0 media storage direct to Nokia.</p>
+    </div>
+    <div class="diag-callout" style="border-left:3px solid var(--warn)">
+      <h4>③ Chained SPOF Risk</h4>
+      <p>AP #2 (<code>.98</code>) carries TP-Link (<code>.12</code>) uplink. Chained outage risk is isolated from the Jio hub.</p>
     </div>
   </div>
 </section>
 
-<!-- 5 ------------------------------------------------------------------ -->
-<section class="slide" id="s5" data-notes="Four radios in one house will fight each other unless you pin them. Every channel here is fixed, not auto. The two 2.4 gigahertz radios that share channel eleven are the two physically furthest apart, with concrete between them. And because a power cut returns the Huawei units to auto-select, the hub re-pins them automatically within a cycle.">
-  <div class="kicker">Step 2 &#8212; the radio plan</div>
-  <h2>Four radios that stay out of each other&#8217;s way</h2>
+<!-- 4: RF SPECTRUM ------------------------------------------------------ -->
+<section class="slide" id="s-rf" data-notes="Four radios in one house will interfere unless you pin them. Every channel is fixed, not auto. Reboots return Huawei units to auto, so the hub's autonomous watchdog detects drift and re-pins the plan within one cycle.">
+  <div class="kicker">Step 2 &#8212; Wireless Spectrum</div>
+  <h2>Pinned RF spectrum &amp; self-healing</h2>
   <div class="body">
     <div class="band" data-step="1">
-      <h4>5 GHz &#8212; four non-overlapping channels</h4>
+      <h4>5 GHz &#8212; non-overlapping channel plan</h4>
       <div class="track" id="tr5"></div>
     </div>
     <div class="band" data-step="2">
-      <h4>2.4 GHz &#8212; the classic 1 / 6 / 11 plan</h4>
+      <h4>2.4 GHz &#8212; non-overlapping 1 / 6 / 11 allocation</h4>
       <div class="track" id="tr24"></div>
     </div>
-    <div class="row" data-step="3" style="margin-top:4px">
-      <div class="card net"><h3>Everything is pinned</h3><p>No radio is left on auto-select. Channel, width and beamforming are written explicitly to each vendor&#8217;s own CLI or web API.</p></div>
-      <div class="card daemon"><h3>&#8230; and re-pinned by itself</h3><p>A reboot sends the Huawei radios back to auto. The hub spots the <code>(auto)</code> suffix within ~20&nbsp;s and writes the plan back.</p></div>
+    <div class="row" data-step="3" style="margin-top:6px">
+      <div class="card net">
+        <h3>Everything is pinned</h3>
+        <p>No radio is left on vendor auto-select. Channel, width, and beamforming are explicitly written to each vendor CLI/API.</p>
+      </div>
+      <div class="card daemon">
+        <h3>...and autonomously re-pinned</h3>
+        <p>Power cuts return Huawei units to auto. <code>mesh-poller.uc</code> detects the <code>(auto)</code> suffix within ~20&nbsp;s and restores the plan automatically.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 6 ------------------------------------------------------------------ -->
-<section class="slide" data-notes="The hub does exactly three things. Pollers read, APIs write, the dashboard shows. Keeping those three separate is what makes the whole thing feel instant, which is the next slide.">
-  <div class="kicker">Step 3 &#8212; the hub</div>
-  <h2>One router, three jobs</h2>
-  <p class="sub">JioRouter AX6000 &#183; 192.168.0.50 &#183; OpenWrt. Everything runs in <b>ucode</b>, the native OpenWrt engine &#8212; no Python, no Node, no container.</p>
-  <div class="body">
-    <div class="row">
-      <div class="card daemon" data-step="1"><h3>&#128266; Pollers</h3><p><b>Read everything, constantly.</b> Mesh every ~20&nbsp;s, the TVs every 3&nbsp;s, the air conditioner every 10&nbsp;s. They are the only thing that ever touches a device for telemetry.</p></div>
-      <div class="card api" data-step="2"><h3>&#9881; APIs</h3><p><b>Turn a click into a real command.</b> Four small REST endpoints that log into the access points, drive the TVs, and publish to the AC&#8217;s cloud.</p></div>
-      <div class="card ui" data-step="3"><h3>&#128250; Dashboard</h3><p><b>One screen for the house.</b> Network, home theatre, climate, downloads &#8212; served straight off the router at <code>mesh.html</code>.</p></div>
-    </div>
-    <div class="row" data-step="4" style="margin-top:18px">
-      <div class="card"><h3 style="font-size:15px">Why it matters that these are separate</h3><p>A web request never waits on a device. The pollers own all device I/O and leave their results in a file; the APIs just read that file. That is the difference between a dashboard that answers in milliseconds and one that hangs for half a minute behind a telnet login.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 7 ------------------------------------------------------------------ -->
-<section class="slide" id="s7" data-notes="This is the heartbeat of the whole system. Nine steps, about twenty seconds, forever. Note step five: the Huawei access point allows exactly one telnet session at a time, so the hub logs in, does everything it needs in one visit, and gets out. Step eight is where it fixes things it finds wrong, without being asked.">
-  <div class="kicker">Step 4 &#8212; the heartbeat</div>
-  <h2>One poll cycle, every ~20 seconds</h2>
+<!-- 5: POLL CYCLE & DECOUPLED IO ----------------------------------------- -->
+<section class="slide" id="s-heartbeat" data-notes="The heartbeat of the system: a 9-step, 20-second cycle. Crucially, pollers own all device I/O and write to an in-memory JSON file. The dashboard reads the file in under 1 millisecond. Web requests NEVER touch a device, preventing Huawei single-telnet collisions.">
+  <div class="kicker">Step 3 &#8212; Hub Heartbeat &amp; Engine</div>
+  <h2>Autonomous cycle &amp; decoupled I/O</h2>
   <div class="body">
     <div class="cycle" id="cyc">
-      <div class="cyc"><div class="k">01</div><div class="v">Ping the gateway and both access points</div></div>
-      <div class="cyc"><div class="k">02</div><div class="v">Sweep the subnet to refresh who is out there</div></div>
-      <div class="cyc"><div class="k">03</div><div class="v">Read its own two radios locally</div></div>
-      <div class="cyc"><div class="k">04</div><div class="v">JioRouter local storage, Transmission &amp; DLNA audit</div></div>
-      <div class="cyc"><div class="k">05</div><div class="v">One visit to AP #2: stats, kicks, USB chores</div></div>
-      <div class="cyc"><div class="k">06</div><div class="v">Ask the gateway for its clients and DHCP names</div></div>
-      <div class="cyc"><div class="k">07</div><div class="v">Resolve unknown hardware makers, cache forever</div></div>
-      <div class="cyc"><div class="k">08</div><div class="v">Fix what drifted: channels, roaming, downloads</div></div>
-      <div class="cyc"><div class="k">09</div><div class="v">Write one JSON file &#8212; atomically</div></div>
-      <div class="cyc" style="border-color:var(--ui);background:#17121f"><div class="k" style="color:var(--ui)">OUT</div><div class="v">That file <b>is</b> the dashboard&#8217;s entire data source</div></div>
+      <div class="cyc"><div class="k">01</div><div class="v">Ping gateway and access points</div></div>
+      <div class="cyc"><div class="k">02</div><div class="v">Subnet ARP sweep for active clients</div></div>
+      <div class="cyc"><div class="k">03</div><div class="v">Read local Wi-Fi 6 radios directly</div></div>
+      <div class="cyc"><div class="k">04</div><div class="v">Local USB 2.0 &amp; Transmission audit</div></div>
+      <div class="cyc"><div class="k">05</div><div class="v">AP #2 single telnet visit (batched)</div></div>
+      <div class="cyc"><div class="k">06</div><div class="v">Nokia gateway DHCP leases &amp; names</div></div>
+      <div class="cyc"><div class="k">07</div><div class="v">Resolve unknown MAC vendors (cached)</div></div>
+      <div class="cyc"><div class="k">08</div><div class="v">Correct drifted channels &amp; daemons</div></div>
+      <div class="cyc"><div class="k">09</div><div class="v">Atomic write to <code>/tmp/mesh-status.json</code></div></div>
+      <div class="cyc" style="border-color:var(--ui);background:#17121f"><div class="k" style="color:var(--ui)">OUT</div><div class="v">Dashboard reads file in <b>&lt;1 ms</b></div></div>
     </div>
-    <div class="row" data-step="1" style="margin-top:22px">
-      <div class="card warn"><h3>The constraint that shapes it</h3><p>Each Huawei access point accepts <b>one</b> telnet session, ever. Leave one half-open and the next cycle is locked out, so the whole visit is budgeted, batched and torn down cleanly.</p></div>
-      <div class="card daemon"><h3>Self-healing, not alerting</h3><p>Drifted channel, stopped download daemon, sticky client on a weak signal &#8212; the cycle corrects them and writes a line to a log instead of asking anyone to intervene.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 8 ------------------------------------------------------------------ -->
-<section class="slide" id="s8" data-notes="A quick contrast slide. The naive design logs into devices when the page loads, which is slow and, on hardware that allows one session, actively harmful. Ours decouples them with a file.">
-  <div class="kicker">Step 5 &#8212; why it feels instant</div>
-  <h2>Nobody waits for a device</h2>
-  <div class="body">
-    <svg class="diagram" viewBox="0 0 960 300" style="max-height:34vh">
-      <g data-step="1">
-        <rect class="nbox dae" x="40" y="40" width="210" height="62"/>
-        <text class="nt" x="145" y="62">Pollers</text><text class="ns" x="145" y="84">every 3&#8211;20 s</text>
-        <path id="q1" class="link live" d="M250 71 L370 71"/>
-        <rect class="nbox" x="370" y="40" width="220" height="62" style="stroke-dasharray:4 4"/>
-        <text class="nt" x="480" y="62">one JSON file</text><text class="ns" x="480" y="84">in memory, on the router</text>
-        <path id="q2" class="link live" d="M590 71 L710 71"/>
-        <rect class="nbox" x="710" y="40" width="210" height="62" style="stroke:var(--ui)"/>
-        <text class="nt" x="815" y="62">Dashboard</text><text class="ns" x="815" y="84">reads the file, &lt;1 ms</text>
-        <circle class="pkt" r="4"><animateMotion dur="1.3s" repeatCount="indefinite"><mpath href="#q1"/></animateMotion></circle>
-        <circle class="pkt" r="4" style="fill:var(--ui)"><animateMotion dur="1.3s" begin=".3s" repeatCount="indefinite"><mpath href="#q2"/></animateMotion></circle>
-      </g>
-      <g data-step="2" opacity=".85">
-        <rect class="nbox warn" x="200" y="180" width="560" height="78" style="stroke-dasharray:5 5"/>
-        <text class="nt" x="480" y="206" style="fill:var(--warn)">The version we do <tspan font-style="italic">not</tspan> build</text>
-        <text class="ns" x="480" y="232">page load &#8594; telnet login &#8594; wait &#8594; parse &#8594; render</text>
-        <line class="x-mark" x1="240" y1="196" x2="300" y2="242"/><line class="x-mark" x1="300" y1="196" x2="240" y2="242"/>
-      </g>
-    </svg>
-    <p class="sub" data-step="3" style="margin:18px auto 0;text-align:center">
-      It also protects the hardware: a dashboard that opened its own telnet session would collide
-      with the poller and lock the access point out of both.</p>
-  </div>
-</section>
-
-<!-- 9 ------------------------------------------------------------------ -->
-<section class="slide" id="s9" data-notes="The home theatre is the most involved part, and the honest framing is: we control a lot, and we proved that some things are simply not reachable. The television is the CEC bus master, so everything to the soundbar goes through it. Volume, power and system-audio work. The Sony's own proprietary sound-field commands do not, and we verified that four different ways before accepting it.">
-  <div class="kicker">Step 6 &#8212; the home theatre</div>
-  <h2>What we can drive, and what we proved we can&#8217;t</h2>
-  <div class="body">
-    <svg class="diagram" viewBox="0 0 960 250" style="max-height:28vh">
-      <rect class="nbox dae" x="40" y="94" width="200" height="62"/>
-      <text class="nt" x="140" y="116">The hub</text><text class="ns" x="140" y="138">over your Wi-Fi</text>
-      <path id="tv1" class="link live" d="M240 125 L370 125"/>
-      <rect class="nbox dev" x="370" y="78" width="230" height="94" style="stroke:var(--ui)"/>
-      <text class="nt" x="485" y="106">Mi TV 75&#8221;</text><text class="ns" x="485" y="128">the CEC bus master</text><text class="ns" x="485" y="148">everything routes through it</text>
-      <path id="tv2" class="link live" d="M600 125 L730 125"/>
-      <rect class="nbox dev" x="730" y="94" width="190" height="62"/>
-      <text class="nt" x="825" y="116">Sony 5.1</text><text class="ns" x="825" y="138">soundbar, over HDMI</text>
-      <circle class="pkt" r="4"><animateMotion dur="1.2s" repeatCount="indefinite"><mpath href="#tv1"/></animateMotion></circle>
-      <circle class="pkt" r="4" style="fill:var(--ui)"><animateMotion dur="1.2s" begin=".25s" repeatCount="indefinite"><mpath href="#tv2"/></animateMotion></circle>
-    </svg>
-    <ul class="plain" style="margin:20px auto 0;max-width:1060px">
-      <li data-step="1" style="border-left-color:var(--dae)"><span class="tag ok">works</span>Volume, mute, power, system-audio, picture and sound profiles, one-click scenes
-        <span>Each one verified by watching the actual HDMI-CEC frames on the bus, not by trusting the command&#8217;s return code.</span></li>
-      <li data-step="2" style="border-left-color:var(--warn)"><span class="tag no">closed</span>The soundbar&#8217;s own proprietary sound-field commands, and bass / surround trims
-        <span>Four separate routes tested and ruled out. One of them reports success and transmits nothing &#8212; which is exactly why we verify against the bus.</span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- 10 ----------------------------------------------------------------- -->
-<section class="slide" id="s10" data-notes="The air conditioner is the one thing in the house with no local control protocol. Pressing a button on our own dashboard sends a message to the manufacturer's cloud in order to reach a unit that is eight metres away on the same Wi-Fi. We cache aggressively so the display keeps working when that cloud does not.">
-  <div class="kicker">Step 7 &#8212; the exception</div>
-  <h2>The air conditioner has to go outside</h2>
-  <div class="body">
-    <svg class="diagram" viewBox="0 0 960 300" style="max-height:36vh">
-      <path id="a1" class="link live" d="M250 90 L430 90 L430 56 L560 56"/>
-      <path id="a2" class="link live" d="M760 90 L760 140 L430 140 L430 206 L560 206"/>
-      <rect class="nbox dae" x="40" y="58" width="210" height="64"/>
-      <text class="nt" x="145" y="82">The hub</text><text class="ns" x="145" y="104">your button press</text>
-      <rect class="nbox cloud" x="560" y="24" width="200" height="64"/>
-      <text class="nt" x="660" y="48">Maker&#8217;s cloud</text><text class="ns" x="660" y="70">the only control path</text>
-      <rect class="nbox dev" x="560" y="174" width="200" height="64"/>
-      <text class="nt" x="660" y="198">The AC unit</text><text class="ns" x="660" y="220">8 m away, same Wi-Fi</text>
-      <circle class="pkt" r="4" style="fill:var(--cloud)"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#a1"/></animateMotion></circle>
-      <circle class="pkt" r="4" style="fill:var(--cloud)"><animateMotion dur="2s" begin="1s" repeatCount="indefinite"><mpath href="#a2"/></animateMotion></circle>
-      <text class="lbl" x="300" y="78">press</text>
-      <text class="lbl" x="300" y="158">&#8230; and back down</text>
-    </svg>
-    <div class="row" data-step="1" style="margin-top:20px;max-width:1020px;margin-left:auto;margin-right:auto">
-      <div class="card cloud"><h3>What we get from it anyway</h3><p>Real energy use per day and per month, straight from the vendor&#8217;s own meter data &#8212; cached for 15 minutes so the dashboard stays useful when the cloud is not.</p></div>
-      <div class="card daemon"><h3>What we read locally</h3><p>Signal strength, link rate and retry rate come from our own radio, not the cloud. The unit sits on the hub&#8217;s 2.4&nbsp;GHz at about &#8722;60&nbsp;dBm.</p></div>
+    <div class="row" data-step="1" style="margin-top:18px">
+      <div class="card warn">
+        <h3>Single-Session Telnet Budgeting</h3>
+        <p>Huawei APs allow exactly <b>one</b> telnet session. The poller batches commands into a single budgeted visit and closes cleanly, avoiding locks.</p>
+      </div>
+      <div class="card daemon">
+        <h3>Zero User-Facing Latency</h3>
+        <p>Web requests never wait on telnet or CLI parsing. The UI reads memory JSON instantly, completely decoupled from hardware I/O.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 11 ----------------------------------------------------------------- -->
-<section class="slide" id="s11" data-notes="My favourite bug, because it explains why deleting files never freed any space. The download folder was pointed at a path that looked right but was a four kilobyte scratch area in memory, not the 28 gigabyte drive. Deleting videos from the real drive could never help, because nothing was being written there.">
-  <div class="kicker">Step 8 &#8212; a bug worth showing</div>
-  <h2>&#8220;Deleting files never freed any space&#8221;</h2>
+<!-- 6: SUBSYSTEMS (A/V & AC) -------------------------------------------- -->
+<section class="slide" data-notes="Bridging closed subsystems without vendor cloud lag. The TV acts as HDMI-CEC master with DSP scene auto-switching and preset bleed protection. The AC uses MQTT-over-TLS with energy ledgering and CDD weather prediction.">
+  <div class="kicker">Step 4 &#8212; Connected Subsystems</div>
+  <h2>Entertainment &amp; climate control plane</h2>
   <div class="body">
-    <svg class="diagram" viewBox="0 0 960 290" style="max-height:34vh">
-      <g data-step="1">
-        <rect class="nbox warn" x="90" y="52" width="330" height="170"/>
-        <text class="nt" x="255" y="84" style="fill:var(--warn)">Where it was writing</text>
-        <text class="ns" x="255" y="112">a scratch area in memory</text>
-        <text class="nt" x="255" y="152" style="font-size:30px;fill:var(--warn)">4 KB</text>
-        <text class="ns" x="255" y="186">&#8220;No space left on device&#8221;, instantly</text>
-        <line class="x-mark" x1="118" y1="74" x2="150" y2="106"/><line class="x-mark" x1="150" y1="74" x2="118" y2="106"/>
-      </g>
-      <g data-step="2">
-        <rect class="nbox" x="540" y="52" width="330" height="170" style="stroke:var(--dae)"/>
-        <text class="nt" x="705" y="84" style="fill:var(--dae)">Where everyone looked</text>
-        <text class="ns" x="705" y="112">the actual USB drive</text>
-        <text class="nt" x="705" y="152" style="font-size:30px;fill:var(--dae)">28 GB</text>
-        <text class="ns" x="705" y="186">31% used, 18 GB free the whole time</text>
-        <path class="ok-mark" d="M568 90 l14 14 l24 -28"/>
-      </g>
-      <g data-step="3">
-        <path class="link live" d="M420 137 L540 137"/>
-        <text class="lbl" x="480" y="118">path fix</text>
-      </g>
-    </svg>
-    <p class="sub" data-step="4" style="margin:18px auto 0;text-align:center;max-width:52em">
-      Fixing the setting was not enough: the download already in flight had cached the old path
-      in its own resume file, and survived both a config change and a restart.
-      <b>The lesson that stuck:</b> when a path fix &#8220;doesn&#8217;t take&#8221;, check what in-flight state
-      cached the old value before you doubt the fix.</p>
+    <div class="row">
+      <div class="card" data-step="1" style="border-left:3px solid var(--api)">
+        <h3>🎬 Home Theatre Control Plane</h3>
+        <p style="margin-bottom:8px"><b>Xiaomi Mi QLED 75 + Fire TV 4K + Sony HT-S40R 5.1</b></p>
+        <p>• <b>HDMI-CEC Bus Master</b>: Routed via router-controlled single-authorized <code>adb</code>.<br>
+        • <b>Auto DSP Scenes</b>: Switches Cinema, Music, Night &amp; Standard per active app.<br>
+        • <b>Preset Bleed Fix</b>: Enforces <code>ensurePictureMode()</code> before PQ register writes.<br>
+        • <b>Hardware Limit</b>: Sony proprietary sound-fields are closed on standard ARC.</p>
+      </div>
+      <div class="card" data-step="2" style="border-left:3px solid var(--cloud)">
+        <h3>❄️ Panasonic Smart AC &amp; MirAIe</h3>
+        <p style="margin-bottom:8px"><b>CS/CU-NU18AKY5WX on TP-Link 2.4GHz (.4)</b></p>
+        <p>• <b>MQTT-over-TLS (:8883)</b>: Controls temperature, mode, fan speed &amp; nanoe-X.<br>
+        • <b>Energy Ledger</b>: Real-time watts, cumulative daily kWh, and cost ledgering.<br>
+        • <b>Weather Intelligence</b>: Open-Meteo CDD (Cooling Degree Days) comfort model.<br>
+        • <b>Cloud Resilient</b>: Hub caches state so dashboard stays responsive in outages.</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- 12 ----------------------------------------------------------------- -->
-<section class="slide" data-notes="If someone remembers only one slide, make it this one. These four rules came out of real incidents in this house, and all of them generalise well beyond it.">
-  <div class="kicker">What the project taught us</div>
+<!-- 7: FOUR RULES ------------------------------------------------------- -->
+<section class="slide" data-notes="Four rules bought with real production outages in this house. Each generalizes far beyond home networking.">
+  <div class="kicker">Operational Principles</div>
   <h2>Four rules, each bought with a real outage</h2>
   <div class="body">
     <ul class="plain">
       <li data-step="1">A write that reports success is <b>not</b> evidence it took effect
-        <span>Settings that read back correctly, APIs returning success, commands exiting zero &#8212; all three have lied on this hardware. Verify against the subsystem&#8217;s own state, never the setter&#8217;s return value.</span></li>
+        <span>Settings reading back correctly, APIs returning rc=0, commands exiting 0 &#8212; all three have lied on this hardware. Verify against subsystem state (dumpsys, CEC bus, <code>display wifi radio</code>).</span></li>
       <li data-step="2">The end state looking right doesn&#8217;t mean the mechanism ran
         <span>A keep-alive sat broken for weeks while its monitor stayed green, because the processes it was supposed to revive happened to already be running.</span></li>
       <li data-step="3">Deploy first, then test
-        <span>Running the suite before copying the file tests the previous copy and passes for the wrong reason.</span></li>
+        <span>Running the test suite locally tests the stale copy and passes for the wrong reason. Always copy to the target router before running regression tests.</span></li>
       <li data-step="4">A confident explanation that contradicts the timeline is still wrong
-        <span>An exhaustively evidenced &#8220;soundbar firmware defect&#8221; was disproved by a reboot &#8212; the user had said it worked yesterday, which no permanent defect can explain.</span></li>
+        <span>An exhaustively argued &#8220;soundbar firmware defect&#8221; was disproved by a reboot &#8212; the user said it worked yesterday, which no permanent defect explains.</span></li>
     </ul>
   </div>
 </section>
 
-<!-- 13 ----------------------------------------------------------------- -->
-<section class="slide" data-notes="Close by pointing at where the detail lives, so nobody has to take notes. Sixteen reference sections, two draw.io files, and this deck.">
-  <div class="kicker">Where the detail lives</div>
+<!-- 8: DETAIL INDEX ----------------------------------------------------- -->
+<section class="slide" data-notes="Close by pointing to the live documentation, source files, and repository assets.">
+  <div class="kicker">Documentation &amp; Assets</div>
   <h2>Everything here is written down</h2>
   <div class="body">
     <div class="row">
-      <div class="card net" data-step="1"><h3>CLAUDE.md</h3><p>The index. Standing rules up front, then one file per subsystem under <code>docs/</code> &#8212; sixteen sections, numbered the way the code comments already reference them.</p></div>
-      <div class="card ui" data-step="2"><h3>docs/diagrams/</h3><p><b>HLD</b> &#8212; this story on one sheet, plus a detailed page.<br><b>LLD</b> &#8212; five pages: topology &amp; RF, the poll cycle, the A/V plane, the AC, and the deploy &amp; test map.</p></div>
-      <div class="card api" data-step="3"><h3>This deck</h3><p>A single self-contained HTML file. No build step, no network, no dependencies &#8212; it runs from a USB stick or straight off the router.</p></div>
+      <div class="card net" data-step="1">
+        <h3>CLAUDE.md &amp; docs/</h3>
+        <p>The operational index. Standing rules up front, then 16 numbered deep-dive chapters covering hardware, CLI telnet, roaming, and TV companion agent.</p>
+      </div>
+      <div class="card ui" data-step="2">
+        <h3>docs/diagrams/</h3>
+        <p><b>HLD</b> &#8212; the 1-slide overview and complete flow diagram.<br><b>LLD</b> &#8212; 5 pages: topology, RF plan, poller cycle, A/V plane, and AC MirAIe MQTT.</p>
+      </div>
+      <div class="card api" data-step="3">
+        <h3>Live Deployment</h3>
+        <p>• <b>GitHub Pages</b>: <a href="https://d2e.github.io/my-wifi-docs/" target="_blank" style="color:var(--net);text-decoration:none">d2e.github.io/my-wifi-docs/</a><br>• <b>Local Router</b>: <code>http://192.168.0.50/architecture.html</code></p>
+      </div>
     </div>
-    <p class="sub" data-step="4" style="margin:26px auto 0;text-align:center">
-      <kbd>&#8592;</kbd> <kbd>&#8594;</kbd> move &#183; <kbd>N</kbd> notes &#183; <kbd>F</kbd> fullscreen &#183; <kbd>?</kbd> help</p>
+    <p class="sub" data-step="4" style="margin:24px auto 0;text-align:center">
+      Press <kbd>?</kbd> for shortcuts &#183; <kbd>N</kbd> for speaker notes &#183; <kbd>Z</kbd> to zoom diagram &#183; <kbd>F</kbd> for fullscreen
+    </p>
   </div>
 </section>
 
 </div>
 
+<!-- LIGHTBOX MODAL ------------------------------------------------------- -->
+<div id="diagModal">
+  <div class="diag-modal-bar">
+    <span class="diag-modal-title" id="diagModalTitle">Whole-Home Architecture — High-Level Design</span>
+    <div class="diag-modal-tools">
+      <button class="btn" id="modalZoomIn">Zoom +</button>
+      <button class="btn" id="modalZoomOut">Zoom −</button>
+      <button class="btn" id="modalZoomReset">Reset</button>
+      <button class="btn" id="modalClose">✕ Close (Esc)</button>
+    </div>
+  </div>
+  <div class="diag-modal-viewport" id="diagModalViewport">
+    <div id="diagModalBody"></div>
+  </div>
+</div>
+
 <div id="foot">
+  <span id="page">1 / 8</span>
+  <span class="spacer"></span>
+  <div id="dots"></div>
+  <span class="spacer"></span>
+  <button class="btn" id="noteBtn">Notes <kbd>N</kbd></button>
+  <button class="btn" id="fsBtn">Fullscreen <kbd>F</kbd></button>
   <button class="btn" id="prev">&#8592;</button>
   <button class="btn" id="next">&#8594;</button>
-  <span id="num">1 / 13</span>
-  <div class="spacer"></div>
-  <div id="dots"></div>
-  <div class="spacer"></div>
-  <button class="btn" id="noteBtn">notes <kbd>N</kbd></button>
-  <button class="btn" id="fsBtn">fullscreen <kbd>F</kbd></button>
 </div>
+
 <div id="notes"></div>
-<div id="help"><div>
-  <b>Keyboard</b><br>
-  <kbd>&#8594;</kbd> / <kbd>space</kbd> next build or slide &nbsp; <kbd>&#8592;</kbd> back<br>
-  <kbd>&#8593;</kbd> / <kbd>&#8595;</kbd> jump whole slides &nbsp; <kbd>Home</kbd> / <kbd>End</kbd> first / last<br>
-  <kbd>N</kbd> speaker notes &nbsp; <kbd>F</kbd> fullscreen &nbsp; <kbd>?</kbd> this help &nbsp; <kbd>Esc</kbd> close
-</div></div>
+<div id="help">
+  <div>
+    <b>Keyboard Navigation</b><br>
+    <kbd>&#8594;</kbd> or <kbd>Space</kbd> &#8212; Next step / slide<br>
+    <kbd>&#8592;</kbd> &#8212; Previous step / slide<br>
+    <kbd>&#8595;</kbd> / <kbd>&#8593;</kbd> &#8212; Force next / prev slide<br>
+    <kbd>Z</kbd> &#8212; Zoom / Lightbox active diagram<br>
+    <kbd>N</kbd> &#8212; Toggle speaker notes<br>
+    <kbd>F</kbd> &#8212; Toggle fullscreen<br>
+    <kbd>Home</kbd> / <kbd>End</kbd> &#8212; First / last slide<br>
+    <kbd>?</kbd> &#8212; Show / hide this help<br>
+    <kbd>Esc</kbd> &#8212; Close overlay / notes / zoom<br><br>
+    <i>Append <code>?all</code> to URL to reveal all steps at once.</i>
+  </div>
+</div>
 
 <script>
 (function(){
-  "use strict";
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var cur = 0, step = 0, timers = [];
-  var ALL = /[?&]all\b/.test(location.search);  /* ?all = reveal every build (handout / print view) */
-  var bar = document.getElementById('bar'), num = document.getElementById('num'),
-      dots = document.getElementById('dots'), notes = document.getElementById('notes'),
-      help = document.getElementById('help');
+  var ALL = location.search.indexOf('all') !== -1;
+  var bar = document.getElementById('bar');
+  var page = document.getElementById('page');
+  var dots = document.getElementById('dots');
+  var notes = document.getElementById('notes');
+  var help = document.getElementById('help');
+  var diagModal = document.getElementById('diagModal');
+  var diagModalBody = document.getElementById('diagModalBody');
+  var diagModalTitle = document.getElementById('diagModalTitle');
+  var modalScale = 1;
 
-  slides.forEach(function(s, i){
-    var d = document.createElement('i');
-    d.addEventListener('click', function(){ go(i); });
-    dots.appendChild(d);
+  slides.forEach(function(_, i){
+    var dot = document.createElement('i');
+    dot.addEventListener('click', function(){ go(i); });
+    dots.appendChild(dot);
   });
 
   function maxStep(s){
-    var n = 0;
-    s.querySelectorAll('[data-step]').forEach(function(el){
-      n = Math.max(n, parseInt(el.getAttribute('data-step'), 10) || 0);
+    var steps = s.querySelectorAll('[data-step]');
+    var m = 0;
+    steps.forEach(function(el){
+      var n = parseInt(el.getAttribute('data-step'), 10);
+      if (n > m) m = n;
     });
-    return n;
+    return m;
   }
+
+  function clearTimers(){ while (timers.length) clearTimeout(timers.pop()); }
+
   function paint(){
-    var s = slides[cur];
-    s.querySelectorAll('[data-step]').forEach(function(el){
-      el.classList.toggle('on', (parseInt(el.getAttribute('data-step'), 10) || 0) <= step);
+    slides.forEach(function(s, i){
+      if (i === cur) {
+        s.classList.add('active');
+        var max = maxStep(s);
+        s.querySelectorAll('[data-step]').forEach(function(el){
+          var n = parseInt(el.getAttribute('data-step'), 10);
+          el.classList.toggle('on', ALL || n <= step);
+        });
+      } else {
+        s.classList.remove('active');
+        s.querySelectorAll('[data-step]').forEach(function(el){
+          el.classList.toggle('on', ALL);
+        });
+      }
     });
     bar.style.width = ((cur + 1) / slides.length * 100) + '%';
-    num.textContent = (cur + 1) + ' / ' + slides.length;
-    Array.prototype.forEach.call(dots.children, function(d, i){ d.classList.toggle('on', i === cur); });
-    notes.innerHTML = '<b>Speaker notes &#8212; slide ' + (cur + 1) + '</b><br>' + (s.getAttribute('data-notes') || '');
+    page.textContent = (cur + 1) + ' / ' + slides.length;
+    Array.prototype.forEach.call(dots.children, function(d, i){
+      d.classList.toggle('on', i === cur);
+    });
+    var note = slides[cur].getAttribute('data-notes') || '';
+    notes.innerHTML = '<b>Speaker note:</b> ' + note;
+    location.replace('#' + (cur + 1));
   }
-  function clearTimers(){ timers.forEach(clearInterval); timers.forEach(clearTimeout); timers = []; }
 
-  function go(i, atEnd){
-    if (i < 0 || i >= slides.length) return;
+  function go(i, rev){
+    if (i < 0) i = 0;
+    if (i >= slides.length) i = slides.length - 1;
+    if (i === cur && !rev) return;
     clearTimers();
-    slides[cur].classList.remove('active');
     cur = i;
-    slides[cur].classList.add('active');
-    step = (ALL || atEnd) ? maxStep(slides[cur]) : 0;
+    step = (rev && !ALL) ? maxStep(slides[cur]) : (ALL ? maxStep(slides[cur]) : 0);
     paint();
     onEnter(slides[cur]);
   }
+
   function next(){ if (!ALL && step < maxStep(slides[cur])) { step++; paint(); } else { go(cur + 1); } }
   function prev(){ if (step > 0) { step--; paint(); } else { go(cur - 1, true); } }
 
   /* ---------- per-slide animations ---------- */
   function onEnter(s){
     if (s.querySelector('[data-count]')) countUp(s);
-    if (s.id === 's4') failLoop(s);
-    if (s.id === 's5') spectrum(s);
-    if (s.id === 's7') cycleLoop(s);
+    if (s.id === 's-rf') spectrum(s);
+    if (s.id === 's-heartbeat') cycleLoop(s);
   }
+
   function countUp(s){
     s.querySelectorAll('[data-count]').forEach(function(el){
       var target = parseInt(el.getAttribute('data-count'), 10), t0 = null, dur = 900;
@@ -550,22 +537,16 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
       requestAnimationFrame(frame);
     });
   }
-  function failLoop(s){
-    var ap2 = s.querySelector('#ap2r'), hub = s.querySelector('#hubg'),
-        l3 = s.querySelector('#f3'), l4 = s.querySelector('#f4');
-    function down(){ ap2.classList.add('flash'); hub.classList.add('dead'); l3.classList.add('dead'); l4.classList.add('dead'); }
-    function up(){ ap2.classList.remove('flash'); hub.classList.remove('dead'); l3.classList.remove('dead'); l4.classList.remove('dead'); }
-    up();
-    timers.push(setTimeout(down, 1400));
-    timers.push(setInterval(function(){ down(); timers.push(setTimeout(up, 2600)); }, 5200));
-  }
+
   var CH5 = [['36','Jio + TP-Link',4,20,'#6ea8fe'],['44','Nokia',27,20,'#79c0ff'],
              ['52','AP #2',50,20,'#56d364']];
   var CH24 = [['1','Jio AX6000',2,27,'#6ea8fe'],['6','TP-Link',36,27,'#56d364'],
               ['11','AP #2 + Nokia',70,28,'#f0a35e']];
+
   function spectrum(s){
     [['#tr5', CH5], ['#tr24', CH24]].forEach(function(pair){
       var track = s.querySelector(pair[0]);
+      if (!track) return;
       if (!track.childElementCount){
         pair[1].forEach(function(c){
           var d = document.createElement('div');
@@ -577,12 +558,14 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
       }
       Array.prototype.forEach.call(track.children, function(d){ d.classList.remove('on'); });
       Array.prototype.forEach.call(track.children, function(d, i){
-        timers.push(setTimeout(function(){ d.classList.add('on'); }, 220 + i * 150));
+        timers.push(setTimeout(function(){ d.classList.add('on'); }, 200 + i * 140));
       });
     });
   }
+
   function cycleLoop(s){
     var items = s.querySelectorAll('#cyc .cyc'), i = 0;
+    if (!items.length) return;
     function tick(){
       items.forEach(function(el){ el.classList.remove('hot'); });
       items[i].classList.add('hot');
@@ -595,7 +578,8 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
   /* ---------- title background ---------- */
   (function(){
     var bg = document.getElementById('t-bg');
-    for (var i = 0; i < 26; i++){
+    if (!bg) return;
+    for (var i = 0; i < 24; i++){
       var sp = document.createElement('span');
       sp.style.left = Math.random() * 100 + '%';
       sp.style.top = Math.random() * 100 + '%';
@@ -608,12 +592,69 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
     }
   })();
 
+  /* ---------- diagram tab switcher ---------- */
+  var tab1 = document.getElementById('tabHld1');
+  var tab2 = document.getElementById('tabHld2');
+  var pane1 = document.getElementById('paneHld1');
+  var pane2 = document.getElementById('paneHld2');
+  var activeDiag = 1;
+
+  function setDiagTab(which){
+    activeDiag = which;
+    if (which === 1){
+      tab1.classList.add('active'); tab2.classList.remove('active');
+      pane1.classList.remove('hidden'); pane2.classList.add('hidden');
+    } else {
+      tab2.classList.add('active'); tab1.classList.remove('active');
+      pane2.classList.remove('hidden'); pane1.classList.add('hidden');
+    }
+  }
+  if (tab1 && tab2){
+    tab1.addEventListener('click', function(){ setDiagTab(1); });
+    tab2.addEventListener('click', function(){ setDiagTab(2); });
+  }
+
+  /* ---------- diagram lightbox ---------- */
+  function openLightbox(){
+    modalScale = 1;
+    var targetSvg = activeDiag === 1 ? document.getElementById('svgHld1') : document.getElementById('svgHld2');
+    diagModalTitle.textContent = activeDiag === 1 ?
+      'Whole-Home Architecture — High-Level Design (One-Slide)' :
+      'Whole-Home Architecture — Detailed Component Flows & Daemons';
+    diagModalBody.innerHTML = targetSvg ? targetSvg.outerHTML : '';
+    diagModalBody.style.transform = 'scale(1)';
+    diagModal.classList.add('show');
+  }
+  function closeLightbox(){
+    diagModal.classList.remove('show');
+    diagModalBody.innerHTML = '';
+  }
+  function zoomModal(delta){
+    modalScale = Math.max(0.5, Math.min(3.0, modalScale + delta));
+    diagModalBody.style.transform = 'scale(' + modalScale + ')';
+  }
+
+  var zoomBtn = document.getElementById('zoomDiagBtn');
+  if (zoomBtn) zoomBtn.addEventListener('click', openLightbox);
+  document.getElementById('modalClose').addEventListener('click', closeLightbox);
+  document.getElementById('modalZoomIn').addEventListener('click', function(){ zoomModal(0.25); });
+  document.getElementById('modalZoomOut').addEventListener('click', function(){ zoomModal(-0.25); });
+  document.getElementById('modalZoomReset').addEventListener('click', function(){ modalScale = 1; diagModalBody.style.transform = 'scale(1)'; });
+
   /* ---------- input ---------- */
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape'){ help.classList.remove('show'); notes.classList.remove('show'); return; }
+    if (e.key === 'Escape'){
+      if (diagModal.classList.contains('show')) { closeLightbox(); return; }
+      help.classList.remove('show'); notes.classList.remove('show'); return;
+    }
     if (e.key === '?' ){ help.classList.toggle('show'); return; }
     if (e.key === 'n' || e.key === 'N'){ notes.classList.toggle('show'); return; }
     if (e.key === 'f' || e.key === 'F'){ toggleFs(); return; }
+    if (e.key === 'z' || e.key === 'Z'){
+      if (diagModal.classList.contains('show')) closeLightbox();
+      else if (slides[cur].id === 's-arch') openLightbox();
+      return;
+    }
     if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown'){ e.preventDefault(); next(); }
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp'){ e.preventDefault(); prev(); }
     else if (e.key === 'ArrowDown'){ e.preventDefault(); go(cur + 1); }
@@ -621,15 +662,18 @@ ul.plain li span.tag{display:inline-block;font-size:10.5px;margin-top:0;line-hei
     else if (e.key === 'Home'){ go(0); }
     else if (e.key === 'End'){ go(slides.length - 1); }
   });
+
   function toggleFs(){
     if (document.fullscreenElement) document.exitFullscreen();
     else document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
   }
+
   document.getElementById('next').addEventListener('click', next);
   document.getElementById('prev').addEventListener('click', prev);
   document.getElementById('noteBtn').addEventListener('click', function(){ notes.classList.toggle('show'); });
   document.getElementById('fsBtn').addEventListener('click', toggleFs);
   help.addEventListener('click', function(){ help.classList.remove('show'); });
+
   var x0 = null;
   document.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
   document.addEventListener('touchend', function(e){
