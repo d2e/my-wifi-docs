@@ -1,0 +1,9 @@
+# Temporary and backup files
+.*.swp
+.*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Draw.io temporary / lock files
+.$*.drawio.*
